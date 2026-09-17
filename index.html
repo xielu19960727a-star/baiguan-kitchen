@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
-<title>稗官的小厨房</title>
+<title>稗官的小厨房 · 多灶升级版 v3</title>
 <style>
 *{box-sizing:border-box;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;margin:0;padding:0}
 html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue','Microsoft YaHei',sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none;position:fixed;top:0;left:0}
@@ -406,15 +406,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .chef-composite{position:relative;display:inline-flex;flex-direction:column;align-items:center}
 .chef-composite .chef-hat-layer{font-size:0.45em;position:relative;top:0.1em;line-height:1;z-index:2;min-height:1em}
 .chef-composite .chef-body-layer{font-size:1em;line-height:1;z-index:1}
-.chef-composite .chef-acc-layer{position:absolute;right:-0.2em;bottom:0.3em;font-size:0.35em;z-index:3;line-height:1}
-.chef-composite .chef-expr-layer{position:absolute;left:-0.1em;top:0.1em;font-size:0.35em;z-index:4;line-height:1;transition:all 0.3s ease}
+.chef-composite .chef-body-wrapper{position:relative;display:inline-block;line-height:1}
+.chef-composite .chef-acc-layer{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font-size:0.45em;z-index:3;line-height:1;white-space:nowrap}
+.chef-composite .chef-expr-layer{position:absolute;left:50%;top:18%;transform:translate(-50%,-50%);font-size:0.32em;z-index:4;line-height:1;transition:all 0.3s ease;white-space:nowrap}
 .chef-composite.chef-lg{font-size:3.2rem}
 .chef-composite.chef-md{font-size:2.2rem}
 .chef-composite.chef-xs{font-size:1.8rem}
 .chef-composite.chef-splash{font-size:3.5rem}
 .chef-composite.cooking .chef-body-layer{animation:chefCookBounce 0.6s ease-in-out infinite}
 .chef-composite .chef-expr-layer.expr-pop{animation:exprPop 0.4s ease}
-@keyframes exprPop{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes exprPop{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1.3)}100%{transform:translate(-50%,-50%) scale(1)}}
 @keyframes chefCookBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
 @media (max-height:700px){
@@ -455,7 +456,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
             <div class="splash-logo">
                 <div class="splash-signboard">
                     <div class="splash-title">稗官的小厨房</div>
-                    <div class="splash-subtitle">BÀI GUĀN's KITCHEN</div>
+                    <div class="splash-subtitle">BÀI GUĀN's KITCHEN · 多灶升级版</div>
                 </div>
             </div>
             <div class="splash-chef">👩‍🍳</div>
@@ -982,12 +983,14 @@ function buildChefCompositeHTML(sizeClass, showExpression){
     var cookingClass = (state.chefMood === 'cooking') ? ' cooking' : '';
     var html = '<div class="chef-composite '+sizeClass+cookingClass+'">';
     html += '<div class="chef-hat-layer">'+hatEmoji+'</div>';
+    html += '<div class="chef-body-wrapper">';
     html += '<div class="chef-body-layer">'+bodyEmoji+'</div>';
     if(accEmoji) html += '<div class="chef-acc-layer">'+accEmoji+'</div>';
     if(showExpression){
         var popClass = exprEmoji ? ' expr-pop' : '';
         html += '<div class="chef-expr-layer'+popClass+'">'+exprEmoji+'</div>';
     }
+    html += '</div>';
     html += '</div>';
     return html;
 }
