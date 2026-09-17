@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
-<title>稗官的小厨房 · 多灶升级版 v3</title>
+<title>稗官的小厨房</title>
 <style>
 *{box-sizing:border-box;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;margin:0;padding:0}
 html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue','Microsoft YaHei',sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none;position:fixed;top:0;left:0}
@@ -72,7 +72,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .health-tip{font-size:.58rem;color:#ffeaaf;font-weight:700;letter-spacing:.5px;text-align:center;opacity:.85;padding:6px 10px;background:rgba(0,0,0,.25);border-radius:20px;border:1px solid rgba(201,168,124,.3)}
 
 /* 模式选择页 */
-.mode-select-screen{background:linear-gradient(160deg,#2b1e14 0,#4a3522 50%,#6b4f34 100%);z-index:95;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:center;padding:16px 12px}
+.mode-select-screen{background:linear-gradient(160deg,#2b1e14 0,#4a3522 50%,#6b4f34 100%);z-index:95;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:center;justify-content:flex-start;padding:16px 12px}
 .mode-select-container{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:14px;padding-bottom:20px}
 .mode-header{text-align:center;margin-top:6px}
 .mode-header .mode-title{font-size:1.35rem;font-weight:900;color:#ffeaaf;letter-spacing:3px;text-shadow:0 3px 0 #8b6d4b,0 5px 10px rgba(0,0,0,.5)}
@@ -86,12 +86,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .mode-card.tutorial{background:linear-gradient(145deg,#fff8e8,#ffe6b3);border-color:#f0c274}
 .mode-card.tutorial .mode-name{color:#8a5520}
 .mode-card.direct{background:linear-gradient(145deg,#fef6e8,#e8d5bc)}
+.mode-card.avatar{background:linear-gradient(145deg,#e8f4f8,#b8dce8)}
+.mode-card.avatar .mode-name{color:#1a4a5e}
+.mode-card.avatar .mode-desc{color:#2d6a7a}
 .mode-card .mode-tag{display:inline-block;background:linear-gradient(180deg,#8fd46b,#6cb04a);color:#1e3a0f;font-size:.55rem;font-weight:900;padding:2px 8px;border-radius:20px;margin-top:4px;box-shadow:0 2px 0 #4c8b2c}
 .mode-card.direct .mode-tag{background:linear-gradient(180deg,#f7c35c,#e8a13b);color:#3d2a16;box-shadow:0 2px 0 #b27d4a}
+.mode-card.avatar .mode-tag{background:linear-gradient(180deg,#7ec8e3,#5ba4c4);color:#1a3a4a;box-shadow:0 2px 0 #4a8aaa}
 .mode-footer{font-size:.58rem;color:#8b6d4b;text-align:center;line-height:1.6;opacity:.85;margin-top:4px}
 
 /* 关卡选择页 */
-.level-select-screen{background:linear-gradient(160deg,#2b1e14 0,#4a3522 50%,#6b4f34 100%);z-index:90;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:center;padding:16px 12px}
+.level-select-screen{background:linear-gradient(160deg,#2b1e14 0,#4a3522 50%,#6b4f34 100%);z-index:90;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:center;justify-content:flex-start;padding:16px 12px}
 .level-select-container{width:100%;max-width:500px;display:flex;flex-direction:column;align-items:center;gap:12px;padding-bottom:20px}
 .select-header{text-align:center;position:relative}
 .select-header .select-title{font-size:1.5rem;font-weight:900;color:#ffeaaf;letter-spacing:3px;text-shadow:0 3px 0 #8b6d4b,0 5px 10px rgba(0,0,0,.5)}
@@ -359,38 +363,59 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .open-shop-btn:disabled{opacity:.5;filter:grayscale(.6);pointer-events:none;transform:translateY(2px);box-shadow:0 2px 0 #4c8b2c}
 .quit-icon{font-size:2.4rem;margin-bottom:6px}
 
-/* 形象创建独立页面 */
-.avatar-screen{background:linear-gradient(160deg,#2b1e14 0,#4a3522 50%,#6b4f34 100%);z-index:92;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:center;padding:16px 12px}
-.avatar-container{width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:12px;padding-bottom:24px}
-.avatar-header{text-align:center;margin-top:6px}
-.avatar-header .avatar-title{font-size:1.4rem;font-weight:900;color:#ffeaaf;letter-spacing:3px;text-shadow:0 3px 0 #8b6d4b,0 5px 10px rgba(0,0,0,.5)}
-.avatar-header .avatar-sub{font-size:.66rem;color:#c9a87c;letter-spacing:2px;font-weight:700;margin-top:4px}
-.avatar-preview-box{background:linear-gradient(145deg,#fef6e8,#e8d5bc);border:2px solid #b28b5e;border-radius:20px;padding:16px 32px;box-shadow:0 6px 0 #8b6d4b,0 8px 16px rgba(0,0,0,.4);display:flex;flex-direction:column;align-items:center;gap:6px;min-width:160px}
-.avatar-preview-emoji{font-size:4rem;line-height:1;animation:bounce 2s infinite ease-in-out}
-.avatar-preview-label{font-size:.68rem;font-weight:800;color:#7a5b3b;letter-spacing:1px}
-.avatar-gender-row{display:flex;gap:10px;width:100%;max-width:320px}
-.avatar-gender-btn{flex:1;border:2px solid #b28b5e;background:linear-gradient(145deg,#fef6e8,#e8d5bc);border-radius:60px;padding:12px 8px;font-weight:900;font-size:.85rem;color:#4a2e1b;cursor:pointer;transition:all .12s;box-shadow:0 4px 0 #8b6d4b;letter-spacing:1px}
-.avatar-gender-btn.active{background:linear-gradient(180deg,#f7c35c,#e8a13b);border-color:#b27d4a;box-shadow:0 4px 0 #8b6d4b}
-.avatar-gender-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #8b6d4b}
-.avatar-section{width:100%;background:linear-gradient(145deg,#3e2c1f,#4a3522);border-radius:18px;padding:12px;border:1px solid #6b4f34;box-shadow:inset 0 2px 6px rgba(0,0,0,.4)}
-.avatar-section-title{font-size:.78rem;font-weight:900;color:#ffeaaf;letter-spacing:2px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.avatar-section-title .badge{font-size:.55rem;background:rgba(247,195,92,.2);border:1px solid rgba(247,195,92,.5);color:#f7c35c;border-radius:20px;padding:1px 8px;font-weight:800}
-.avatar-item-list{display:flex;flex-direction:column;gap:5px;max-height:220px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-right:3px}
-.avatar-item-list::-webkit-scrollbar{width:3px}
-.avatar-item-list::-webkit-scrollbar-thumb{background:#c9a87c;border-radius:20px}
-.avatar-item-card{display:flex;align-items:center;gap:8px;background:linear-gradient(145deg,#fef6e8,#e8d5bc);border-radius:14px;padding:7px 9px;box-shadow:0 3px 0 #8b6d4b;border:1px solid #d9b382}
-.avatar-item-card .ai-emoji{font-size:1.4rem;width:34px;text-align:center;flex-shrink:0}
-.avatar-item-card .ai-info{flex:1;min-width:0;text-align:left}
-.avatar-item-card .ai-name{font-weight:800;font-size:.72rem;color:#4a2e1b}
-.avatar-item-card .ai-desc{font-size:.56rem;color:#8b6d4b;font-weight:600;line-height:1.3}
-.avatar-item-card .ai-btn{border:none;background:linear-gradient(180deg,#f7c35c,#e8a13b);border-radius:30px;padding:5px 10px;font-weight:800;color:#3d2a16;box-shadow:0 3px 0 #b27d4a;cursor:pointer;font-size:.62rem;white-space:nowrap;flex-shrink:0}
-.avatar-item-card .ai-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #b27d4a}
-.avatar-item-card .ai-btn.owned{background:linear-gradient(180deg,#8fd46b,#6cb04a);color:#1e3a0f;box-shadow:0 3px 0 #4c8b2c}
-.avatar-item-card .ai-btn.equipped{background:linear-gradient(180deg,#b0d68e,#8fc46b);color:#2a3d15;box-shadow:0 3px 0 #6c8b4c}
-.avatar-item-card .ai-btn:disabled{opacity:.5;pointer-events:none}
-.avatar-gold-bar{width:100%;text-align:center;font-size:.72rem;font-weight:900;color:#ffeaaf;background:rgba(0,0,0,.3);border:1px solid rgba(201,168,124,.4);border-radius:20px;padding:6px;letter-spacing:1px}
-.avatar-actions{width:100%;display:flex;gap:8px;margin-top:4px}
-.avatar-actions .select-btn{flex:1}
+/* 形象创建 & 衣柜 */
+.avatar-preview{font-size:4rem;margin:8px 0 12px;line-height:1;animation:bounce 2s infinite ease-in-out}
+.gender-picker{display:flex;gap:8px;margin-bottom:14px}
+.gender-btn{flex:1;border:2px solid #d9b382;background:#fffaef;border-radius:60px;padding:10px;font-weight:800;font-size:.82rem;color:#4a2e1b;cursor:pointer;transition:all .12s;box-shadow:0 3px 0 #b28b5e}
+.gender-btn.active{background:linear-gradient(180deg,#f7c35c,#e8a13b);border-color:#b27d4a;box-shadow:0 3px 0 #8b6d4b}
+.gender-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #b28b5e}
+.avatar-wardrobe-box{max-width:360px}
+.wardrobe-tabs{display:flex;gap:4px;margin-bottom:10px;background:#e8d5bc;padding:3px;border-radius:40px}
+.wardrobe-tab{flex:1;border:none;background:transparent;border-radius:40px;padding:7px 2px;font-weight:700;font-size:.65rem;color:#7a5b3b;cursor:pointer;transition:all .15s}
+.wardrobe-tab.active{background:#fffaef;color:#4a2e1b;box-shadow:0 2px 0 #c9a87c}
+.wardrobe-list{max-height:240px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:5px;margin-bottom:10px;padding-right:3px}
+.wardrobe-list::-webkit-scrollbar{width:3px}
+.wardrobe-list::-webkit-scrollbar-thumb{background:#c9a87c;border-radius:20px}
+.wardrobe-item{display:flex;align-items:center;gap:8px;background:#fffaef;border-radius:14px;padding:7px 9px;box-shadow:0 3px 0 #d9b382;border:1px solid #e9d5bc}
+.wardrobe-item .wi-emoji{font-size:1.4rem;width:32px;text-align:center}
+.wardrobe-item .wi-info{flex:1;min-width:0;text-align:left}
+.wardrobe-item .wi-name{font-weight:800;font-size:.72rem;color:#4a2e1b}
+.wardrobe-item .wi-desc{font-size:.58rem;color:#8b6d4b;font-weight:600}
+.wardrobe-item .wi-btn{border:none;background:#8fd46b;border-radius:30px;padding:5px 10px;font-weight:800;color:#1e3a0f;box-shadow:0 3px 0 #4c8b2c;cursor:pointer;font-size:.62rem;white-space:nowrap}
+.wardrobe-item .wi-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #4c8b2c}
+.wardrobe-item .wi-btn.equipped{background:#f7c35c;color:#3d2a16;box-shadow:0 3px 0 #b27d4a}
+.wardrobe-item .wi-btn.owned{background:#b0d68e;color:#2a3d15;box-shadow:0 3px 0 #6c8b4c}
+.wardrobe-item .wi-btn:disabled{opacity:.5;pointer-events:none}
+.wardrobe-footer{font-weight:800;color:#4a2e1b;font-size:.78rem;margin-bottom:10px}
+/* 形象选择页面 */
+.avatar-page-box{max-width:380px;padding:18px 16px}
+.avatar-page-preview{background:linear-gradient(180deg,#fff8e8,#f3e5d3);border-radius:20px;padding:14px 0 10px;margin:10px 0;border:2px solid #e9d5bc;display:flex;flex-direction:column;align-items:center;position:relative}
+.avatar-emoji-layer{font-size:1.6rem;line-height:1;height:1.6rem;text-align:center}
+.avatar-emoji-layer.avatar-emoji-main{font-size:3.6rem;height:3.6rem;animation:bounce 2s infinite ease-in-out}
+.avatar-page-gender{display:flex;gap:8px;margin:10px 0}
+.avatar-page-tabs{display:flex;gap:4px;margin-bottom:8px;background:#e8d5bc;padding:3px;border-radius:40px}
+.avatar-page-tab{flex:1;border:none;background:transparent;border-radius:40px;padding:7px 2px;font-weight:700;font-size:.65rem;color:#7a5b3b;cursor:pointer;transition:all .15s}
+.avatar-page-tab.active{background:#fffaef;color:#4a2e1b;box-shadow:0 2px 0 #c9a87c}
+.avatar-page-list{max-height:220px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:5px;margin-bottom:8px;padding-right:3px}
+.avatar-page-list::-webkit-scrollbar{width:3px}
+.avatar-page-list::-webkit-scrollbar-thumb{background:#c9a87c;border-radius:20px}
+.avatar-page-footer{display:flex;justify-content:space-between;align-items:center;font-weight:800;color:#4a2e1b;font-size:.78rem;margin-top:4px}
+.avatar-page-close-btn{width:auto!important;padding:8px 20px!important;font-size:.78rem!important}
+
+.chef-character{position:absolute;right:10px;bottom:60px;z-index:5;pointer-events:none}
+.chef-composite{position:relative;display:inline-flex;flex-direction:column;align-items:center}
+.chef-composite .chef-hat-layer{font-size:0.45em;position:relative;top:0.1em;line-height:1;z-index:2;min-height:1em}
+.chef-composite .chef-body-layer{font-size:1em;line-height:1;z-index:1}
+.chef-composite .chef-acc-layer{position:absolute;right:-0.2em;bottom:0.3em;font-size:0.35em;z-index:3;line-height:1}
+.chef-composite .chef-expr-layer{position:absolute;left:-0.1em;top:0.1em;font-size:0.35em;z-index:4;line-height:1;transition:all 0.3s ease}
+.chef-composite.chef-lg{font-size:3.2rem}
+.chef-composite.chef-md{font-size:2.2rem}
+.chef-composite.chef-xs{font-size:1.8rem}
+.chef-composite.chef-splash{font-size:3.5rem}
+.chef-composite.cooking .chef-body-layer{animation:chefCookBounce 0.6s ease-in-out infinite}
+.chef-composite .chef-expr-layer.expr-pop{animation:exprPop 0.4s ease}
+@keyframes exprPop{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes chefCookBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
 @media (max-height:700px){
     .prep-slot{width:52px;height:52px}
@@ -430,7 +455,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
             <div class="splash-logo">
                 <div class="splash-signboard">
                     <div class="splash-title">稗官的小厨房</div>
-                    <div class="splash-subtitle">BÀI GUĀN's KITCHEN · 多灶升级版</div>
+                    <div class="splash-subtitle">BÀI GUĀN's KITCHEN</div>
                 </div>
             </div>
             <div class="splash-chef">👩‍🍳</div>
@@ -486,56 +511,17 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
                     <span class="mode-tag">跳过教程</span>
                 </div>
             </div>
+            <div class="mode-card avatar" id="modeAvatar">
+                <div class="mode-emoji">👩🍳</div>
+                <div class="mode-info">
+                    <div class="mode-name">形象选择</div>
+                    <div class="mode-desc">搭配厨师服装、帽子、配饰，打造专属大厨形象。</div>
+                    <span class="mode-tag">自定义外观</span>
+                </div>
+            </div>
             <div class="mode-footer">
                 教程模式会强制走一遍引导，通关后不影响正常进度。<br>
                 © 2026 稗官工作室 · 单机休闲 · 不含内购
-            </div>
-        </div>
-    </div>
-
-    <!-- 形象选择独立页面 -->
-    <div class="screen avatar-screen hidden" id="avatarScreen">
-        <div class="avatar-container">
-            <div class="avatar-header">
-                <div class="avatar-title">👩‍🍳 厨师形象</div>
-                <div class="avatar-sub">— 选择性别 · 购买装扮 · 提升能力 —</div>
-            </div>
-
-            <div class="avatar-preview-box">
-                <div class="avatar-preview-emoji" id="avatarScreenPreview">👩‍🍳</div>
-                <div class="avatar-preview-label" id="avatarScreenLabel">女厨师</div>
-            </div>
-
-            <div class="avatar-gender-row">
-                <button class="avatar-gender-btn" data-gender="male">👨‍🍳 男厨师</button>
-                <button class="avatar-gender-btn active" data-gender="female">👩‍🍳 女厨师</button>
-            </div>
-
-            <div class="avatar-gold-bar">💰 当前金币：<span id="avatarScreenGold">0</span></div>
-
-            <div class="avatar-section">
-                <div class="avatar-section-title">👕 服装 <span class="badge">消耗金币</span></div>
-                <div class="avatar-item-list" id="avatarOutfitList"></div>
-            </div>
-
-            <div class="avatar-section">
-                <div class="avatar-section-title">🎩 帽子 <span class="badge">消耗金币</span></div>
-                <div class="avatar-item-list" id="avatarHatList"></div>
-            </div>
-
-            <div class="avatar-section">
-                <div class="avatar-section-title">💍 配饰 <span class="badge">消耗金币</span></div>
-                <div class="avatar-item-list" id="avatarAccessoryList"></div>
-            </div>
-
-            <div class="avatar-section">
-                <div class="avatar-section-title">⚡ 能力提升 <span class="badge">消耗金币</span></div>
-                <div class="avatar-item-list" id="avatarSkillList"></div>
-            </div>
-
-            <div class="avatar-actions">
-                <button class="select-btn select-btn-back" id="avatarBackBtn">← 返回</button>
-                <button class="select-btn select-btn-continue" id="avatarConfirmBtn">💾 保存形象</button>
             </div>
         </div>
     </div>
@@ -641,6 +627,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
                         <div class="actions">
                             <button class="open-shop-btn" id="shopToggleBtn">🏪 开始营业</button>
                         </div>
+                        <div class="chef-character" id="chefCharacter"></div>
                     </div>
                     <div class="dish-selector">
                         <div class="selector-header"><span>🍽️ 选择菜品/套餐</span><span class="selector-hint" id="selectorHint">点选 → 自动烹饪</span></div>
@@ -766,7 +753,35 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
         </div>
     </div>
 
-    <!-- 衣柜（游戏内快捷入口） -->
+    <!-- 形象选择页面 -->
+    <div class="modal-overlay avatar-overlay" id="avatarCreateModal">
+        <div class="modal-box avatar-page-box">
+            <div class="modal-title">👩‍🍳 形象定制</div>
+            <div class="modal-date">打造你的专属厨师 · 装扮提升能力</div>
+            <div class="avatar-page-preview" id="avatarPagePreview">
+                <div class="avatar-emoji-layer" id="avatarLayerHat"></div>
+                <div class="avatar-emoji-layer avatar-emoji-main" id="avatarLayerBody">👩‍🍳</div>
+                <div class="avatar-emoji-layer" id="avatarLayerAcc"></div>
+            </div>
+            <div class="avatar-page-gender">
+                <button class="gender-btn" data-gender="male">👨‍🍳 男厨师</button>
+                <button class="gender-btn active" data-gender="female">👩‍🍳 女厨师</button>
+            </div>
+            <div class="avatar-page-tabs">
+                <button class="avatar-page-tab active" data-slot="outfit">👕 服装</button>
+                <button class="avatar-page-tab" data-slot="hat">🎩 帽子</button>
+                <button class="avatar-page-tab" data-slot="accessory">💍 配饰</button>
+                <button class="avatar-page-tab" data-slot="skill">⚡ 能力</button>
+            </div>
+            <div class="avatar-page-list" id="avatarPageList"></div>
+            <div class="avatar-page-footer">
+                <span>💰 金币：<strong id="avatarPageGold">0</strong></span>
+                <button class="modal-btn secondary avatar-page-close-btn" id="avatarPageCloseBtn">完成</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 衣柜 -->
     <div class="modal-overlay avatar-overlay" id="avatarWardrobeModal">
         <div class="modal-box avatar-wardrobe-box">
             <div class="modal-title">👗 厨师衣柜</div>
@@ -889,30 +904,6 @@ var ALL_INGREDIENTS = [
 
 var CUSTOMER_AVATARS = ['👩','👨','👧','👦','👵','👴','🧑','👩‍🍳','👨‍🦰','👩‍🦱','🧔','👱‍♀️','👳','🤵','👰'];
 
-/* 每关开局赠送的基础库存，让玩家无需先去仓库补货即可直接烹饪 */
-function getLevelStartInventory(level){
-    var base = deepCopy(DEFAULT_INVENTORY);
-    // 前几关额外多给一些常用食材，保证开局顺畅
-    if(level <= 2){
-        base.egg = (base.egg||0) + 8;
-        base.oil = (base.oil||0) + 8;
-        base.veggie = (base.veggie||0) + 6;
-        base.meat = (base.meat||0) + 5;
-        base.bread = (base.bread||0) + 5;
-        base.rice = (base.rice||0) + 5;
-        base.flour = (base.flour||0) + 5;
-        base.sugar = (base.sugar||0) + 5;
-        base.milk = (base.milk||0) + 5;
-    } else {
-        // 中后期关卡也保证基础库存充足
-        base.egg = (base.egg||0) + 4;
-        base.oil = (base.oil||0) + 4;
-        base.veggie = (base.veggie||0) + 3;
-        base.meat = (base.meat||0) + 3;
-    }
-    return base;
-}
-
 var DEFAULT_INVENTORY = { egg:12, oil:12, veggie:8, meat:6, bread:6, rice:5, fish:4, noodle:4, cheese:4, flour:5, sugar:5, milk:4, coffee:4, fruit:3, seafood:2 };
 
 /* 形象系统数据 */
@@ -969,6 +960,59 @@ function hasAvatarItem(slot, id){
 function getAvatarEmoji(){
     if(state.avatar.gender === 'female') return '👩‍🍳';
     return '👨‍🍳';
+}
+
+function getBodyDisplayEmoji(){
+    var outfitItem = findEquippedItem('outfit');
+    if(outfitItem && outfitItem.id !== 'chef_default') return outfitItem.emoji;
+    return getAvatarEmoji();
+}
+
+function buildChefCompositeHTML(sizeClass, showExpression){
+    var hatItem = findEquippedItem('hat');
+    var accItem = findEquippedItem('accessory');
+    var bodyEmoji = getBodyDisplayEmoji();
+    var hatEmoji = (hatItem && hatItem.id !== 'none') ? hatItem.emoji : '';
+    var accEmoji = (accItem && accItem.id !== 'none') ? accItem.emoji : '';
+    var exprEmoji = '';
+    if(showExpression){
+        var moodMap = { idle:'', cooking:'😓', happy:'😄', sad:'😢' };
+        exprEmoji = moodMap[state.chefMood] || '';
+    }
+    var cookingClass = (state.chefMood === 'cooking') ? ' cooking' : '';
+    var html = '<div class="chef-composite '+sizeClass+cookingClass+'">';
+    html += '<div class="chef-hat-layer">'+hatEmoji+'</div>';
+    html += '<div class="chef-body-layer">'+bodyEmoji+'</div>';
+    if(accEmoji) html += '<div class="chef-acc-layer">'+accEmoji+'</div>';
+    if(showExpression){
+        var popClass = exprEmoji ? ' expr-pop' : '';
+        html += '<div class="chef-expr-layer'+popClass+'">'+exprEmoji+'</div>';
+    }
+    html += '</div>';
+    return html;
+}
+
+function updateChefExpression(mood){
+    state.chefMood = mood;
+    var el = $('chefCharacter');
+    if(el) el.innerHTML = buildChefCompositeHTML('chef-lg', true);
+}
+
+function syncAllChefDisplays(){
+    var el = $('chefCharacter');
+    if(el) el.innerHTML = buildChefCompositeHTML('chef-lg', true);
+    var selAv = $('selectAvatar');
+    if(selAv){
+        selAv.innerHTML = buildChefCompositeHTML('chef-xs', false);
+    }
+    var wp = $('wardrobePreview');
+    if(wp){
+        wp.innerHTML = buildChefCompositeHTML('chef-md', false);
+    }
+    var splashChef = document.querySelector('.splash-chef');
+    if(splashChef){
+        splashChef.innerHTML = buildChefCompositeHTML('chef-splash', false);
+    }
 }
 
 function $(id){ return document.getElementById(id); }
@@ -1127,6 +1171,7 @@ var state = {
     avatar: { gender:'female', outfit:'chef_default', hat:'none', accessory:'none' },
     avatarUpgrades: { waitBonus:0, tipBonus:0 },
     avatarCreated: false,
+    chefMood: 'idle',
     ownedAvatarItems: { outfit:['chef_default'], hat:['none'], accessory:['none'] }
 };
 
@@ -1343,7 +1388,7 @@ function renderLevelSelect(){
     $('selectRep').textContent = state.reputation;
     $('selectSlots').textContent = getMaxSlots();
     var av = $('selectAvatar');
-    if(av) av.textContent = getAvatarEmoji();
+    if(av) av.innerHTML = buildChefCompositeHTML('chef-xs', false);
 
     var completedCount = getCompletedCount();
     var currentChallenge = getCurrentChallengeLevel();
@@ -1398,7 +1443,6 @@ function showModeSelect(){
     addClass($('splashScreen'),'hidden');
     addClass($('levelSelectScreen'),'hidden');
     addClass($('gameContainer'),'hidden');
-    addClass($('avatarScreen'),'hidden');
     removeClass($('modeSelectScreen'),'hidden');
 }
 
@@ -1406,18 +1450,8 @@ function showLevelSelect(){
     addClass($('splashScreen'),'hidden');
     addClass($('modeSelectScreen'),'hidden');
     addClass($('gameContainer'),'hidden');
-    addClass($('avatarScreen'),'hidden');
     removeClass($('levelSelectScreen'),'hidden');
     renderLevelSelect();
-}
-
-function showAvatarScreen(){
-    addClass($('splashScreen'),'hidden');
-    addClass($('modeSelectScreen'),'hidden');
-    addClass($('levelSelectScreen'),'hidden');
-    addClass($('gameContainer'),'hidden');
-    removeClass($('avatarScreen'),'hidden');
-    renderAvatarScreen();
 }
 
 function startLevel(lvl){
@@ -1435,8 +1469,7 @@ function startLevel(lvl){
     state.todayServed = 0;
     state.todayRep = 0;
     state.todayComboCount = 0;
-    /* 开局赠送基础库存，玩家无需先去仓库补货 */
-    state.inventory = getLevelStartInventory(lvl);
+    state.inventory = deepCopy(DEFAULT_INVENTORY);
     state.lastTickTime = Date.now();
     state.dailyGoal = generateDailyGoal(lvl);
 
@@ -1444,7 +1477,6 @@ function startLevel(lvl){
 
     addClass($('modeSelectScreen'),'hidden');
     addClass($('levelSelectScreen'),'hidden');
-    addClass($('avatarScreen'),'hidden');
     removeClass($('gameContainer'),'hidden');
 
     $('progressFill').style.width = '0%';
@@ -1473,6 +1505,8 @@ function startLevel(lvl){
     if(state.playMode === 'tutorial' && lvl === 1){
         setTimeout(function(){ startGuide(); }, 700);
     }
+    state.chefMood = 'idle';
+    syncAllChefDisplays();
 }
 
 function quitToSelect(){
@@ -1730,12 +1764,13 @@ function triggerFail(){
     state.isShopOpen = false;
     updateShopUI();
     Sound.fail();
+    updateChefExpression('sad');
     $('failServed').textContent = state.levelServedCount + ' 位';
     $('failTarget').textContent = state.levelConfig.servedNeeded + ' 位';
     addClass($('failModal'),'show');
 }
 
-/* ===== 多灶台烹饪时按钮状态动态管理 ===== */
+/* ===== 修复：多灶台烹饪时按钮状态动态管理 ===== */
 function updateCookBtnState(){
     var btn = $('cookBtn');
     if(!btn) return;
@@ -1862,6 +1897,7 @@ function startCooking(){
     renderDishSelector();
     updateSelectorHint();
     Sound.cook();
+    updateChefExpression('cooking');
 
     if(slot.interval) clearInterval(slot.interval);
     slot.interval = setInterval(function(){
@@ -1882,6 +1918,7 @@ function startCooking(){
             renderCustomers();
             updateSelectorHint();
             Sound.ready();
+            updateChefExpression('idle');
             showToast('✅ '+item.name+' 做好了！点击灶台或顾客上菜', 1600);
         }
     }, CONFIG.COOK_TICK_MS);
@@ -1957,6 +1994,7 @@ function completeLevel(){
     state.customers = [];
     renderCustomers();
     Timer.clear('spawn');
+    updateChefExpression('happy');
 
     var reward = state.levelConfig.reward;
     addGold(reward);
@@ -2072,7 +2110,6 @@ function renderDishSelector(){
         else neededComboIds[c.item.id] = true;
     }
 
-    // 根据顾客点单排序：有顾客需要的排在前面，其余按烹饪时间从短到长
     availCombos.sort(function(a,b){
         var aN = neededComboIds[a.id]?0:1, bN = neededComboIds[b.id]?0:1;
         if(aN !== bN) return aN - bN;
@@ -2349,102 +2386,128 @@ function nextGuide(){
     }
 }
 
-/* ===== 形象选择独立页面 ===== */
-function renderAvatarScreen(){
-    $('avatarScreenGold').textContent = state.gold;
-    $('avatarScreenPreview').textContent = getAvatarEmoji();
-    $('avatarScreenLabel').textContent = state.avatar.gender === 'female' ? '女厨师' : '男厨师';
+/* ===== 形象创建 / 衣柜 ===== */
+var avatarPageCurrentSlot = 'outfit';
 
-    var genderBtns = document.querySelectorAll('.avatar-gender-btn');
-    for(var g=0;g<genderBtns.length;g++){
-        if(genderBtns[g].getAttribute('data-gender') === state.avatar.gender) addClass(genderBtns[g],'active');
-        else removeClass(genderBtns[g],'active');
+function showAvatarCreate(){
+    addClass($('avatarCreateModal'),'show');
+    avatarPageCurrentSlot = 'outfit';
+    var pageTabs = document.querySelectorAll('.avatar-page-tab');
+    for(var i=0;i<pageTabs.length;i++){
+        if(pageTabs[i].getAttribute('data-slot') === 'outfit') addClass(pageTabs[i],'active');
+        else removeClass(pageTabs[i],'active');
     }
-
-    renderAvatarItemList('outfit', 'avatarOutfitList');
-    renderAvatarItemList('hat', 'avatarHatList');
-    renderAvatarItemList('accessory', 'avatarAccessoryList');
-    renderAvatarSkillList();
+    renderAvatarPreview();
+    renderAvatarPageItems('outfit');
+    $('avatarPageGold').textContent = state.gold;
 }
 
-function renderAvatarItemList(slot, containerId){
-    var items = AVATAR_ITEMS[slot];
-    var html = '';
-    for(var i=0;i<items.length;i++){
-        var it = items[i];
-        var owned = hasAvatarItem(slot, it.id);
-        var equipped = state.avatar[slot] === it.id;
-        var btnHtml;
-        if(equipped) btnHtml = '<button class="ai-btn equipped" disabled>已穿戴</button>';
-        else if(owned) btnHtml = '<button class="ai-btn owned" data-equip-slot="'+slot+'" data-equip-id="'+it.id+'">穿戴</button>';
-        else btnHtml = '<button class="ai-btn" data-buy-slot="'+slot+'" data-buy-id="'+it.id+'" data-cost="'+it.price+'"'+(state.gold>=it.price?'':' disabled')+'>💰'+it.price+'</button>';
-        html += '<div class="avatar-item-card">'+
-            '<div class="ai-emoji">'+it.emoji+'</div>'+
-            '<div class="ai-info"><div class="ai-name">'+it.name+'</div>'+
-            '<div class="ai-desc">'+(it.desc||'')+'</div></div>'+
-            btnHtml+'</div>';
+function renderAvatarPreview(){
+    var hatLayer = $('avatarLayerHat');
+    var bodyLayer = $('avatarLayerBody');
+    var accLayer = $('avatarLayerAcc');
+    bodyLayer.textContent = getBodyDisplayEmoji();
+    var hatItem = findEquippedItem('hat');
+    hatLayer.textContent = hatItem ? hatItem.emoji : '';
+    var accItem = findEquippedItem('accessory');
+    accLayer.textContent = accItem ? accItem.emoji : '';
+    var genderBtns = document.querySelectorAll('.avatar-page-gender .gender-btn');
+    for(var i=0;i<genderBtns.length;i++){
+        if(genderBtns[i].getAttribute('data-gender') === state.avatar.gender) addClass(genderBtns[i],'active');
+        else removeClass(genderBtns[i],'active');
     }
-    $(containerId).innerHTML = html;
+}
 
-    var buyBtns = $(containerId).querySelectorAll('[data-buy-slot]');
+function findEquippedItem(slot){
+    var items = AVATAR_ITEMS[slot];
+    var currentId = state.avatar[slot];
+    for(var i=0;i<items.length;i++){
+        if(items[i].id === currentId) return items[i];
+    }
+    return null;
+}
+
+function renderAvatarPageItems(slot){
+    avatarPageCurrentSlot = slot;
+    var list = $('avatarPageList');
+    $('avatarPageGold').textContent = state.gold;
+    var html = '';
+    if(slot === 'skill'){
+        for(var s=0;s<AVATAR_SKILLS.length;s++){
+            var sk = AVATAR_SKILLS[s];
+            var lv = state.avatarUpgrades[sk.id] || 0;
+            var maxed = lv >= sk.maxLevel;
+            var cost = sk.baseCost + lv * sk.baseCost;
+            var canAfford = state.gold >= cost && !maxed;
+            html += '<div class="wardrobe-item">'+
+                '<div class="wi-emoji">'+sk.icon+'</div>'+
+                '<div class="wi-info"><div class="wi-name">'+sk.name+' Lv.'+lv+'/'+sk.maxLevel+'</div>'+
+                '<div class="wi-desc">'+sk.desc+'</div></div>'+
+                '<button class="wi-btn" data-skill="'+sk.id+'" data-cost="'+cost+'"'+(maxed||!canAfford?' disabled':'')+'>'+
+                (maxed?'已满级':'💰'+cost)+'</button></div>';
+        }
+    } else {
+        var items = AVATAR_ITEMS[slot];
+        for(var i2=0;i2<items.length;i2++){
+            var it = items[i2];
+            var owned = hasAvatarItem(slot, it.id);
+            var equipped = state.avatar[slot] === it.id;
+            var btnHtml;
+            if(equipped) btnHtml = '<button class="wi-btn equipped" disabled>已穿戴</button>';
+            else if(owned) btnHtml = '<button class="wi-btn owned" data-equip="'+it.id+'">穿戴</button>';
+            else btnHtml = '<button class="wi-btn" data-buy="'+it.id+'" data-cost="'+it.price+'"'+(state.gold>=it.price?'':' disabled')+'>💰'+it.price+'</button>';
+            html += '<div class="wardrobe-item">'+
+                '<div class="wi-emoji">'+it.emoji+'</div>'+
+                '<div class="wi-info"><div class="wi-name">'+it.name+'</div>'+
+                '<div class="wi-desc">'+(it.desc||'')+'</div></div>'+
+                btnHtml+'</div>';
+        }
+    }
+    list.innerHTML = html;
+
+    var buyBtns = list.querySelectorAll('[data-buy]');
     for(var b=0;b<buyBtns.length;b++){
         (function(btn){
             btn.addEventListener('click', function(){
-                var slot2 = btn.getAttribute('data-buy-slot');
-                var id = btn.getAttribute('data-buy-id');
+                var id = btn.getAttribute('data-buy');
                 var cost = parseInt(btn.getAttribute('data-cost'),10);
                 if(!spendGold(cost)){ showToast('💰 金币不足'); return; }
-                if(!state.ownedAvatarItems[slot2]) state.ownedAvatarItems[slot2] = [];
-                state.ownedAvatarItems[slot2].push(id);
-                state.avatar[slot2] = id;
-                renderAvatarScreen();
+                if(!state.ownedAvatarItems[slot]) state.ownedAvatarItems[slot] = [];
+                state.ownedAvatarItems[slot].push(id);
+                state.avatar[slot] = id;
+                renderAvatarPageItems(slot);
+                renderAvatarPreview();
+                syncAllChefDisplays();
                 Sound.upgrade();
                 showToast('✅ 已购买并穿戴！');
                 saveGame();
             });
         })(buyBtns[b]);
     }
-    var equipBtns = $(containerId).querySelectorAll('[data-equip-slot]');
+    var equipBtns = list.querySelectorAll('[data-equip]');
     for(var e=0;e<equipBtns.length;e++){
         (function(btn){
             btn.addEventListener('click', function(){
-                var slot2 = btn.getAttribute('data-equip-slot');
-                var id = btn.getAttribute('data-equip-id');
-                state.avatar[slot2] = id;
-                renderAvatarScreen();
+                var id = btn.getAttribute('data-equip');
+                state.avatar[slot] = id;
+                renderAvatarPageItems(slot);
+                renderAvatarPreview();
+                syncAllChefDisplays();
                 showToast('✅ 已穿戴');
                 saveGame();
             });
         })(equipBtns[e]);
     }
-}
-
-function renderAvatarSkillList(){
-    var html = '';
-    for(var s=0;s<AVATAR_SKILLS.length;s++){
-        var sk = AVATAR_SKILLS[s];
-        var lv = state.avatarUpgrades[sk.id] || 0;
-        var maxed = lv >= sk.maxLevel;
-        var cost = sk.baseCost + lv * sk.baseCost;
-        var canAfford = state.gold >= cost && !maxed;
-        html += '<div class="avatar-item-card">'+
-            '<div class="ai-emoji">'+sk.icon+'</div>'+
-            '<div class="ai-info"><div class="ai-name">'+sk.name+' Lv.'+lv+'/'+sk.maxLevel+'</div>'+
-            '<div class="ai-desc">'+sk.desc+'</div></div>'+
-            '<button class="ai-btn" data-skill-id="'+sk.id+'" data-cost="'+cost+'"'+(maxed||!canAfford?' disabled':'')+'>'+
-            (maxed?'已满级':'💰'+cost)+'</button></div>';
-    }
-    $('avatarSkillList').innerHTML = html;
-
-    var skillBtns = $('avatarSkillList').querySelectorAll('[data-skill-id]');
+    var skillBtns = list.querySelectorAll('[data-skill]');
     for(var k=0;k<skillBtns.length;k++){
         (function(btn){
             btn.addEventListener('click', function(){
-                var id = btn.getAttribute('data-skill-id');
+                var id = btn.getAttribute('data-skill');
                 var cost = parseInt(btn.getAttribute('data-cost'),10);
                 if(!spendGold(cost)){ showToast('💰 金币不足'); return; }
                 state.avatarUpgrades[id] = (state.avatarUpgrades[id]||0) + 1;
-                renderAvatarScreen();
+                renderAvatarPageItems('skill');
+                renderAvatarPreview();
                 Sound.upgrade();
                 showToast('⬆️ 能力提升！');
                 saveGame();
@@ -2453,7 +2516,6 @@ function renderAvatarSkillList(){
     }
 }
 
-/* ===== 游戏内衣柜（快捷入口） ===== */
 var wardrobeCurrentSlot = 'outfit';
 
 function showWardrobe(){
@@ -2469,7 +2531,7 @@ function renderWardrobe(slot){
         if(tabs[i].getAttribute('data-slot') === slot) addClass(tabs[i],'active');
         else removeClass(tabs[i],'active');
     }
-    $('wardrobePreview').textContent = getAvatarEmoji();
+    $('wardrobePreview').innerHTML = buildChefCompositeHTML('chef-md', false);
     $('wardrobeGold').textContent = state.gold;
     var html = '';
     if(slot === 'skill'){
@@ -2518,6 +2580,7 @@ function renderWardrobe(slot){
                 renderWardrobe(slot);
                 renderCustomers();
                 renderDishSelector();
+                syncAllChefDisplays();
                 Sound.upgrade();
                 showToast('✅ 已购买并穿戴！');
                 saveGame();
@@ -2531,6 +2594,7 @@ function renderWardrobe(slot){
                 var id = btn.getAttribute('data-equip');
                 state.avatar[slot] = id;
                 renderWardrobe(slot);
+                syncAllChefDisplays();
                 showToast('✅ 已穿戴');
                 saveGame();
             });
@@ -2697,31 +2761,22 @@ function bindEvents(){
         try{
             Sound.init();
             prepareGameData();
-            showAvatarScreen();
+            renderAvatarPreview();
+            showAvatarCreate();
         }catch(e){ console.error('打开形象选择失败:', e); }
-    });
-
-    // 形象选择独立页面
-    var avatarGenderBtns = document.querySelectorAll('.avatar-gender-btn');
-    for(var ag=0;ag<avatarGenderBtns.length;ag++){
-        (function(btn){
-            btn.addEventListener('click', function(){
-                state.avatar.gender = btn.getAttribute('data-gender');
-                renderAvatarScreen();
-            });
-        })(avatarGenderBtns[ag]);
-    }
-    $('avatarBackBtn').addEventListener('click', function(){ showModeSelect(); });
-    $('avatarConfirmBtn').addEventListener('click', function(){
-        state.avatarCreated = true;
-        saveGame();
-        showToast('💾 厨师形象已保存', 1400);
-        showModeSelect();
     });
 
     // 模式选择
     $('modeTutorial').addEventListener('click', function(){ chooseMode('tutorial'); });
     $('modeDirect').addEventListener('click', function(){ chooseMode('direct'); });
+    $('modeAvatar').addEventListener('click', function(){
+        try{
+            Sound.init();
+            prepareGameData();
+            renderAvatarPreview();
+            showAvatarCreate();
+        }catch(e){ console.error('打开形象选择失败:', e); }
+    });
     $('modeBackBtn').addEventListener('click', function(){ showModeSelect(); });
 
     $('continueBtn').addEventListener('click', function(){
@@ -2825,7 +2880,42 @@ function bindEvents(){
         showToast('🍽️ 没有做好的对应菜品');
     });
 
-    // 游戏内衣柜
+    // 形象选择页面
+    var genderBtns = document.querySelectorAll('.avatar-page-gender .gender-btn');
+    for(var g=0;g<genderBtns.length;g++){
+        (function(btn){
+            btn.addEventListener('click', function(){
+                var gender = btn.getAttribute('data-gender');
+                state.avatar.gender = gender;
+                var all = document.querySelectorAll('.avatar-page-gender .gender-btn');
+                for(var x=0;x<all.length;x++) removeClass(all[x],'active');
+                addClass(btn,'active');
+                renderAvatarPreview();
+                syncAllChefDisplays();
+                saveGame();
+            });
+        })(genderBtns[g]);
+    }
+    $('avatarPageCloseBtn').addEventListener('click', function(){
+        state.avatarCreated = true;
+        saveGame();
+        removeClass($('avatarCreateModal'),'show');
+        syncAllChefDisplays();
+        showToast('💾 形象已保存', 1400);
+    });
+    var avatarPageTabs = document.querySelectorAll('.avatar-page-tab');
+    for(var apt=0;apt<avatarPageTabs.length;apt++){
+        (function(tab){
+            tab.addEventListener('click', function(){
+                var slot = tab.getAttribute('data-slot');
+                for(var x=0;x<avatarPageTabs.length;x++) removeClass(avatarPageTabs[x],'active');
+                addClass(tab,'active');
+                renderAvatarPageItems(slot);
+            });
+        })(avatarPageTabs[apt]);
+    }
+
+    // 衣柜
     $('wardrobeBtn').addEventListener('click', showWardrobe);
     $('wardrobeClose').addEventListener('click', function(){ removeClass($('avatarWardrobeModal'),'show'); });
     var wTabs = document.querySelectorAll('.wardrobe-tab');
@@ -2873,6 +2963,7 @@ function init(){
 
     try { updateDateUI(); } catch(e){}
     try { updateSoundBtn(); } catch(e){}
+    try { syncAllChefDisplays(); } catch(e){}
 }
 
 if(document.readyState === 'loading'){
