@@ -1152,6 +1152,10 @@ var Loop = {
         this.running = false;
     },
     tick: function(dt, now){
+        // 统一时间基准：顾客相关用 Date.now()（因为 spawnTime 是 Date.now()），
+        // 灶台相关用 performance.now()（因为 cookStartTime 是 performance.now()）
+        var wallNow = Date.now();
+
         // 灶台烹饪进度插值
         if(state.isShopOpen){
             for(var i=0;i<state.prepSlots.length;i++){
@@ -1190,7 +1194,7 @@ var Loop = {
             var diffCfg = DIFFICULTY[safeDiffKey(state.difficulty)] || DIFFICULTY.normal;
             for(var j=state.customers.length-1;j>=0;j--){
                 var cust = state.customers[j];
-                var elapsed2 = now - cust.spawnTime;
+                var elapsed2 = wallNow - cust.spawnTime;
                 if(elapsed2 >= cust.maxWaitTime){
                     state.customers.splice(j,1);
                     removedIds.push(cust.id);
@@ -1220,7 +1224,7 @@ var Loop = {
                 var c = state.customers[k];
                 var card = document.querySelector('.customer-card[data-id="'+c.id+'"]');
                 if(!card) continue;
-                var el2 = now - c.spawnTime;
+                var el2 = wallNow - c.spawnTime;
                 var remaining = Math.max(0, c.maxWaitTime - el2);
                 var percent = (remaining / c.maxWaitTime) * 100;
                 var fillEl = card.querySelector('.wait-timer-fill');
