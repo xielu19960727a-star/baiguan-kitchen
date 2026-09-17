@@ -228,7 +228,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .dish-chip .chip-name{font-size:.6rem;font-weight:800;color:#4a2e1b;text-align:center;line-height:1.1}
 .dish-chip .chip-badge{position:absolute;top:-5px;right:-5px;background:#e74c3c;color:#fff;font-size:.55rem;font-weight:800;border-radius:20px;padding:1px 4px;box-shadow:0 2px 4px rgba(0,0,0,.2);border:1px solid #fff}
 .dish-chip.selected{border-color:#f7c35c;background:#fff7e0;box-shadow:0 0 0 2px #f7c35c,0 3px 0 #d9b382}
-.dish-chip .chip-stock{font-size:.58rem;font-weight:700;color:#8b6d4b;display:flex;gap:2px;flex-wrap:wrap;justify-content:center;max-width:58px;line-height:1.2}
+.dish-chip .chip-stock{font-size:.55rem;font-weight:700;color:#8b6d4b;display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1.3}
+.dish-chip .chip-stock .ing-line{display:block;white-space:nowrap}
+.dish-chip .chip-stock .ing-ok{color:#2e7d32}
+.dish-chip .chip-stock .ing-lack{color:#c0392b}
 .dish-chip.no-stock{border-color:#e0b0a0;background:#fce8e8}
 .dish-chip.no-stock .chip-stock{color:#c0392b}
 .combo-chip{background:linear-gradient(145deg,#fff3d6,#ffe6b3);border:2px solid #f0c274;min-width:76px}
@@ -2193,35 +2196,41 @@ function renderDishSelector(){
         var isSelected = state.selectedItem && state.selectedItem.type === 'combo' && state.selectedItem.id === combo.id;
         var isNeeded = !!neededComboIds[combo.id];
         var needs = getItemIngredients(combo, 'combo');
-        var stockStr = '';
+        var stockHtml = '';
         for(var ing in needs){
             var ingData = null;
             for(var n=0;n<ALL_INGREDIENTS.length;n++){ if(ALL_INGREDIENTS[n].id===ing){ ingData=ALL_INGREDIENTS[n]; break; } }
-            stockStr += (ingData?ingData.emoji:ing)+(state.inventory[ing]||0)+'/'+needs[ing]+' ';
+            var have = state.inventory[ing] || 0;
+            var need = needs[ing];
+            var cls = have >= need ? 'ing-ok' : 'ing-lack';
+            stockHtml += '<span class="ing-line '+cls+'">'+(ingData?ingData.emoji:ing)+' '+have+'/'+need+'</span>';
         }
         html += '<div class="dish-chip combo-chip '+(isSelected?'selected':'')+' '+(!canMakeIt?'no-stock':'')+'" data-type="combo" data-id="'+combo.id+'">'+
             (isNeeded?'<div class="chip-badge">需</div>':'')+
             '<div class="chip-emoji">'+combo.emoji+'</div>'+
             '<div class="chip-name">'+combo.name+'</div>'+
             '<div class="chip-detail">'+combo.tag+' · 💰'+getPrice(combo)+'</div>'+
-            '<div class="chip-stock">'+stockStr+'</div></div>';
+            '<div class="chip-stock">'+stockHtml+'</div></div>';
     }
     for(var p=0;p<availDishes.length;p++){
         var dish = availDishes[p];
         var canMakeDish = hasIngredients(dish, 'dish');
         var isSelectedD = state.selectedItem && state.selectedItem.type === 'dish' && state.selectedItem.id === dish.id;
         var isNeededD = !!neededDishIds[dish.id];
-        var stockStrD = '';
+        var stockHtmlD = '';
         for(var ing2 in dish.ingredients){
             var ingData2 = null;
             for(var q=0;q<ALL_INGREDIENTS.length;q++){ if(ALL_INGREDIENTS[q].id===ing2){ ingData2=ALL_INGREDIENTS[q]; break; } }
-            stockStrD += (ingData2?ingData2.emoji:ing2)+(state.inventory[ing2]||0)+'/'+dish.ingredients[ing2]+' ';
+            var have2 = state.inventory[ing2] || 0;
+            var need2 = dish.ingredients[ing2];
+            var cls2 = have2 >= need2 ? 'ing-ok' : 'ing-lack';
+            stockHtmlD += '<span class="ing-line '+cls2+'">'+(ingData2?ingData2.emoji:ing2)+' '+have2+'/'+need2+'</span>';
         }
         html += '<div class="dish-chip '+(isSelectedD?'selected':'')+' '+(!canMakeDish?'no-stock':'')+'" data-type="dish" data-id="'+dish.id+'">'+
             (isNeededD?'<div class="chip-badge">需</div>':'')+
             '<div class="chip-emoji">'+dish.emoji+'</div>'+
             '<div class="chip-name">'+dish.name+'</div>'+
-            '<div class="chip-stock">'+stockStrD+'</div></div>';
+            '<div class="chip-stock">'+stockHtmlD+'</div></div>';
     }
     $('dishScroll').innerHTML = html;
 
