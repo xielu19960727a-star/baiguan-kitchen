@@ -425,13 +425,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
                     <div class="splash-subtitle">BÀI GUĀN's KITCHEN · 多灶升级版</div>
                 </div>
             </div>
-            <div class="splash-chef">👨‍🍳</div>
+            <div class="splash-chef">👩‍🍳</div>
             <div class="splash-loading">
                 <div class="loading-bar-bg"><div class="loading-bar-fill" id="loadingFill"></div></div>
                 <div class="loading-text" id="loadingText">正在备菜...</div>
             </div>
             <div class="splash-login" id="splashLogin">
-                <button class="login-btn" id="loginBtn" disabled onclick="window.__enterGame && window.__enterGame()">开始游戏</button>
+                <button class="login-btn splash-action-btn" id="tutorialStartBtn" disabled>🎓 新手教程</button>
+                <button class="login-btn splash-action-btn" id="directStartBtn" disabled>▶️ 直接开始</button>
+                <button class="login-btn splash-action-btn" id="avatarSelectBtn" disabled>👩‍🍳 形象选择</button>
                 <div class="login-name">—— 欢迎光临 ——</div>
             </div>
             <div class="age-rating-box">
@@ -564,8 +566,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
             <div class="day-progress-wrap"><div class="day-progress-bg"><div class="day-progress-fill" id="dayProgressFill"></div></div></div>
             <div class="tabs">
                 <button class="tab active" data-tab="kitchen">🍳 厨房</button>
-                <button class="tab" data-tab="menu">📖 菜单</button>
                 <button class="tab" data-tab="inventory">📦 库存</button>
+                <button class="tab" data-tab="menu">📖 菜单</button>
                 <button class="tab" data-tab="upgrade">⬆️ 升级</button>
             </div>
             <div class="main-content">
@@ -582,12 +584,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
                         <div class="prep-station" id="prepStation"></div>
                         <div class="cook-progress"><div class="progress-fill" id="progressFill" style="width:0"></div></div>
                         <div class="actions">
-                            <button class="btn btn-cook" id="cookBtn">🔥 开始烹饪</button>
                             <button class="open-shop-btn" id="shopToggleBtn">🏪 开始营业</button>
                         </div>
                     </div>
                     <div class="dish-selector">
-                        <div class="selector-header"><span>🍽️ 选择菜品/套餐</span><span class="selector-hint" id="selectorHint">点选 → 烹饪</span></div>
+                        <div class="selector-header"><span>🍽️ 选择菜品/套餐</span><span class="selector-hint" id="selectorHint">点选 → 自动烹饪</span></div>
                         <div class="dish-scroll" id="dishScroll"></div>
                     </div>
                     <div class="order-section">
@@ -595,16 +596,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
                         <div class="customer-list" id="customerList"><div class="empty-orders">点击“开始营业”迎接顾客...</div></div>
                     </div>
                 </div>
-                <div id="tab-menu" class="tab-content hidden">
-                    <div class="order-section" style="padding:8px">
-                        <div class="order-header" style="margin-bottom:6px"><span>📖 菜品图鉴</span><span id="menuCount">0/0</span></div>
-                        <div class="menu-grid" id="menuGrid"></div>
-                    </div>
-                </div>
                 <div id="tab-inventory" class="tab-content hidden">
                     <div class="inventory-panel">
                         <div class="inventory-title"><span>📦 食材库存</span><span id="inventoryGold">💰 0</span></div>
                         <div class="inventory-grid" id="inventoryGrid"></div>
+                    </div>
+                </div>
+                <div id="tab-menu" class="tab-content hidden">
+                    <div class="order-section" style="padding:8px">
+                        <div class="order-header" style="margin-bottom:6px"><span>📖 菜品图鉴</span><span id="menuCount">0/0</span></div>
+                        <div class="menu-grid" id="menuGrid"></div>
                     </div>
                 </div>
                 <div id="tab-upgrade" class="tab-content hidden">
@@ -713,14 +714,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
     <!-- 形象创建 -->
     <div class="modal-overlay avatar-overlay" id="avatarCreateModal">
         <div class="modal-box avatar-create-box">
-            <div class="modal-title">👨‍🍳 创建你的厨师形象</div>
-            <div class="modal-date">选择性别，开启厨房之旅</div>
-            <div class="avatar-preview" id="avatarPreview">👨‍🍳</div>
+            <div class="modal-title">👩‍🍳 选择你的厨师形象</div>
+            <div class="modal-date">选择后保存，下次进入会继续使用</div>
+            <div class="avatar-preview" id="avatarPreview">👩‍🍳</div>
             <div class="gender-picker">
-                <button class="gender-btn active" data-gender="male">👨‍🍳 男厨师</button>
-                <button class="gender-btn" data-gender="female">👩‍🍳 女厨师</button>
+                <button class="gender-btn" data-gender="male">👨‍🍳 男厨师</button>
+                <button class="gender-btn active" data-gender="female">👩‍🍳 女厨师</button>
             </div>
-            <button class="modal-btn" id="avatarCreateConfirm">✅ 开始新手教程</button>
+            <button class="modal-btn" id="avatarCreateConfirm">💾 保存形象</button>
         </div>
     </div>
 
@@ -980,10 +981,28 @@ function getLevelConfig(level, difficulty){
     var servedNeeded = 3 + Math.floor(level * 1.2);
     var maxCustomers = Math.min(8, 2 + Math.ceil(level / 2.5));
     var baseWait = Math.max(15, 45 - Math.floor(level * 1.5));
-    var waitTime = baseWait * diff.waitMul * 1000;
     var comboChance = Math.min(0.7, 0.15 + level * 0.03);
     var multiQtyChance = Math.min(0.6, level * 0.04);
     var tipChance = Math.max(0.1, 0.3 - level * 0.01);
+
+    // 前两关仅做新手友好调整，不影响第3关及之后的原有难度曲线
+    if(level === 1){
+        servedNeeded = 2;
+        maxCustomers = 2;
+        baseWait = 80;
+        comboChance = 0;
+        multiQtyChance = 0;
+        tipChance = 0.35;
+    } else if(level === 2){
+        servedNeeded = 3;
+        maxCustomers = 2;
+        baseWait = 70;
+        comboChance = 0.05;
+        multiQtyChance = 0;
+        tipChance = 0.33;
+    }
+
+    var waitTime = baseWait * diff.waitMul * 1000;
     var desc = '';
     if(level<=3) desc='新手开业';
     else if(level<=6) desc='小有名气';
@@ -1040,7 +1059,7 @@ var state = {
     lastTickTime: Date.now(),
     playMode: null,
     /* 形象系统 */
-    avatar: { gender:'male', outfit:'chef_default', hat:'none', accessory:'none' },
+    avatar: { gender:'female', outfit:'chef_default', hat:'none', accessory:'none' },
     avatarUpgrades: { waitBonus:0, tipBonus:0 },
     avatarCreated: false,
     ownedAvatarItems: { outfit:['chef_default'], hat:['none'], accessory:['none'] }
@@ -1084,7 +1103,7 @@ function loadGame(){
         state.upgrades = Object.assign({cookingSpeed:0,priceBonus:0,maxCustomers:0}, data.upgrades || {});
         state.difficulty = safeDiffKey(data.difficulty);
         state.soundEnabled = data.soundEnabled !== false;
-        state.avatar = Object.assign({ gender:'male', outfit:'chef_default', hat:'none', accessory:'none' }, data.avatar || {});
+        state.avatar = Object.assign({ gender:'female', outfit:'chef_default', hat:'none', accessory:'none' }, data.avatar || {});
         state.avatarUpgrades = Object.assign({ waitBonus:0, tipBonus:0 }, data.avatarUpgrades || {});
         state.avatarCreated = data.avatarCreated === true;
         state.ownedAvatarItems = Object.assign({ outfit:['chef_default'], hat:['none'], accessory:['none'] }, data.ownedAvatarItems || {});
@@ -1210,8 +1229,8 @@ function getCurrentPhase(){
 }
 
 function generateDailyGoal(level){
-    var type = DAILY_GOAL_TYPES[randomInt(0, DAILY_GOAL_TYPES.length-1)];
-    var target = type.target(level);
+    var type = level <= 2 ? DAILY_GOAL_TYPES[0] : DAILY_GOAL_TYPES[randomInt(0, DAILY_GOAL_TYPES.length-1)];
+    var target = level === 1 ? 2 : (level === 2 ? 3 : type.target(level));
     var reward = type.reward(level);
     return {
         id: type.id,
@@ -1501,7 +1520,7 @@ function generateCustomer(){
 
     var orderType, orderItem;
     var roll = Math.random();
-    var isRush = roll < 0.1;
+    var isRush = state.currentLevel > 2 && roll < 0.1;
     var isDoubleTip = roll >= 0.1 && roll < 0.18;
 
     if(availCombos.length > 0 && Math.random() < state.levelConfig.comboChance){
@@ -1587,7 +1606,7 @@ function startWaitTimer(){
                 showToast('😤 顾客等太久走了...');
                 Sound.leave();
                 addRep(-Math.round(1 * repLossMul));
-                if(state.reputation <= CONFIG.FAIL_REP_THRESHOLD && state.levelServedCount < state.levelConfig.servedNeeded){
+                if(state.currentLevel > 2 && state.reputation <= CONFIG.FAIL_REP_THRESHOLD && state.levelServedCount < state.levelConfig.servedNeeded){
                     triggerFail();
                     return;
                 }
@@ -2030,9 +2049,9 @@ function updateSelectorHint(){
         } else {
             for(var j=0;j<ALL_COMBOS.length;j++){ if(ALL_COMBOS[j].id===state.selectedItem.id){ name=ALL_COMBOS[j].name; break; } }
         }
-        hint.textContent = '已选：'+name+' → 点击灶台烹饪';
+        hint.textContent = '已选：'+name+' · 等待空灶台';
     } else {
-        hint.textContent = '点选菜品 → 点击空灶台开始烹饪';
+        hint.textContent = '点选菜品 → 自动使用空灶台烹饪';
     }
 }
 
@@ -2055,9 +2074,7 @@ function selectItem(type, id){
     }
     if(!hasIngredients(itemData, type)){ showToast('📦 食材不足，去库存补货'); return; }
     state.selectedItem = { type:type, id:id, data:itemData };
-    renderDishSelector();
-    updateSelectorHint();
-    showToast('✅ 已选择 '+itemData.name+'，点击空灶台烹饪', 1200);
+    startCooking();
 }
 
 function renderMenu(){
@@ -2199,8 +2216,8 @@ function setGuideDone(){
 }
 
 var GUIDE_STEPS = [
-    { icon:'🍽️', title:'选择菜品', text:'点击下方菜品卡片，选择要做的菜。有顾客下单的菜品会显示“需”角标。' },
-    { icon:'🍳', title:'点击灶台烹饪', text:'选择菜品后，点击空灶台开始烹饪。声望越高，可解锁的灶台越多，最多5个同时开工。' },
+    { icon:'🍽️', title:'选择菜品', text:'点击下方菜品卡片后，会自动使用空闲灶台开始烹饪。有顾客下单的菜品会显示“需”角标。' },
+    { icon:'🍳', title:'灶台自动开工', text:'点选菜品后，系统会优先使用你选中的空灶台，否则自动使用第一个空闲灶台。声望越高，可解锁的灶台越多，最多5个同时开工。' },
     { icon:'🏪', title:'开门营业', text:'点击“开始营业”才会来顾客。注意看顾客头上的倒计时，超时会流失顾客并扣声望。' },
     { icon:'🍽️', title:'上菜收钱', text:'菜做好后，灶台会显示✓。点击灶台或顾客卡片上的“上菜”按钮即可提交。' }
 ];
@@ -2246,6 +2263,11 @@ function showAvatarCreate(){
 function renderAvatarPreview(){
     var el = $('avatarPreview');
     if(el) el.textContent = getAvatarEmoji();
+    var buttons = document.querySelectorAll('.gender-btn');
+    for(var i=0;i<buttons.length;i++){
+        if(buttons[i].getAttribute('data-gender') === state.avatar.gender) addClass(buttons[i],'active');
+        else removeClass(buttons[i],'active');
+    }
 }
 
 var wardrobeCurrentSlot = 'outfit';
@@ -2368,6 +2390,7 @@ function prepareGameData(){
     }catch(e){
         console.error('读取游戏进度失败，使用新游戏数据:', e);
     }
+    if(!state.avatarCreated) state.avatar.gender = 'female';
     state.soundEnabled = state.soundEnabled !== false;
     Sound.enabled = state.soundEnabled;
 }
@@ -2379,20 +2402,17 @@ function finishLoading(){
         var fillEl = $('loadingFill');
         var textEl = $('loadingText');
         var loginEl = $('splashLogin');
-        var loginBtn = $('loginBtn');
+        var actionBtns = document.querySelectorAll('.splash-action-btn');
         if(fillEl) fillEl.style.width = '100%';
-        if(textEl) textEl.textContent = '加载完成，准备开厨！';
+        if(textEl) textEl.textContent = '加载完成，选择开始方式';
         if(loginEl) addClass(loginEl, 'visible');
-        if(loginBtn){
-            loginBtn.textContent = '开始游戏';
-            loginBtn.disabled = false;
-        }
+        for(var i=0;i<actionBtns.length;i++) actionBtns[i].disabled = false;
     }catch(e){
         console.error('finishLoading error:', e);
     }
 }
 
-function enterGame(){
+function enterGame(mode){
     if(splashStarted) return;
     splashStarted = true;
     clearLoadingTimers();
@@ -2405,12 +2425,7 @@ function enterGame(){
         Sound.init();
         prepareGameData();
         updateSoundBtn();
-        // 首次进入先创建形象，之后走模式选择
-        if(!state.avatarCreated){
-            showAvatarCreate();
-        } else {
-            showModeSelect();
-        }
+        chooseMode(mode === 'tutorial' ? 'tutorial' : 'direct');
     }catch(e){
         console.error('进入模式选择失败，回退到关卡选择:', e);
         try{
@@ -2434,7 +2449,6 @@ function enterGame(){
         }
     }
 }
-window.__enterGame = enterGame;
 
 function runLoadingSequence(){
     var steps = [
@@ -2449,17 +2463,16 @@ function runLoadingSequence(){
     var fillEl = $('loadingFill');
     var textEl = $('loadingText');
     var loginEl = $('splashLogin');
-    var loginBtn = $('loginBtn');
+    var actionBtns = document.querySelectorAll('.splash-action-btn');
 
-    if(!fillEl || !textEl || !loginEl || !loginBtn){
+    if(!fillEl || !textEl || !loginEl || actionBtns.length !== 3){
         finishLoading();
         return;
     }
 
     clearLoadingTimers();
     loadingFinished = false;
-    loginBtn.disabled = true;
-    loginBtn.textContent = '开始游戏';
+    for(var b=0;b<actionBtns.length;b++) actionBtns[b].disabled = true;
     removeClass(loginEl, 'visible');
     fillEl.style.width = '0%';
     textEl.textContent = '正在启动游戏...';
@@ -2494,10 +2507,16 @@ function chooseMode(mode){
 }
 
 function bindEvents(){
-    var loginBtn = $('loginBtn');
-    if(loginBtn){
-        loginBtn.addEventListener('click', enterGame);
-    }
+    $('tutorialStartBtn').addEventListener('click', function(){ enterGame('tutorial'); });
+    $('directStartBtn').addEventListener('click', function(){ enterGame('direct'); });
+    $('avatarSelectBtn').addEventListener('click', function(){
+        try{
+            Sound.init();
+            prepareGameData();
+            renderAvatarPreview();
+            showAvatarCreate();
+        }catch(e){ console.error('打开形象选择失败:', e); }
+    });
 
     // 模式选择
     $('modeTutorial').addEventListener('click', function(){ chooseMode('tutorial'); });
@@ -2526,7 +2545,7 @@ function bindEvents(){
         state.inventory = deepCopy(DEFAULT_INVENTORY);
         state.upgrades = { cookingSpeed:0, priceBonus:0, maxCustomers:0 };
         state.difficulty = 'normal';
-        state.avatar = { gender:'male', outfit:'chef_default', hat:'none', accessory:'none' };
+        state.avatar = { gender:'female', outfit:'chef_default', hat:'none', accessory:'none' };
         state.avatarUpgrades = { waitBonus:0, tipBonus:0 };
         state.avatarCreated = false;
         state.ownedAvatarItems = { outfit:['chef_default'], hat:['none'], accessory:['none'] };
@@ -2535,7 +2554,6 @@ function bindEvents(){
         showToast('🗑️ 进度已重置');
     });
 
-    $('cookBtn').addEventListener('click', startCooking);
     $('shopToggleBtn').addEventListener('click', toggleShop);
 
     var tabs = document.querySelectorAll('.tab');
@@ -2624,8 +2642,7 @@ function bindEvents(){
         state.avatarCreated = true;
         saveGame();
         removeClass($('avatarCreateModal'),'show');
-        state.playMode = 'tutorial';
-        startLevel(1);
+        showToast('💾 厨师形象已保存', 1400);
     });
 
     // 衣柜
@@ -2663,8 +2680,10 @@ function init(){
 
     try { bindEvents(); } catch(e){
         console.error('bindEvents error:', e);
-        var loginBtn = $('loginBtn');
-        if(loginBtn) loginBtn.onclick = enterGame;
+        var tutorialBtn = $('tutorialStartBtn');
+        var directBtn = $('directStartBtn');
+        if(tutorialBtn) tutorialBtn.onclick = function(){ enterGame('tutorial'); };
+        if(directBtn) directBtn.onclick = function(){ enterGame('direct'); };
     }
 
     try { runLoadingSequence(); } catch(e){
@@ -2683,5 +2702,6 @@ if(document.readyState === 'loading'){
 }
 
 })();</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
