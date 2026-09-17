@@ -228,8 +228,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .dish-chip .chip-name{font-size:.6rem;font-weight:800;color:#4a2e1b;text-align:center;line-height:1.1}
 .dish-chip .chip-badge{position:absolute;top:-5px;right:-5px;background:#e74c3c;color:#fff;font-size:.55rem;font-weight:800;border-radius:20px;padding:1px 4px;box-shadow:0 2px 4px rgba(0,0,0,.2);border:1px solid #fff}
 .dish-chip.selected{border-color:#f7c35c;background:#fff7e0;box-shadow:0 0 0 2px #f7c35c,0 3px 0 #d9b382}
-.dish-chip .chip-stock{font-size:.55rem;font-weight:700;color:#8b6d4b;display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1.3}
-.dish-chip .chip-stock .ing-line{display:block;white-space:nowrap}
+.dish-chip .chip-stock{font-size:.55rem;font-weight:700;color:#8b6d4b;display:block;width:100%;text-align:center;line-height:1.4;margin-top:2px}
+.dish-chip .chip-stock .ing-line{display:block;width:100%;white-space:nowrap;margin:1px 0}
 .dish-chip .chip-stock .ing-ok{color:#2e7d32}
 .dish-chip .chip-stock .ing-lack{color:#c0392b}
 .dish-chip.no-stock{border-color:#e0b0a0;background:#fce8e8}
@@ -2422,10 +2422,11 @@ function setGuideDone(){
 }
 
 var GUIDE_STEPS = [
-    { icon:'🍽️', title:'选择菜品', text:'点击下方菜品卡片后，会自动使用空闲灶台开始烹饪。有顾客下单的菜品会显示“需”角标。' },
+    { icon:'🍽️', title:'选择菜品', text:'点击下方菜品卡片后，会自动使用空闲灶台开始烹饪。有顾客下单的菜品会显示”需”角标。' },
+    { icon:'📦', title:'看懂食材数量', text:'每道菜品下方显示所需食材，格式为：食材图标 + 库存/需要。例如 🥚 12/1 表示鸡蛋库存12个、做这道菜需要1个。绿色表示库存充足，红色表示库存不足。' },
     { icon:'🍳', title:'灶台自动开工', text:'点选菜品后，系统会优先使用你选中的空灶台，否则自动使用第一个空闲灶台。声望越高，可解锁的灶台越多，最多5个同时开工。' },
-    { icon:'🏪', title:'开门营业', text:'点击“开始营业”才会来顾客。注意看顾客头上的倒计时，超时会流失顾客并扣声望。' },
-    { icon:'🍽️', title:'上菜收钱', text:'菜做好后，灶台会显示✓。点击灶台或顾客卡片上的“上菜”按钮即可提交。' }
+    { icon:'🏪', title:'开门营业', text:'点击”开始营业”才会来顾客。注意看顾客头上的倒计时，超时会流失顾客并扣声望。' },
+    { icon:'🍽️', title:'上菜收钱', text:'菜做好后，灶台会显示✓。点击灶台或顾客卡片上的”上菜”按钮即可提交。' }
 ];
 
 function startGuide(){
