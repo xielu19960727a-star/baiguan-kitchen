@@ -190,37 +190,17 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 
 .kitchen-scene{background:#c9a87c;background-image:radial-gradient(circle at 20% 40%,#e4d2b8 5%,transparent 20%),radial-gradient(circle at 90% 70%,#e4d2b8 5%,transparent 20%),linear-gradient(45deg,#b48c5c 1px,transparent 1px),linear-gradient(-45deg,#b48c5c 1px,transparent 1px);background-size:40px 40px,70px 70px,20px 20px,20px 20px;border-radius:18px;padding:10px;margin-bottom:8px;box-shadow:inset 0 5px 8px rgba(0,0,0,.2),0 5px 0 #6b4f34;border:1px solid #b28b5e;display:flex;flex-direction:column;align-items:center;position:relative}
 
-/* 新增：厨师形象 & 工作台 */
-.chef-scene{display:flex;flex-direction:column;align-items:center;width:100%;margin-bottom:6px}
-.chef-avatar-wrap{position:relative;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#fff6e6,#f0dbb8);box-shadow:0 6px 0 #8b6d4b,0 8px 16px rgba(0,0,0,.25);border:3px solid #b28b5e;display:flex;align-items:center;justify-content:center;font-size:2.6rem;transition:all .2s;cursor:pointer}
-.chef-avatar-wrap.cooking{animation:chefCook .6s ease-in-out infinite}
-@keyframes chefCook{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
-.chef-avatar-wrap.happy{animation:chefHappy .8s ease}
-@keyframes chefHappy{0%{transform:scale(1)}30%{transform:scale(1.15)}60%{transform:scale(.95)}100%{transform:scale(1)}}
-.chef-name{font-size:.6rem;font-weight:800;color:#6b4f34;margin-top:4px;letter-spacing:1px}
-.chef-dress-tag{font-size:.55rem;color:#b27d4a;font-weight:700}
-
-/* 工作台 */
-.workbench{width:100%;background:linear-gradient(180deg,#d9c4a5,#b28b5e);border-radius:16px;padding:8px;margin-bottom:8px;box-shadow:inset 0 -4px 0 #8b6d4b,0 4px 8px rgba(0,0,0,.2);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;min-height:70px;position:relative;border:2px solid #a07a52}
-.workbench-label{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#6b4f34;color:#ffeaaf;font-size:.55rem;font-weight:800;padding:1px 12px;border-radius:20px;letter-spacing:1px;box-shadow:0 2px 0 #3e2c1f}
-.workbench-slot{width:52px;height:52px;background:rgba(255,250,239,.7);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 -3px 0 #b28b5e;border:1px dashed #a07a52;position:relative;transition:all .15s;cursor:pointer}
-.workbench-slot.filled{background:#fffaef;border-style:solid;border-color:#e9d5bc}
-.workbench-slot .ws-emoji{font-size:1.4rem;line-height:1}
-.workbench-slot .ws-label{font-size:.4rem;font-weight:700;color:#8b6d4b;margin-top:1px;line-height:1}
-.workbench-slot .ws-drag-hint{position:absolute;bottom:-2px;right:0;font-size:.5rem;opacity:.5}
-.workbench-slot.highlight{box-shadow:0 0 0 3px #f7c35c,inset 0 -3px 0 #b28b5e;border-color:#f7c35c}
-
-.prep-station{width:100%;display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;justify-content:center;min-height:60px}
-.prep-slot{background:#f1e3cf;width:58px;height:58px;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 4px 0 #8b6d4b,0 5px 8px rgba(0,0,0,.25);border:2px solid #b28b5e;position:relative;transition:all .2s;cursor:pointer;flex-shrink:0}
+.prep-station{width:100%;display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;justify-content:center;min-height:70px}
+.prep-slot{background:#f1e3cf;width:62px;height:62px;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 4px 0 #8b6d4b,0 5px 8px rgba(0,0,0,.25);border:2px solid #b28b5e;position:relative;transition:all .2s;cursor:pointer;flex-shrink:0}
 .prep-slot.locked{filter:grayscale(1);opacity:.5;box-shadow:0 2px 0 #8b6d4b;cursor:not-allowed;pointer-events:none;border-style:dashed}
 .prep-slot.active{border-color:#f7c35c;box-shadow:0 0 0 3px #f7c35c,0 4px 0 #8b6d4b}
-.prep-slot .slot-emoji{font-size:1.5rem;line-height:1}
+.prep-slot .slot-emoji{font-size:1.6rem;line-height:1}
 .prep-slot .slot-progress{position:absolute;bottom:2px;left:10%;width:80%;height:4px;background:rgba(0,0,0,.3);border-radius:10px;overflow:hidden}
 .prep-slot .slot-progress-fill{height:100%;width:0;background:linear-gradient(90deg,#f8c44c,#ffdb7c);border-radius:10px;transition:width .15s linear}
 .prep-slot .slot-ready-badge{position:absolute;top:-4px;right:-4px;background:#4caf50;color:#fff;font-size:.55rem;font-weight:800;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3);animation:popIn .3s ease}
 @keyframes popIn{0%{transform:scale(0)}80%{transform:scale(1.2)}100%{transform:scale(1)}}
 .prep-slot .slot-lock-icon{font-size:.9rem;opacity:.6}
-.prep-slot .slot-label{font-size:.42rem;color:#8b6d4b;font-weight:700;margin-top:1px}
+.prep-slot .slot-label{font-size:.45rem;color:#8b6d4b;font-weight:700;margin-top:1px}
 .slot-upgrade-hint{width:100%;text-align:center;font-size:.6rem;color:#8b6d4b;font-weight:700;margin-top:2px}
 
 .cook-progress{width:88%;background:#816e53;border-radius:40px;height:11px;overflow:hidden;box-shadow:inset 0 3px 5px rgba(0,0,0,.3);margin-bottom:8px;border:1px solid #6b4f34}
@@ -257,13 +237,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .customer-list{display:flex;flex-direction:column;gap:5px;max-height:260px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-right:2px}
 .customer-list::-webkit-scrollbar{width:3px}
 .customer-list::-webkit-scrollbar-thumb{background:#c9a87c;border-radius:20px}
-.customer-card{background:#fef7e9;border-radius:40px;padding:7px 9px;display:flex;align-items:center;gap:7px;box-shadow:0 3px 0 #b28b5e;border:1px solid #e1c9a8;transition:all .1s;position:relative}
+.customer-card{background:#fef7e9;border-radius:40px;padding:7px 9px;display:flex;align-items:center;gap:7px;box-shadow:0 3px 0 #b28b5e;border:1px solid #e1c9a8;transition:all .1s}
 .customer-card.match{border-color:#4caf50;box-shadow:0 3px 0 #4caf50,0 0 0 2px rgba(76,175,80,.3);animation:highlightPulse 1.2s ease-in-out infinite}
 @keyframes highlightPulse{0%,100%{box-shadow:0 3px 0 #4caf50,0 0 0 2px rgba(76,175,80,.3)}50%{box-shadow:0 3px 0 #4caf50,0 0 0 6px rgba(76,175,80,0)}}
 .customer-card.served-anim{animation:servedAnim .5s ease}
 @keyframes servedAnim{0%{transform:scale(1)}30%{transform:scale(1.05)}100%{transform:scale(1)}}
-.customer-avatar{font-size:1.3rem;background:#e6d3ba;width:36px;height:36px;min-width:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -3px 0 #b28b5e;position:relative}
-.customer-avatar .mood{position:absolute;bottom:-2px;right:-2px;font-size:.8rem;line-height:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))}
+.customer-avatar{font-size:1.3rem;background:#e6d3ba;width:36px;height:36px;min-width:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -3px 0 #b28b5e}
 .customer-info{flex:1;min-width:0}
 .customer-order{font-weight:800;font-size:.72rem;color:#3b2a17;display:flex;align-items:center;gap:3px;flex-wrap:wrap}
 .customer-order .dish-icon{font-size:.95rem;line-height:1}
@@ -370,43 +349,58 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .upgrade-card .btn-buy:active{transform:translateY(3px);box-shadow:0 1px 0 #b27d4a}
 .upgrade-card .btn-buy:disabled{opacity:.5;transform:translateY(2px);box-shadow:0 1px 0 #b27d4a;pointer-events:none}
 
-/* 厨师选择 */
-.chef-selector-panel{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:8px;background:#f3e5d3;border-radius:16px;margin-bottom:8px}
-.chef-option{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px;border-radius:14px;border:2px solid transparent;transition:all .15s;background:#fffaef;box-shadow:0 3px 0 #d9b382;min-width:70px}
-.chef-option.active{border-color:#f7c35c;background:#fff7e0;box-shadow:0 0 0 2px #f7c35c,0 3px 0 #d9b382}
-.chef-option .opt-avatar{font-size:2.2rem}
-.chef-option .opt-name{font-size:.6rem;font-weight:800;color:#4a2e1b}
-.chef-option .opt-price{font-size:.55rem;font-weight:800;color:#b27d4a}
-.chef-option .opt-price.owned{color:#6cb04a}
+.toast{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 40px);left:50%;transform:translateX(-50%);background:#2e241b;color:#ffeaaf;padding:9px 18px;border-radius:60px;font-weight:600;font-size:.78rem;box-shadow:0 8px 20px rgba(0,0,0,.4);opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999;max-width:88vw;text-align:center;border:1px solid #c9a87c}
+.toast.show{opacity:1}
+.hidden{display:none!important}
 
-/* 拖拽提示 */
-.drag-ghost{position:fixed;pointer-events:none;z-index:9999;font-size:1.8rem;opacity:.8;filter:drop-shadow(0 4px 6px rgba(0,0,0,.3));transition:transform .05s}
+.open-shop-btn{background:linear-gradient(180deg,#8fd46b,#6cb04a);border:2px solid #4c8b2c;border-radius:60px;padding:8px 14px;font-weight:900;font-size:.78rem;color:#1e3a0f;box-shadow:0 4px 0 #4c8b2c,0 5px 10px rgba(0,0,0,.2);cursor:pointer;letter-spacing:.5px;transition:all .1s}
+.open-shop-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #4c8b2c}
+.open-shop-btn.closed{background:linear-gradient(180deg,#e07b6c,#c95a48);border-color:#8b3520;box-shadow:0 4px 0 #8b3520;color:#fff}
+.open-shop-btn:disabled{opacity:.5;filter:grayscale(.6);pointer-events:none;transform:translateY(2px);box-shadow:0 2px 0 #4c8b2c}
+.quit-icon{font-size:2.4rem;margin-bottom:6px}
 
-/* 厨房动画 */
-@keyframes floatIngredient{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.1)}100%{transform:translateY(0) scale(1)}}
-.ingredient-float{animation:floatIngredient 1.2s ease-in-out infinite}
+/* 形象创建 & 衣柜 */
+.avatar-preview{font-size:4rem;margin:8px 0 12px;line-height:1;animation:bounce 2s infinite ease-in-out}
+.gender-picker{display:flex;gap:8px;margin-bottom:14px}
+.gender-btn{flex:1;border:2px solid #d9b382;background:#fffaef;border-radius:60px;padding:10px;font-weight:800;font-size:.82rem;color:#4a2e1b;cursor:pointer;transition:all .12s;box-shadow:0 3px 0 #b28b5e}
+.gender-btn.active{background:linear-gradient(180deg,#f7c35c,#e8a13b);border-color:#b27d4a;box-shadow:0 3px 0 #8b6d4b}
+.gender-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #b28b5e}
+.avatar-wardrobe-box{max-width:360px}
+.wardrobe-tabs{display:flex;gap:4px;margin-bottom:10px;background:#e8d5bc;padding:3px;border-radius:40px}
+.wardrobe-tab{flex:1;border:none;background:transparent;border-radius:40px;padding:7px 2px;font-weight:700;font-size:.65rem;color:#7a5b3b;cursor:pointer;transition:all .15s}
+.wardrobe-tab.active{background:#fffaef;color:#4a2e1b;box-shadow:0 2px 0 #c9a87c}
+.wardrobe-list{max-height:240px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:5px;margin-bottom:10px;padding-right:3px}
+.wardrobe-list::-webkit-scrollbar{width:3px}
+.wardrobe-list::-webkit-scrollbar-thumb{background:#c9a87c;border-radius:20px}
+.wardrobe-item{display:flex;align-items:center;gap:8px;background:#fffaef;border-radius:14px;padding:7px 9px;box-shadow:0 3px 0 #d9b382;border:1px solid #e9d5bc}
+.wardrobe-item .wi-emoji{font-size:1.4rem;width:32px;text-align:center}
+.wardrobe-item .wi-info{flex:1;min-width:0;text-align:left}
+.wardrobe-item .wi-name{font-weight:800;font-size:.72rem;color:#4a2e1b}
+.wardrobe-item .wi-desc{font-size:.58rem;color:#8b6d4b;font-weight:600}
+.wardrobe-item .wi-btn{border:none;background:#8fd46b;border-radius:30px;padding:5px 10px;font-weight:800;color:#1e3a0f;box-shadow:0 3px 0 #4c8b2c;cursor:pointer;font-size:.62rem;white-space:nowrap}
+.wardrobe-item .wi-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #4c8b2c}
+.wardrobe-item .wi-btn.equipped{background:#f7c35c;color:#3d2a16;box-shadow:0 3px 0 #b27d4a}
+.wardrobe-item .wi-btn.owned{background:#b0d68e;color:#2a3d15;box-shadow:0 3px 0 #6c8b4c}
+.wardrobe-item .wi-btn:disabled{opacity:.5;pointer-events:none}
+.wardrobe-footer{font-weight:800;color:#4a2e1b;font-size:.78rem;margin-bottom:10px}
 
 @media (max-height:700px){
-    .prep-slot{width:50px;height:50px}
-    .prep-slot .slot-emoji{font-size:1.2rem}
+    .prep-slot{width:52px;height:52px}
+    .prep-slot .slot-emoji{font-size:1.3rem}
     .splash-chef{font-size:3rem;margin:10px 0 6px}
     .splash-title{font-size:1.4rem}
     .age-rating-box{margin-top:16px}
     .customer-list{max-height:180px}
     .mode-card .mode-emoji{width:48px;height:48px;font-size:2.2rem}
-    .chef-avatar-wrap{width:56px;height:56px;font-size:2rem}
-    .workbench-slot{width:42px;height:42px}
-    .workbench-slot .ws-emoji{font-size:1.1rem}
 }
 @media (max-width:360px){
     .levels-grid{grid-template-columns:repeat(4,1fr)}
     .level-card .level-num{font-size:1rem}
     .level-card .level-desc{font-size:.4rem}
     .splash-title{font-size:1.4rem;letter-spacing:2px}
-    .prep-slot{width:46px;height:46px}
-    .prep-slot .slot-emoji{font-size:1.1rem}
+    .prep-slot{width:48px;height:48px}
+    .prep-slot .slot-emoji{font-size:1.2rem}
     .mode-card .mode-name{font-size:.9rem}
-    .chef-option{min-width:60px;padding:6px}
 }
 </style>
 </head>
@@ -454,7 +448,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
                 <span class="copyright-line">© 2026 稗官工作室 版权所有</span>
                 <span class="copyright-line">软著登字第 2026SR0000000 号</span>
                 <span class="copyright-line">著作权登记号：国作登字-2026-F-00000000</span>
-                <span class="version-tag">Ver 3.3.0 Build 20261203</span>
+                <span class="version-tag">Ver 3.2.0 Build 20261202</span>
             </div>
         </div>
     </div>
@@ -498,27 +492,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
                 <div class="select-age-badge">🎈 8+ 适龄 · 亲子友好</div>
             </div>
             <div class="player-card">
-                <div class="player-avatar" id="playerAvatarDisplay">👨‍🍳</div>
+                <div class="player-avatar" id="selectAvatar">👨‍🍳</div>
                 <div class="player-info">
-                    <div class="player-name" id="playerNameDisplay">稗官大厨</div>
+                    <div class="player-name">稗官大厨</div>
                     <div class="player-stats">
                         <div class="player-stat">💰 <span id="selectGold">0</span></div>
                         <div class="player-stat">⭐ <span id="selectRep">0</span></div>
                         <div class="player-stat">🍳 <span id="selectSlots">1</span>灶</div>
                     </div>
-                </div>
-            </div>
-            <!-- 厨师形象选择 -->
-            <div class="chef-selector-panel" id="chefSelectorPanel">
-                <div class="chef-option" data-chef="male">
-                    <div class="opt-avatar">👨‍🍳</div>
-                    <div class="opt-name">男大厨</div>
-                    <div class="opt-price owned">已拥有</div>
-                </div>
-                <div class="chef-option" data-chef="female">
-                    <div class="opt-avatar">👩‍🍳</div>
-                    <div class="opt-name">女大厨</div>
-                    <div class="opt-price" data-price="200">💰200</div>
                 </div>
             </div>
             <div class="level-summary">
@@ -541,7 +522,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
             </div>
             <div class="select-footer">
                 <div class="footer-rating">🎈 适龄提示：8+ · 健康游戏忠告：抵制不良游戏，拒绝盗版游戏</div>
-                <div class="footer-copyright">© 2026 稗官工作室 版权所有 · 软著登字第 2026SR0000000 号<br>国作登字-2026-F-00000000 · 版本 Ver 3.3.0</div>
+                <div class="footer-copyright">© 2026 稗官工作室 版权所有 · 软著登字第 2026SR0000000 号<br>国作登字-2026-F-00000000 · 版本 Ver 3.2.0</div>
                 <div class="footer-health">📖 本游戏为单机休闲游戏，不含内购</div>
             </div>
         </div>
@@ -559,6 +540,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
             <div class="header">
                 <div class="shop-name">🏮 稗官的小厨房</div>
                 <div class="header-actions">
+                    <button class="icon-btn" id="wardrobeBtn">👗</button>
                     <button class="icon-btn" id="soundBtn">🔊</button>
                     <button class="icon-btn" id="saveBtn">💾</button>
                     <button class="icon-btn" id="quitBtn">🚪</button>
@@ -588,15 +570,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
             </div>
             <div class="main-content">
                 <div id="tab-kitchen" class="tab-content">
-                    <!-- 新增：厨师形象 & 工作台 -->
-                    <div class="chef-scene">
-                        <div class="chef-avatar-wrap" id="chefAvatar">👨‍🍳</div>
-                        <div class="chef-name" id="chefName">稗官大厨</div>
-                    </div>
-                    <div class="workbench" id="workbench">
-                        <div class="workbench-label">🍽️ 工作台 · 拖拽食材到灶台</div>
-                        <!-- 工作台槽由JS动态生成 -->
-                    </div>
                     <div class="daily-goal" id="dailyGoalBox">
                         <div class="dg-icon" id="dgIcon">🎯</div>
                         <div class="dg-info">
@@ -737,6 +710,38 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
         </div>
     </div>
 
+    <!-- 形象创建 -->
+    <div class="modal-overlay avatar-overlay" id="avatarCreateModal">
+        <div class="modal-box avatar-create-box">
+            <div class="modal-title">👨‍🍳 创建你的厨师形象</div>
+            <div class="modal-date">选择性别，开启厨房之旅</div>
+            <div class="avatar-preview" id="avatarPreview">👨‍🍳</div>
+            <div class="gender-picker">
+                <button class="gender-btn active" data-gender="male">👨‍🍳 男厨师</button>
+                <button class="gender-btn" data-gender="female">👩‍🍳 女厨师</button>
+            </div>
+            <button class="modal-btn" id="avatarCreateConfirm">✅ 开始新手教程</button>
+        </div>
+    </div>
+
+    <!-- 衣柜 -->
+    <div class="modal-overlay avatar-overlay" id="avatarWardrobeModal">
+        <div class="modal-box avatar-wardrobe-box">
+            <div class="modal-title">👗 厨师衣柜</div>
+            <div class="modal-date">用金币购买穿搭，获得能力加成</div>
+            <div class="avatar-preview" id="wardrobePreview">👨‍🍳</div>
+            <div class="wardrobe-tabs">
+                <button class="wardrobe-tab active" data-slot="outfit">👕 服装</button>
+                <button class="wardrobe-tab" data-slot="hat">🎩 帽子</button>
+                <button class="wardrobe-tab" data-slot="accessory">💍 配饰</button>
+                <button class="wardrobe-tab" data-slot="skill">⚡ 能力</button>
+            </div>
+            <div class="wardrobe-list" id="wardrobeList"></div>
+            <div class="wardrobe-footer">💰 金币：<span id="wardrobeGold">0</span></div>
+            <button class="modal-btn secondary" id="wardrobeClose">关闭</button>
+        </div>
+    </div>
+
     <div class="guide-overlay" id="guideOverlay">
         <div class="guide-card">
             <div class="guide-step" id="guideStep">第 1 / 4 步</div>
@@ -757,8 +762,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 var CONFIG = {
     DAY_DURATION_MS: 3600 * 1000,
     TOTAL_LEVELS: 20,
-    SAVE_KEY: 'baiguan_kitchen_save_v7',
-    SAVE_VERSION: 7,
+    SAVE_KEY: 'baiguan_kitchen_save_v6',
+    SAVE_VERSION: 6,
     MAX_PREP_SLOTS: 5,
     SLOT_UNLOCK_REP: [0, 20, 60, 120, 200],
     SPAWN_INTERVAL_MS: 3500,
@@ -766,10 +771,9 @@ var CONFIG = {
     COOK_TICK_MS: 100,
     CUSTOMER_RENDER_MS: 4000,
     MAX_GOLD: 999999,
+    SLOT_UNLOCK_TEXT: [0, 20, 60, 120, 200],
     FAIL_REP_THRESHOLD: 0,
-    GUIDE_DONE_KEY: 'baiguan_kitchen_guide_done_v7',
-    BG_MUSIC_VOLUME: 0.08,
-    WORKBENCH_SLOTS: 4
+    GUIDE_DONE_KEY: 'baiguan_kitchen_guide_done'
 };
 
 var PHASES = [
@@ -842,9 +846,64 @@ var ALL_INGREDIENTS = [
 ];
 
 var CUSTOMER_AVATARS = ['👩','👨','👧','👦','👵','👴','🧑','👩‍🍳','👨‍🦰','👩‍🦱','🧔','👱‍♀️','👳','🤵','👰'];
-var CUSTOMER_MOODS = ['😊','😐','😠','😤','😋'];
 
 var DEFAULT_INVENTORY = { egg:12, oil:12, veggie:8, meat:6, bread:6, rice:5, fish:4, noodle:4, cheese:4, flour:5, sugar:5, milk:4, coffee:4, fruit:3, seafood:2 };
+
+/* 形象系统数据 */
+var AVATAR_ITEMS = {
+    outfit: [
+        { id:'chef_default', name:'经典厨师服', emoji:'👨‍🍳', price:0, bonus:null, desc:'默认服装' },
+        { id:'chef_gold', name:'黄金厨师服', emoji:'🥇', price:300, bonus:{tipBonus:1}, desc:'小费+10%' },
+        { id:'chef_ninja', name:'忍者装', emoji:'🥷', price:500, bonus:{waitBonus:1}, desc:'顾客等待+5%' },
+        { id:'chef_wizard', name:'魔法厨袍', emoji:'🧙', price:800, bonus:{tipBonus:2}, desc:'小费+20%' },
+        { id:'chef_king', name:'国王礼服', emoji:'🤴', price:1500, bonus:{waitBonus:2,tipBonus:2}, desc:'等待+10%，小费+20%' }
+    ],
+    hat: [
+        { id:'none', name:'不戴帽子', emoji:'🚫', price:0, bonus:null, desc:'' },
+        { id:'hat_chef', name:'厨师帽', emoji:'👨‍🍳', price:100, bonus:{waitBonus:1}, desc:'顾客等待+5%' },
+        { id:'hat_crown', name:'皇冠', emoji:'👑', price:600, bonus:{tipBonus:1}, desc:'小费+10%' },
+        { id:'hat_pirate', name:'海盗帽', emoji:'🏴‍☠️', price:900, bonus:{waitBonus:1,tipBonus:1}, desc:'等待+5%，小费+10%' }
+    ],
+    accessory: [
+        { id:'none', name:'无配饰', emoji:'🚫', price:0, bonus:null, desc:'' },
+        { id:'acc_glasses', name:'智慧眼镜', emoji:'👓', price:150, bonus:{waitBonus:1}, desc:'顾客等待+5%' },
+        { id:'acc_ring', name:'金戒指', emoji:'💍', price:400, bonus:{tipBonus:1}, desc:'小费+10%' },
+        { id:'acc_medal', name:'荣誉勋章', emoji:'🎖️', price:700, bonus:{waitBonus:1,tipBonus:1}, desc:'等待+5%，小费+10%' },
+        { id:'acc_diamond', name:'钻石项链', emoji:'💎', price:1200, bonus:{tipBonus:2}, desc:'小费+20%' }
+    ]
+};
+
+var AVATAR_SKILLS = [
+    { id:'waitBonus', name:'耐心光环', icon:'⏳', desc:'每级顾客等待时间+5%', maxLevel:5, baseCost:200 },
+    { id:'tipBonus', name:'小费达人', icon:'💵', desc:'每级小费+10%', maxLevel:5, baseCost:250 }
+];
+
+function getAvatarBonus(){
+    var bonus = { waitBonus:0, tipBonus:0 };
+    ['outfit','hat','accessory'].forEach(function(slot){
+        var items = AVATAR_ITEMS[slot];
+        var currentId = state.avatar[slot];
+        for(var i=0;i<items.length;i++){
+            if(items[i].id === currentId && items[i].bonus){
+                for(var k in items[i].bonus) bonus[k] += items[i].bonus[k];
+                break;
+            }
+        }
+    });
+    bonus.waitBonus += state.avatarUpgrades.waitBonus || 0;
+    bonus.tipBonus += state.avatarUpgrades.tipBonus || 0;
+    return bonus;
+}
+
+function hasAvatarItem(slot, id){
+    var owned = state.ownedAvatarItems[slot] || [];
+    return owned.indexOf(id) !== -1;
+}
+
+function getAvatarEmoji(){
+    if(state.avatar.gender === 'female') return '👩‍🍳';
+    return '👨‍🍳';
+}
 
 function $(id){ return document.getElementById(id); }
 function addClass(el,cls){ if(el && !el.classList.contains(cls)) el.classList.add(cls); }
@@ -866,69 +925,6 @@ var Timer = {
     },
     clearAll: function(){
         for(var k in this._map){ this.clear(k); }
-    }
-};
-
-// ========== 背景音乐 (Web Audio) ==========
-var Music = {
-    ctx: null,
-    gainNode: null,
-    playing: false,
-    timerId: null,
-    enabled: true,
-    notes: [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25],
-    init: function(){
-        try{
-            var AC = window.AudioContext || window.webkitAudioContext;
-            if(AC && !this.ctx){
-                this.ctx = new AC();
-                this.gainNode = this.ctx.createGain();
-                this.gainNode.gain.value = CONFIG.BG_MUSIC_VOLUME;
-                this.gainNode.connect(this.ctx.destination);
-            }
-        }catch(e){ this.ctx = null; }
-    },
-    playNote: function(freq, dur, type, vol){
-        if(!this.enabled || !this.ctx || !this.gainNode) return;
-        try{
-            if(this.ctx.state === 'suspended') this.ctx.resume();
-            var osc = this.ctx.createOscillator();
-            var g = this.ctx.createGain();
-            osc.type = type || 'sine';
-            osc.frequency.value = freq;
-            g.gain.setValueAtTime(vol || 0.06, this.ctx.currentTime);
-            g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + dur);
-            osc.connect(g);
-            g.connect(this.gainNode);
-            osc.start();
-            osc.stop(this.ctx.currentTime + dur);
-        }catch(e){}
-    },
-    playLoop: function(){
-        if(this.playing) return;
-        this.playing = true;
-        var self = this;
-        var seq = [0,2,4,5,7,5,4,2,0,4,7,9,7,4,2,0];
-        var idx = 0;
-        function nextNote(){
-            if(!self.playing) return;
-            var noteIdx = seq[idx % seq.length];
-            var base = self.notes[noteIdx % self.notes.length];
-            self.playNote(base, 0.7, 'sine', 0.05);
-            if(idx % 4 === 0) self.playNote(base/2, 0.9, 'triangle', 0.03);
-            idx++;
-            self.timerId = setTimeout(nextNote, 550);
-        }
-        nextNote();
-    },
-    stop: function(){
-        this.playing = false;
-        if(this.timerId){ clearTimeout(this.timerId); this.timerId = null; }
-    },
-    toggle: function(on){
-        this.enabled = on;
-        if(on && !this.playing) this.playLoop();
-        else if(!on) this.stop();
     }
 };
 
@@ -1039,15 +1035,15 @@ var state = {
     dailyGoal: null,
     dailyGoalDone: false,
     soundEnabled: true,
-    bgMusicEnabled: true,
     guideStep: 0,
     guideDone: false,
     lastTickTime: Date.now(),
     playMode: null,
-    // 厨师形象
-    chefGender: 'male', // 'male' | 'female'
-    chefOutfit: 'default', // 预留装扮
-    chefOwned: { male: true, female: false }
+    /* 形象系统 */
+    avatar: { gender:'male', outfit:'chef_default', hat:'none', accessory:'none' },
+    avatarUpgrades: { waitBonus:0, tipBonus:0 },
+    avatarCreated: false,
+    ownedAvatarItems: { outfit:['chef_default'], hat:['none'], accessory:['none'] }
 };
 
 function saveGame(){
@@ -1062,10 +1058,10 @@ function saveGame(){
             upgrades: state.upgrades,
             difficulty: state.difficulty,
             soundEnabled: state.soundEnabled,
-            bgMusicEnabled: state.bgMusicEnabled,
-            chefGender: state.chefGender,
-            chefOutfit: state.chefOutfit,
-            chefOwned: state.chefOwned
+            avatar: state.avatar,
+            avatarUpgrades: state.avatarUpgrades,
+            avatarCreated: state.avatarCreated,
+            ownedAvatarItems: state.ownedAvatarItems
         };
         localStorage.setItem(CONFIG.SAVE_KEY, JSON.stringify(data));
         return true;
@@ -1088,10 +1084,10 @@ function loadGame(){
         state.upgrades = Object.assign({cookingSpeed:0,priceBonus:0,maxCustomers:0}, data.upgrades || {});
         state.difficulty = safeDiffKey(data.difficulty);
         state.soundEnabled = data.soundEnabled !== false;
-        state.bgMusicEnabled = data.bgMusicEnabled !== false;
-        state.chefGender = data.chefGender || 'male';
-        state.chefOutfit = data.chefOutfit || 'default';
-        state.chefOwned = data.chefOwned || { male: true, female: false };
+        state.avatar = Object.assign({ gender:'male', outfit:'chef_default', hat:'none', accessory:'none' }, data.avatar || {});
+        state.avatarUpgrades = Object.assign({ waitBonus:0, tipBonus:0 }, data.avatarUpgrades || {});
+        state.avatarCreated = data.avatarCreated === true;
+        state.ownedAvatarItems = Object.assign({ outfit:['chef_default'], hat:['none'], accessory:['none'] }, data.ownedAvatarItems || {});
         state.gold = clamp(state.gold, 0, CONFIG.MAX_GOLD);
         state.reputation = Math.max(0, state.reputation);
         return true;
@@ -1258,153 +1254,12 @@ function checkDailyGoal(){
     updateDailyGoalUI();
 }
 
-// ========== 厨师形象 ==========
-function updateChefDisplay(){
-    var isMale = state.chefGender === 'male';
-    var emoji = isMale ? '👨‍🍳' : '👩‍🍳';
-    var name = isMale ? '稗官大厨' : '小厨娘';
-    var avatarEl = $('chefAvatar');
-    if(avatarEl) avatarEl.textContent = emoji;
-    var nameEl = $('chefName');
-    if(nameEl) nameEl.textContent = name;
-    var playerAvatar = $('playerAvatarDisplay');
-    if(playerAvatar) playerAvatar.textContent = emoji;
-    var playerName = $('playerNameDisplay');
-    if(playerName) playerName.textContent = name;
-}
-
-function renderChefSelector(){
-    var panel = $('chefSelectorPanel');
-    if(!panel) return;
-    var options = panel.querySelectorAll('.chef-option');
-    for(var i=0;i<options.length;i++){
-        var opt = options[i];
-        var gender = opt.getAttribute('data-chef');
-        var owned = state.chefOwned[gender];
-        var active = state.chefGender === gender;
-        if(active) addClass(opt,'active');
-        else removeClass(opt,'active');
-        var priceEl = opt.querySelector('.opt-price');
-        if(priceEl){
-            if(owned) { priceEl.textContent = '已拥有'; priceEl.className = 'opt-price owned'; }
-            else { priceEl.textContent = '💰200'; priceEl.className = 'opt-price'; }
-        }
-    }
-}
-
-function selectChef(gender){
-    if(state.chefOwned[gender]){
-        state.chefGender = gender;
-        updateChefDisplay();
-        renderChefSelector();
-        saveGame();
-        showToast(gender === 'male' ? '👨‍🍳 已切换男厨师' : '👩‍🍳 已切换女厨师', 1200);
-    } else {
-        if(spendGold(200)){
-            state.chefOwned[gender] = true;
-            state.chefGender = gender;
-            updateChefDisplay();
-            renderChefSelector();
-            saveGame();
-            Sound.upgrade();
-            showToast('🎉 解锁新厨师形象！', 1600);
-        } else {
-            showToast('💰 金币不足，需要200金币解锁');
-        }
-    }
-}
-
-// ========== 工作台拖拽 ==========
-function renderWorkbench(){
-    var bench = $('workbench');
-    if(!bench) return;
-    var html = '<div class="workbench-label">🍽️ 工作台 · 拖拽食材到灶台</div>';
-    // 从库存中选取一些常用食材展示
-    var commonIngredients = ['egg','oil','veggie','meat','bread','rice'];
-    for(var i=0;i<commonIngredients.length;i++){
-        var ingId = commonIngredients[i];
-        var ingData = null;
-        for(var j=0;j<ALL_INGREDIENTS.length;j++){ if(ALL_INGREDIENTS[j].id===ingId){ ingData=ALL_INGREDIENTS[j]; break; } }
-        if(!ingData) continue;
-        var count = state.inventory[ingId] || 0;
-        html += '<div class="workbench-slot filled" data-ing="'+ingId+'">'+
-            '<div class="ws-emoji">'+ingData.emoji+'</div>'+
-            '<div class="ws-label">'+count+'</div>'+
-            '</div>';
-    }
-    bench.innerHTML = html;
-
-    // 为工作台食材绑定拖拽/点击事件
-    var slots = bench.querySelectorAll('.workbench-slot');
-    for(var k=0;k<slots.length;k++){
-        (function(slot){
-            var ingId = slot.getAttribute('data-ing');
-            // 点击直接选菜（简化操作）
-            slot.addEventListener('click', function(){
-                var ingData = null;
-                for(var n=0;n<ALL_INGREDIENTS.length;n++){ if(ALL_INGREDIENTS[n].id===ingId){ ingData=ALL_INGREDIENTS[n]; break; } }
-                if(!ingData) return;
-                // 尝试找到匹配的菜品
-                var found = false;
-                for(var d=0;d<ALL_DISHES.length;d++){
-                    var dish = ALL_DISHES[d];
-                    if(dish.ingredients[ingId] && dish.level <= getPlayerLevel()){
-                        selectItem('dish', dish.id);
-                        found = true;
-                        break;
-                    }
-                }
-                if(!found){
-                    // 尝试套餐
-                    for(var c=0;c<ALL_COMBOS.length;c++){
-                        var combo = ALL_COMBOS[c];
-                        if(combo.level <= getPlayerLevel()){
-                            var needs = getItemIngredients(combo, 'combo');
-                            if(needs[ingId]){
-                                selectItem('combo', combo.id);
-                                found = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-                if(!found) showToast('🍽️ 没有找到使用'+ingData.name+'的菜品');
-            });
-
-            // 简单拖拽：触摸/鼠标拖拽时高亮灶台
-            slot.addEventListener('touchstart', handleDragStart, {passive:true});
-            slot.addEventListener('mousedown', handleDragStart);
-        })(slots[k]);
-    }
-}
-
-function handleDragStart(e){
-    var slot = e.currentTarget;
-    var ingId = slot.getAttribute('data-ing');
-    if(!ingId) return;
-    // 高亮所有空灶台
-    var prepSlots = document.querySelectorAll('.prep-slot');
-    for(var i=0;i<prepSlots.length;i++){
-        addClass(prepSlots[i], 'highlight');
-    }
-    // 提示用户
-    showToast('👆 点击灶台开始烹饪', 1000);
-    // 清除高亮
-    setTimeout(function(){
-        var prepSlots2 = document.querySelectorAll('.prep-slot');
-        for(var j=0;j<prepSlots2.length;j++){
-            removeClass(prepSlots2[j], 'highlight');
-        }
-    }, 2000);
-}
-
-// ========== 关卡选择 ==========
 function renderLevelSelect(){
     $('selectGold').textContent = state.gold;
     $('selectRep').textContent = state.reputation;
     $('selectSlots').textContent = getMaxSlots();
-    updateChefDisplay();
-    renderChefSelector();
+    var av = $('selectAvatar');
+    if(av) av.textContent = getAvatarEmoji();
 
     var completedCount = getCompletedCount();
     var currentChallenge = getCurrentChallengeLevel();
@@ -1467,7 +1322,6 @@ function showLevelSelect(){
     addClass($('modeSelectScreen'),'hidden');
     addClass($('gameContainer'),'hidden');
     removeClass($('levelSelectScreen'),'hidden');
-    updateChefDisplay();
     renderLevelSelect();
 }
 
@@ -1496,13 +1350,10 @@ function startLevel(lvl){
     removeClass($('gameContainer'),'hidden');
 
     $('progressFill').style.width = '0%';
-    $('cookBtn').disabled = false;
 
-    updateChefDisplay();
     updateStatsUI();
     updateDateUI();
     updateLevelUI();
-    renderWorkbench();
     renderPrepStation();
     renderCustomers();
     renderDishSelector();
@@ -1512,6 +1363,7 @@ function startLevel(lvl){
     updateDailyGoalUI();
     updateSelectorHint();
     updateShopUI();
+    updateCookBtnState();
 
     startDayClock();
     startWaitTimer();
@@ -1626,7 +1478,6 @@ function toggleShop(){
     }
     state.isShopOpen = !state.isShopOpen;
     updateShopUI();
-    updateCookBtnState();
     if(state.isShopOpen){
         showToast('🏪 开门营业！');
         if(!Timer._map['spawn']) startSpawnTimer();
@@ -1670,14 +1521,17 @@ function generateCustomer(){
     var unitPrice = getPrice(orderItem);
     var price = unitPrice * qty;
     var tip = 0;
+    var avatarBonus = getAvatarBonus();
     if(Math.random() < state.levelConfig.tipChance || isDoubleTip){
         tip = randomInt(2, Math.max(3, Math.floor(price*0.25)));
         if(isDoubleTip) tip *= 2;
+        tip = Math.round(tip * (1 + avatarBonus.tipBonus * 0.10));
         price += tip;
     }
 
     var avatar = CUSTOMER_AVATARS[Math.floor(Math.random()*CUSTOMER_AVATARS.length)];
     var waitTime = state.levelConfig.waitTime;
+    waitTime *= (1 + avatarBonus.waitBonus * 0.05);
     if(orderType === 'combo') waitTime *= 1.3;
     if(isRush) waitTime *= 0.5;
 
@@ -1687,7 +1541,6 @@ function generateCustomer(){
         item: Object.assign({}, orderItem),
         qty: qty,
         avatar: avatar,
-        mood: '😊',
         price: price,
         tip: tip,
         isRush: isRush,
@@ -1728,14 +1581,6 @@ function startWaitTimer(){
         for(var i=state.customers.length-1;i>=0;i--){
             var cust = state.customers[i];
             var elapsed = now - cust.spawnTime;
-            // 更新顾客情绪
-            var remaining = Math.max(0, cust.maxWaitTime - elapsed);
-            var percent = remaining / cust.maxWaitTime;
-            if(percent < 0.25) cust.mood = '😠';
-            else if(percent < 0.5) cust.mood = '😤';
-            else if(percent < 0.75) cust.mood = '😐';
-            else cust.mood = '😊';
-
             if(elapsed >= cust.maxWaitTime){
                 state.customers.splice(i,1);
                 changed = true;
@@ -1764,7 +1609,6 @@ function updateWaitTimers(){
         var percent = (remaining / cust.maxWaitTime) * 100;
         var fill = card.querySelector('.wait-timer-fill');
         var text = card.querySelector('.wait-timer-text');
-        var moodEl = card.querySelector('.mood');
         if(fill){
             fill.style.width = percent + '%';
             fill.className = 'wait-timer-fill';
@@ -1775,12 +1619,6 @@ function updateWaitTimers(){
             text.textContent = Math.ceil(remaining/1000) + 's';
             text.className = 'wait-timer-text';
             if(percent < 30) text.className += ' danger';
-        }
-        if(moodEl){
-            if(percent < 25) moodEl.textContent = '😠';
-            else if(percent < 50) moodEl.textContent = '😤';
-            else if(percent < 75) moodEl.textContent = '😐';
-            else moodEl.textContent = '😊';
         }
     }
 }
@@ -1795,35 +1633,18 @@ function triggerFail(){
     addClass($('failModal'),'show');
 }
 
-// ========== 新增：动态更新烹饪按钮状态 ==========
+/* ===== 修复：多灶台烹饪时按钮状态动态管理 ===== */
 function updateCookBtnState(){
     var btn = $('cookBtn');
     if(!btn) return;
-    // 店铺未营业时禁用
-    if(!state.isShopOpen){
-        btn.disabled = true;
-        return;
-    }
-    // 没有选中菜品时禁用
-    if(!state.selectedItem){
-        btn.disabled = true;
-        return;
-    }
-    // 没有空灶台时禁用
-    var hasEmptySlot = false;
+    var hasEmpty = false;
     for(var i=0;i<getMaxSlots();i++){
-        if(state.prepSlots[i] && state.prepSlots[i].status === 'empty'){ hasEmptySlot = true; break; }
+        var s = state.prepSlots[i];
+        if(s && s.status === 'empty'){ hasEmpty = true; break; }
     }
-    if(!hasEmptySlot){
-        btn.disabled = true;
-        return;
-    }
-    // 检查选中的菜品是否有足够食材
-    if(!hasIngredients(state.selectedItem.data, state.selectedItem.type)){
-        btn.disabled = true;
-        return;
-    }
-    btn.disabled = false;
+    // 未开门时禁用
+    if(!state.isShopOpen) hasEmpty = false;
+    btn.disabled = !hasEmpty;
 }
 
 function renderPrepStation(){
@@ -1839,7 +1660,7 @@ function renderPrepStation(){
         var cls = 'prep-slot' + (unlocked?'':' locked') + (isActive?' active':'');
         var content = '';
         if(!unlocked){
-            content = '<span class="slot-lock-icon">🔒</span><span class="slot-label">'+CONFIG.SLOT_UNLOCK_REP[i]+'⭐</span>';
+            content = '<span class="slot-lock-icon">🔒</span><span class="slot-label">'+CONFIG.SLOT_UNLOCK_TEXT[i]+'⭐</span>';
         } else if(slot.status === 'empty'){
             content = '<span class="slot-emoji">➕</span><span class="slot-label">'+(i+1)+'号灶</span>';
         } else if(slot.status === 'cooking'){
@@ -1861,7 +1682,7 @@ function renderPrepStation(){
             el.addEventListener('click', function(){
                 var idx = parseInt(el.getAttribute('data-slot'),10);
                 if(idx >= getMaxSlots()){
-                    showToast('🔒 声望 '+CONFIG.SLOT_UNLOCK_REP[idx]+' 解锁此灶台');
+                    showToast('🔒 声望 '+CONFIG.SLOT_UNLOCK_TEXT[idx]+' 解锁此灶台');
                     return;
                 }
                 handleSlotClick(idx);
@@ -1885,7 +1706,6 @@ function handleSlotClick(idx){
     state.activeSlotIndex = idx;
     renderPrepStation();
     updateSelectorHint();
-    updateCookBtnState();
     showToast('🔥 已选择 '+(idx+1)+' 号灶台，请选择菜品', 1200);
 }
 
@@ -1941,10 +1761,6 @@ function startCooking(){
     updateSelectorHint();
     Sound.cook();
 
-    // 厨师做饭动画
-    var chefEl = $('chefAvatar');
-    if(chefEl) addClass(chefEl, 'cooking');
-
     if(slot.interval) clearInterval(slot.interval);
     slot.interval = setInterval(function(){
         slot.currentStep++;
@@ -1964,11 +1780,6 @@ function startCooking(){
             renderCustomers();
             updateSelectorHint();
             Sound.ready();
-            if(chefEl){
-                removeClass(chefEl, 'cooking');
-                addClass(chefEl, 'happy');
-                setTimeout(function(){ removeClass(chefEl, 'happy'); }, 800);
-            }
             showToast('✅ '+item.name+' 做好了！点击灶台或顾客上菜', 1600);
         }
     }, CONFIG.COOK_TICK_MS);
@@ -2030,8 +1841,6 @@ function tryServe(type, id, slotIdx){
     renderInventory();
     renderUpgrades();
     updateSelectorHint();
-    renderWorkbench();
-    updateCookBtnState();
 }
 
 function checkLevelComplete(){
@@ -2103,14 +1912,8 @@ function renderCustomers(){
         var rushTag = cust.isRush ? '<span class="combo-tag" style="background:linear-gradient(145deg,#ff6b6b,#e74c3c);color:#fff">加急</span>' : '';
         var serveBtn = hasMatch ? '<button class="serve-btn" data-cust="'+cust.id+'">上菜</button>' : '';
 
-        // 根据等待时间显示不同表情
-        var moodEmoji = '😊';
-        if(percent < 25) moodEmoji = '😠';
-        else if(percent < 50) moodEmoji = '😤';
-        else if(percent < 75) moodEmoji = '😐';
-
         html += '<div class="customer-card '+matchClass+'" data-id="'+cust.id+'">'+
-            '<div class="customer-avatar">'+cust.avatar+'<span class="mood">'+moodEmoji+'</span></div>'+
+            '<div class="customer-avatar">'+cust.avatar+'</div>'+
             '<div class="customer-info">'+
             '<div class="customer-order">'+
             '<span class="dish-icon">'+cust.item.emoji+'</span>'+
@@ -2254,7 +2057,6 @@ function selectItem(type, id){
     state.selectedItem = { type:type, id:id, data:itemData };
     renderDishSelector();
     updateSelectorHint();
-    updateCookBtnState();
     showToast('✅ 已选择 '+itemData.name+'，点击空灶台烹饪', 1200);
 }
 
@@ -2315,8 +2117,6 @@ function renderInventory(){
                     state.inventory[ingId] = (state.inventory[ingId]||0) + qty;
                     renderInventory();
                     renderDishSelector();
-                    renderWorkbench();
-                    updateCookBtnState();
                     showToast('✅ 补货 +'+qty);
                 } else {
                     showToast('💰 金币不足');
@@ -2388,13 +2188,7 @@ function switchTab(tab){
     if(tab === 'menu') renderMenu();
     if(tab === 'inventory') renderInventory();
     if(tab === 'upgrade') renderUpgrades();
-    if(tab === 'kitchen'){
-        renderWorkbench();
-        renderPrepStation();
-        renderDishSelector();
-        renderCustomers();
-        updateCookBtnState();
-    }
+    if(tab === 'kitchen'){ renderPrepStation(); renderDishSelector(); renderCustomers(); updateCookBtnState(); }
 }
 
 function hasGuideDone(){
@@ -2443,6 +2237,117 @@ function nextGuide(){
     }
 }
 
+/* ===== 形象创建 / 衣柜 ===== */
+function showAvatarCreate(){
+    addClass($('avatarCreateModal'),'show');
+    renderAvatarPreview();
+}
+
+function renderAvatarPreview(){
+    var el = $('avatarPreview');
+    if(el) el.textContent = getAvatarEmoji();
+}
+
+var wardrobeCurrentSlot = 'outfit';
+
+function showWardrobe(){
+    addClass($('avatarWardrobeModal'),'show');
+    renderWardrobe('outfit');
+    $('wardrobeGold').textContent = state.gold;
+}
+
+function renderWardrobe(slot){
+    wardrobeCurrentSlot = slot;
+    var tabs = document.querySelectorAll('.wardrobe-tab');
+    for(var i=0;i<tabs.length;i++){
+        if(tabs[i].getAttribute('data-slot') === slot) addClass(tabs[i],'active');
+        else removeClass(tabs[i],'active');
+    }
+    $('wardrobePreview').textContent = getAvatarEmoji();
+    $('wardrobeGold').textContent = state.gold;
+    var html = '';
+    if(slot === 'skill'){
+        for(var s=0;s<AVATAR_SKILLS.length;s++){
+            var sk = AVATAR_SKILLS[s];
+            var lv = state.avatarUpgrades[sk.id] || 0;
+            var maxed = lv >= sk.maxLevel;
+            var cost = sk.baseCost + lv * sk.baseCost;
+            var canAfford = state.gold >= cost && !maxed;
+            html += '<div class="wardrobe-item">'+
+                '<div class="wi-emoji">'+sk.icon+'</div>'+
+                '<div class="wi-info"><div class="wi-name">'+sk.name+' Lv.'+lv+'/'+sk.maxLevel+'</div>'+
+                '<div class="wi-desc">'+sk.desc+'</div></div>'+
+                '<button class="wi-btn" data-skill="'+sk.id+'" data-cost="'+cost+'"'+(maxed||!canAfford?' disabled':'')+'>'+
+                (maxed?'已满级':'💰'+cost)+'</button></div>';
+        }
+    } else {
+        var items = AVATAR_ITEMS[slot];
+        for(var i2=0;i2<items.length;i2++){
+            var it = items[i2];
+            var owned = hasAvatarItem(slot, it.id);
+            var equipped = state.avatar[slot] === it.id;
+            var btnHtml;
+            if(equipped) btnHtml = '<button class="wi-btn equipped" disabled>已穿戴</button>';
+            else if(owned) btnHtml = '<button class="wi-btn owned" data-equip="'+it.id+'">穿戴</button>';
+            else btnHtml = '<button class="wi-btn" data-buy="'+it.id+'" data-cost="'+it.price+'"'+(state.gold>=it.price?'':' disabled')+'>💰'+it.price+'</button>';
+            html += '<div class="wardrobe-item">'+
+                '<div class="wi-emoji">'+it.emoji+'</div>'+
+                '<div class="wi-info"><div class="wi-name">'+it.name+'</div>'+
+                '<div class="wi-desc">'+(it.desc||'')+'</div></div>'+
+                btnHtml+'</div>';
+        }
+    }
+    $('wardrobeList').innerHTML = html;
+
+    var buyBtns = $('wardrobeList').querySelectorAll('[data-buy]');
+    for(var b=0;b<buyBtns.length;b++){
+        (function(btn){
+            btn.addEventListener('click', function(){
+                var id = btn.getAttribute('data-buy');
+                var cost = parseInt(btn.getAttribute('data-cost'),10);
+                if(!spendGold(cost)){ showToast('💰 金币不足'); return; }
+                if(!state.ownedAvatarItems[slot]) state.ownedAvatarItems[slot] = [];
+                state.ownedAvatarItems[slot].push(id);
+                state.avatar[slot] = id;
+                renderWardrobe(slot);
+                renderCustomers();
+                renderDishSelector();
+                Sound.upgrade();
+                showToast('✅ 已购买并穿戴！');
+                saveGame();
+            });
+        })(buyBtns[b]);
+    }
+    var equipBtns = $('wardrobeList').querySelectorAll('[data-equip]');
+    for(var e=0;e<equipBtns.length;e++){
+        (function(btn){
+            btn.addEventListener('click', function(){
+                var id = btn.getAttribute('data-equip');
+                state.avatar[slot] = id;
+                renderWardrobe(slot);
+                showToast('✅ 已穿戴');
+                saveGame();
+            });
+        })(equipBtns[e]);
+    }
+    var skillBtns = $('wardrobeList').querySelectorAll('[data-skill]');
+    for(var k=0;k<skillBtns.length;k++){
+        (function(btn){
+            btn.addEventListener('click', function(){
+                var id = btn.getAttribute('data-skill');
+                var cost = parseInt(btn.getAttribute('data-cost'),10);
+                if(!spendGold(cost)){ showToast('💰 金币不足'); return; }
+                state.avatarUpgrades[id] = (state.avatarUpgrades[id]||0) + 1;
+                renderWardrobe('skill');
+                Sound.upgrade();
+                showToast('⬆️ 能力提升！');
+                saveGame();
+            });
+        })(skillBtns[k]);
+    }
+}
+
+/* ===== 加载与入口 ===== */
 var splashStarted = false;
 var loadingFinished = false;
 var gameDataLoaded = false;
@@ -2464,10 +2369,7 @@ function prepareGameData(){
         console.error('读取游戏进度失败，使用新游戏数据:', e);
     }
     state.soundEnabled = state.soundEnabled !== false;
-    state.bgMusicEnabled = state.bgMusicEnabled !== false;
     Sound.enabled = state.soundEnabled;
-    Music.enabled = state.bgMusicEnabled;
-    updateSoundBtn();
 }
 
 function finishLoading(){
@@ -2501,12 +2403,14 @@ function enterGame(){
 
     try{
         Sound.init();
-        Music.init();
         prepareGameData();
         updateSoundBtn();
-        // 启动背景音乐
-        if(state.bgMusicEnabled) Music.playLoop();
-        showModeSelect();
+        // 首次进入先创建形象，之后走模式选择
+        if(!state.avatarCreated){
+            showAvatarCreate();
+        } else {
+            showModeSelect();
+        }
     }catch(e){
         console.error('进入模式选择失败，回退到关卡选择:', e);
         try{
@@ -2600,17 +2504,6 @@ function bindEvents(){
     $('modeDirect').addEventListener('click', function(){ chooseMode('direct'); });
     $('modeBackBtn').addEventListener('click', function(){ showModeSelect(); });
 
-    // 厨师形象选择
-    var chefOptions = document.querySelectorAll('.chef-option');
-    for(var c=0;c<chefOptions.length;c++){
-        (function(opt){
-            opt.addEventListener('click', function(){
-                var gender = opt.getAttribute('data-chef');
-                selectChef(gender);
-            });
-        })(chefOptions[c]);
-    }
-
     $('continueBtn').addEventListener('click', function(){
         if(getCompletedCount() >= CONFIG.TOTAL_LEVELS) return;
         state.playMode = 'direct';
@@ -2633,10 +2526,11 @@ function bindEvents(){
         state.inventory = deepCopy(DEFAULT_INVENTORY);
         state.upgrades = { cookingSpeed:0, priceBonus:0, maxCustomers:0 };
         state.difficulty = 'normal';
-        state.chefGender = 'male';
-        state.chefOwned = { male: true, female: false };
+        state.avatar = { gender:'male', outfit:'chef_default', hat:'none', accessory:'none' };
+        state.avatarUpgrades = { waitBonus:0, tipBonus:0 };
+        state.avatarCreated = false;
+        state.ownedAvatarItems = { outfit:['chef_default'], hat:['none'], accessory:['none'] };
         removeClass($('resetConfirmModal'),'show');
-        updateChefDisplay();
         renderLevelSelect();
         showToast('🗑️ 进度已重置');
     });
@@ -2712,15 +2606,41 @@ function bindEvents(){
         showToast('🍽️ 没有做好的对应菜品');
     });
 
+    // 形象创建
+    var genderBtns = document.querySelectorAll('.gender-btn');
+    for(var g=0;g<genderBtns.length;g++){
+        (function(btn){
+            btn.addEventListener('click', function(){
+                var gender = btn.getAttribute('data-gender');
+                state.avatar.gender = gender;
+                var all = document.querySelectorAll('.gender-btn');
+                for(var x=0;x<all.length;x++) removeClass(all[x],'active');
+                addClass(btn,'active');
+                renderAvatarPreview();
+            });
+        })(genderBtns[g]);
+    }
+    $('avatarCreateConfirm').addEventListener('click', function(){
+        state.avatarCreated = true;
+        saveGame();
+        removeClass($('avatarCreateModal'),'show');
+        state.playMode = 'tutorial';
+        startLevel(1);
+    });
+
+    // 衣柜
+    $('wardrobeBtn').addEventListener('click', showWardrobe);
+    $('wardrobeClose').addEventListener('click', function(){ removeClass($('avatarWardrobeModal'),'show'); });
+    var wTabs = document.querySelectorAll('.wardrobe-tab');
+    for(var wt=0;wt<wTabs.length;wt++){
+        (function(tab){
+            tab.addEventListener('click', function(){ renderWardrobe(tab.getAttribute('data-slot')); });
+        })(wTabs[wt]);
+    }
+
     document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
     document.addEventListener('visibilitychange', function(){
-        if(document.hidden){
-            if(!$('gameContainer').classList.contains('hidden')) saveGame();
-            // 页面隐藏时暂停音乐
-            Music.stop();
-        } else {
-            if(state.bgMusicEnabled && !$('gameContainer').classList.contains('hidden')) Music.playLoop();
-        }
+        if(document.hidden && !$('gameContainer').classList.contains('hidden')) saveGame();
     });
     window.addEventListener('beforeunload', function(){
         if(!$('gameContainer').classList.contains('hidden')) saveGame();
@@ -2740,7 +2660,6 @@ function updateSoundBtn(){
 
 function init(){
     try { Sound.init(); } catch(e){}
-    try { Music.init(); } catch(e){}
 
     try { bindEvents(); } catch(e){
         console.error('bindEvents error:', e);
