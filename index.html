@@ -1044,6 +1044,22 @@ var Timer = {
 var Sound = {
     ctx: null,
     enabled: true,
+    bgmPlaying: false,
+    bgmTimer: null,
+    bgmGain: null,
+    bgmIndex: 0,
+    bgmMelody: [
+        523,587,659,784, 659,587,523,0,
+        349,440,523,659, 523,440,349,0,
+        392,494,587,659, 587,494,392,0,
+        523,392,330,262, 330,392,523,0
+    ],
+    bgmBass: [
+        262,0,262,0, 175,0,175,0,
+        196,0,196,0, 131,0,131,0,
+        196,0,196,0, 165,0,165,0,
+        131,0,131,0, 196,0,262,0
+    ],
     init: function(){
         try {
             var AC = window.AudioContext || window.webkitAudioContext;
@@ -1065,6 +1081,52 @@ var Sound = {
             osc.start();
             osc.stop(this.ctx.currentTime + dur);
         } catch(e){}
+    },
+    _bgmStep: function(){
+        if(!this.bgmPlaying || !this.enabled || !this.ctx) return;
+        try{
+            if(this.ctx.state === 'suspended') this.ctx.resume();
+            var t = this.ctx.currentTime;
+            var melFreq = this.bgmMelody[this.bgmIndex % this.bgmMelody.length];
+            var basFreq = this.bgmBass[this.bgmIndex % this.bgmBass.length];
+            if(melFreq > 0){
+                var oscM = this.ctx.createOscillator();
+                var gainM = this.ctx.createGain();
+                oscM.type = 'sine';
+                oscM.frequency.value = melFreq;
+                gainM.gain.setValueAtTime(0.025, t);
+                gainM.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+                oscM.connect(gainM);
+                gainM.connect(this.ctx.destination);
+                oscM.start(t);
+                oscM.stop(t + 0.3);
+            }
+            if(basFreq > 0){
+                var oscB = this.ctx.createOscillator();
+                var gainB = this.ctx.createGain();
+                oscB.type = 'triangle';
+                oscB.frequency.value = basFreq;
+                gainB.gain.setValueAtTime(0.018, t);
+                gainB.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+                oscB.connect(gainB);
+                gainB.connect(this.ctx.destination);
+                oscB.start(t);
+                oscB.stop(t + 0.37);
+            }
+        } catch(e){}
+        this.bgmIndex++;
+        var self = this;
+        this.bgmTimer = setTimeout(function(){ self._bgmStep(); }, 220);
+    },
+    startBGM: function(){
+        if(!this.ctx || !this.enabled || this.bgmPlaying) return;
+        this.bgmPlaying = true;
+        this.bgmIndex = 0;
+        this._bgmStep();
+    },
+    stopBGM: function(){
+        this.bgmPlaying = false;
+        if(this.bgmTimer){ clearTimeout(this.bgmTimer); this.bgmTimer = null; }
     },
     cook: function(){ this.beep(520,0.1,'triangle',0.06); },
     ready: function(){ this.beep(880,0.15,'sine',0.1); var s=this; setTimeout(function(){ s.beep(1100,0.2,'sine',0.1); },120); },
@@ -2676,6 +2738,7 @@ function enterGame(mode){
         Sound.init();
         prepareGameData();
         updateSoundBtn();
+        Sound.startBGM();
         chooseMode(mode === 'tutorial' ? 'tutorial' : 'direct');
     }catch(e){
         console.error('进入模式选择失败，回退到关卡选择:', e);
@@ -2764,6 +2827,7 @@ function bindEvents(){
         try{
             Sound.init();
             prepareGameData();
+            Sound.startBGM();
             renderAvatarPreview();
             showAvatarCreate();
         }catch(e){ console.error('打开形象选择失败:', e); }
@@ -2776,6 +2840,7 @@ function bindEvents(){
         try{
             Sound.init();
             prepareGameData();
+            Sound.startBGM();
             renderAvatarPreview();
             showAvatarCreate();
         }catch(e){ console.error('打开形象选择失败:', e); }
@@ -2825,8 +2890,9 @@ function bindEvents(){
     $('soundBtn').addEventListener('click', function(){
         state.soundEnabled = !state.soundEnabled;
         Sound.enabled = state.soundEnabled;
+        if(state.soundEnabled){ Sound.startBGM(); } else { Sound.stopBGM(); }
         updateSoundBtn();
-        showToast(state.soundEnabled ? '🔊 音效开启' : '🔇 音效关闭', 1000);
+        showToast(state.soundEnabled ? '🔊 音乐开启' : '🔇 音乐关闭', 1000);
     });
 
     $('saveBtn').addEventListener('click', function(){
