@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
-<title>稗官的小厨房 · 多灶升级版 v3</title>
+<title>稗官的小厨房 · 多灶升级版 v4</title>
 <style>
 *{box-sizing:border-box;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;margin:0;padding:0}
 html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue','Microsoft YaHei',sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none;position:fixed;top:0;left:0}
@@ -15,7 +15,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .screen{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;transition:opacity .5s ease,visibility .5s;overflow:hidden}
 .screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
 
-/* 横屏提示 */
 #landscapeHint{position:fixed;inset:0;background:rgba(26,18,8,.96);z-index:99999;display:none;flex-direction:column;justify-content:center;align-items:center;color:#ffeaaf;text-align:center;padding:20px}
 #landscapeHint .icon{font-size:4rem;margin-bottom:16px;animation:rotateHint 2s ease-in-out infinite}
 #landscapeHint .txt{font-size:1rem;font-weight:800;letter-spacing:2px}
@@ -23,7 +22,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 @keyframes rotateHint{0%,100%{transform:rotate(0)}50%{transform:rotate(-90deg)}}
 @media (orientation:landscape) and (max-height:500px){#landscapeHint{display:flex}}
 
-/* 动态厨房背景 */
 .kitchen-bg-layer{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .kitchen-bg-tile{position:absolute;inset:0;background-image:radial-gradient(circle at 25% 35%,rgba(255,235,190,.18) 0,transparent 30%),radial-gradient(circle at 75% 70%,rgba(255,215,140,.12) 0,transparent 35%),linear-gradient(45deg,rgba(180,140,90,.08) 25%,transparent 25%),linear-gradient(-45deg,rgba(180,140,90,.08) 25%,transparent 25%),linear-gradient(180deg,#f5e6d0 0,#e8d5b8 40%,#d9c4a5 100%);background-size:100% 100%,100% 100%,24px 24px,24px 24px,100% 100%}
 .kitchen-bg-rack{position:absolute;top:3%;left:4%;right:4%;height:42px;background:linear-gradient(180deg,#b28b5e,#8b6d4b);border-radius:0 0 12px 12px;box-shadow:0 6px 0 #6b4f34,0 8px 16px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:space-around;padding:0 12px;z-index:1;opacity:.85}
@@ -35,7 +33,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .kitchen-bg-window::before{content:'';position:absolute;top:50%;left:0;right:0;height:3px;background:#b28b5e;transform:translateY(-50%)}
 .kitchen-bg-window::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:3px;background:#b28b5e;transform:translateX(-50%)}
 
-/* 加载页 */
 .splash-screen{background:linear-gradient(160deg,#2b1e14 0,#4a3522 50%,#6b4f34 100%);flex-direction:column;z-index:100;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px;justify-content:center;align-items:center}
 .splash-bg-emoji{position:absolute;font-size:6rem;opacity:.06;pointer-events:none}
 .splash-bg-emoji.e1{top:5%;left:5%;transform:rotate(-15deg)}.splash-bg-emoji.e2{top:15%;right:8%;transform:rotate(20deg)}.splash-bg-emoji.e3{bottom:12%;left:8%;transform:rotate(10deg)}.splash-bg-emoji.e4{bottom:8%;right:10%;transform:rotate(-25deg)}
@@ -71,7 +68,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .copyright-info .version-tag{display:inline-block;background:rgba(255,234,175,.12);border:1px solid rgba(201,168,124,.4);border-radius:20px;padding:1px 8px;font-size:.55rem;margin-top:3px;color:#c9a87c}
 .health-tip{font-size:.58rem;color:#ffeaaf;font-weight:700;letter-spacing:.5px;text-align:center;opacity:.85;padding:6px 10px;background:rgba(0,0,0,.25);border-radius:20px;border:1px solid rgba(201,168,124,.3)}
 
-/* 模式选择页 */
 .mode-select-screen{background:linear-gradient(160deg,#2b1e14 0,#4a3522 50%,#6b4f34 100%);z-index:95;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:center;justify-content:flex-start;padding:16px 12px}
 .mode-select-container{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:14px;padding-bottom:20px}
 .mode-header{text-align:center;margin-top:6px}
@@ -94,7 +90,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .mode-card.avatar .mode-tag{background:linear-gradient(180deg,#7ec8e3,#5ba4c4);color:#1a3a4a;box-shadow:0 2px 0 #4a8aaa}
 .mode-footer{font-size:.58rem;color:#8b6d4b;text-align:center;line-height:1.6;opacity:.85;margin-top:4px}
 
-/* 关卡选择页 */
 .level-select-screen{background:linear-gradient(160deg,#2b1e14 0,#4a3522 50%,#6b4f34 100%);z-index:90;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:center;justify-content:flex-start;padding:16px 12px}
 .level-select-container{width:100%;max-width:500px;display:flex;flex-direction:column;align-items:center;gap:12px;padding-bottom:20px}
 .select-header{text-align:center;position:relative}
@@ -158,7 +153,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .select-footer .footer-copyright{font-size:.55rem;color:#8b6d4b;font-weight:600;line-height:1.6;letter-spacing:.2px;opacity:.85}
 .select-footer .footer-health{font-size:.55rem;color:#c9a87c;font-weight:700;letter-spacing:.5px;opacity:.75}
 
-/* 游戏主页面 */
 .game-container{z-index:80;flex-direction:column;background:#fef6e8;align-items:stretch;justify-content:flex-start;padding-top:calc(env(safe-area-inset-top) + 8px)}
 .game-wrapper{width:100%;height:100%;background:#fef6e8;display:flex;flex-direction:column;overflow:hidden;padding:8px 10px 4px}
 .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;gap:6px;flex-shrink:0}
@@ -171,6 +165,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .stat{background:#fffaef;padding:3px 8px;border-radius:40px;font-weight:700;color:#4a2e1b;box-shadow:inset 0 -2px 0 #d9b382;display:flex;align-items:center;gap:3px;font-size:.7rem}
 .date-display{background:#fffaef;padding:3px 8px;border-radius:40px;font-weight:800;color:#4a2e1b;box-shadow:inset 0 -2px 0 #d9b382;font-size:.62rem;white-space:nowrap}
 .phase-indicator{display:flex;align-items:center;gap:3px;background:#fffaef;padding:3px 8px;border-radius:40px;font-weight:800;font-size:.65rem;box-shadow:inset 0 -2px 0 #d9b382;white-space:nowrap}
+
+/* 顶部木牌 HUD */
+.wood-hud{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.wood-stat{background:linear-gradient(180deg,#c08a4a,#8a5f2f);border:2px solid #6b4a24;border-radius:40px;padding:3px 10px 3px 8px;font-weight:900;color:#fff2d0;font-size:.72rem;display:flex;align-items:center;gap:4px;box-shadow:inset 0 2px 0 rgba(255,220,160,.35),inset 0 -2px 0 rgba(0,0,0,.25),0 2px 0 #3d2814;text-shadow:0 1px 0 #3d2814;letter-spacing:.3px}
+.wood-stat .num{display:inline-block;min-width:1.6em;text-align:right;font-variant-numeric:tabular-nums}
+@keyframes goldPulse{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+.wood-stat.pulse{animation:goldPulse .35s ease}
+.wood-stat.date-wood{font-size:.62rem;padding:3px 8px}
+.wood-stat.phase-wood{font-size:.65rem}
 
 .level-bar{background:linear-gradient(90deg,#6b4f34,#8b6d4b,#6b4f34);border-radius:40px;padding:5px 10px;margin-bottom:6px;display:flex;align-items:center;gap:6px;box-shadow:inset 0 2px 5px rgba(0,0,0,.3);flex-shrink:0}
 .level-icon{font-size:.95rem}
@@ -200,15 +203,18 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .prep-slot.active{border-color:#f7c35c;box-shadow:0 0 0 3px #f7c35c,0 4px 0 #8b6d4b}
 .prep-slot .slot-emoji{font-size:1.6rem;line-height:1}
 .prep-slot .slot-progress{position:absolute;bottom:2px;left:10%;width:80%;height:4px;background:rgba(0,0,0,.3);border-radius:10px;overflow:hidden}
-.prep-slot .slot-progress-fill{height:100%;width:0;background:linear-gradient(90deg,#f8c44c,#ffdb7c);border-radius:10px;transition:width .15s linear}
+.prep-slot .slot-progress-fill{height:100%;width:0;background:linear-gradient(90deg,#f8c44c,#ffdb7c);border-radius:10px}
 .prep-slot .slot-ready-badge{position:absolute;top:-4px;right:-4px;background:#4caf50;color:#fff;font-size:.55rem;font-weight:800;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3);animation:popIn .3s ease}
 @keyframes popIn{0%{transform:scale(0)}80%{transform:scale(1.2)}100%{transform:scale(1)}}
 .prep-slot .slot-lock-icon{font-size:.9rem;opacity:.6}
 .prep-slot .slot-label{font-size:.45rem;color:#8b6d4b;font-weight:700;margin-top:1px}
+.prep-slot .slot-flame{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);font-size:1rem;opacity:0;transition:opacity .3s;pointer-events:none;filter:drop-shadow(0 0 6px #ff9800)}
+.prep-slot.cooking .slot-flame{opacity:1;animation:flameDance .35s ease-in-out infinite alternate}
+@keyframes flameDance{0%{transform:translateX(-50%) scale(1) translateY(0)}100%{transform:translateX(-50%) scale(1.25) translateY(-3px)}}
 .slot-upgrade-hint{width:100%;text-align:center;font-size:.6rem;color:#8b6d4b;font-weight:700;margin-top:2px}
 
 .cook-progress{width:88%;background:#816e53;border-radius:40px;height:11px;overflow:hidden;box-shadow:inset 0 3px 5px rgba(0,0,0,.3);margin-bottom:8px;border:1px solid #6b4f34}
-.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#f8c44c,#f0a43b);border-radius:40px;transition:width .15s linear;box-shadow:0 0 12px #ffc107}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#f8c44c,#f0a43b);border-radius:40px;box-shadow:0 0 12px #ffc107}
 .btn{border:none;background:#ffe6b3;border-radius:60px;padding:8px 12px;font-weight:700;font-size:.78rem;color:#3d2a16;box-shadow:0 4px 0 #b27d4a,0 4px 8px rgba(0,0,0,.2);display:inline-flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:all .08s ease;border:1px solid #e9c28b;letter-spacing:.2px}
 .btn:active{transform:translateY(3px);box-shadow:0 1px 0 #b27d4a}
 .btn:disabled{opacity:.5;transform:translateY(2px);box-shadow:0 2px 0 #b27d4a;pointer-events:none;filter:grayscale(.5)}
@@ -239,18 +245,32 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .combo-chip .chip-name{color:#8a5520}
 .combo-chip .chip-detail{font-size:.5rem;color:#b27d4a;font-weight:700;text-align:center;line-height:1.1;max-width:72px}
 
-.order-section{background:#f3e5d3;border-radius:16px;padding:8px;box-shadow:inset 0 -3px 0 #c8b094,0 4px 8px rgba(0,0,0,.1);border:1px solid #dbbc95}
-.order-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-weight:800;color:#4f3a25;font-size:.78rem}
-.customer-list{display:flex;flex-direction:column;gap:5px;max-height:260px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-right:2px}
+.order-section{background:linear-gradient(180deg,#a8763f 0%,#8a5f2f 8%,#6b4a24 100%);border-radius:16px;padding:8px 8px 10px;box-shadow:inset 0 -4px 0 #4a3218,inset 0 3px 8px rgba(255,220,160,.15),0 5px 0 #3d2814,0 8px 16px rgba(0,0,0,.35);border:1px solid #7a5528;position:relative}
+.order-section::before{content:'';position:absolute;inset:6px 6px 8px;border-radius:10px;background:repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 2px,transparent 2px 6px),repeating-linear-gradient(0deg,rgba(255,220,160,.04) 0 1px,transparent 1px 3px);pointer-events:none;z-index:0}
+.order-section .order-header{position:relative;z-index:1;color:#ffe6b3;text-shadow:0 2px 0 #3d2814;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-weight:800;font-size:.78rem}
+.customer-list{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 2px 4px}
 .customer-list::-webkit-scrollbar{width:3px}
 .customer-list::-webkit-scrollbar-thumb{background:#c9a87c;border-radius:20px}
-.customer-card{background:#fef7e9;border-radius:40px;padding:7px 9px;display:flex;align-items:center;gap:7px;box-shadow:0 3px 0 #b28b5e;border:1px solid #e1c9a8;transition:all .1s}
-.customer-card.match{border-color:#4caf50;box-shadow:0 3px 0 #4caf50,0 0 0 2px rgba(76,175,80,.3);animation:highlightPulse 1.2s ease-in-out infinite}
-@keyframes highlightPulse{0%,100%{box-shadow:0 3px 0 #4caf50,0 0 0 2px rgba(76,175,80,.3)}50%{box-shadow:0 3px 0 #4caf50,0 0 0 6px rgba(76,175,80,0)}}
-.customer-card.served-anim{animation:servedAnim .5s ease}
-@keyframes servedAnim{0%{transform:scale(1)}30%{transform:scale(1.05)}100%{transform:scale(1)}}
-.customer-avatar{font-size:1.3rem;background:#e6d3ba;width:36px;height:36px;min-width:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -3px 0 #b28b5e}
-.customer-info{flex:1;min-width:0}
+
+/* 顾客卡片 - 人物+气泡 */
+.customer-card{position:relative;background:transparent;border:none;box-shadow:none;padding:0;display:flex;align-items:flex-start;gap:6px;transition:transform .25s ease,opacity .25s ease}
+.customer-card .cust-body{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:52px}
+.customer-card .customer-avatar{font-size:2rem;line-height:1;background:transparent;box-shadow:none;width:auto;height:auto;min-width:0;position:relative;transition:transform .2s}
+.customer-card .cust-shadow{width:32px;height:6px;border-radius:50%;background:rgba(0,0,0,.22);margin-top:2px;filter:blur(2px)}
+.customer-card .cust-bubble{position:relative;flex:1;min-width:0;background:linear-gradient(160deg,#fff8e8,#ffeecb);border:2px solid #e8c98a;border-radius:14px;border-bottom-left-radius:4px;padding:7px 9px;box-shadow:0 3px 0 #c9a87c,0 5px 10px rgba(0,0,0,.15);transition:all .2s}
+.customer-card .cust-bubble::before{content:'';position:absolute;left:-7px;top:14px;width:0;height:0;border:6px solid transparent;border-right-color:#e8c98a;border-left:0}
+.customer-card .cust-bubble::after{content:'';position:absolute;left:-4px;top:15px;width:0;height:0;border:5px solid transparent;border-right-color:#fff8e8;border-left:0}
+.customer-card.match .cust-bubble{border-color:#4caf50;animation:highlightPulse 1.2s ease-in-out infinite}
+.customer-card.match .cust-bubble::before{border-right-color:#4caf50}
+.customer-card.match .cust-bubble::after{border-right-color:#e8ffd6}
+@keyframes highlightPulse{0%,100%{box-shadow:0 3px 0 #4caf50,0 0 0 2px rgba(76,175,80,.3)}50%{box-shadow:0 3px 0 #4caf50,0 0 0 7px rgba(76,175,80,0)}}
+.customer-card.leaving{animation:custLeave .55s cubic-bezier(.5,-.3,.7,0) forwards}
+@keyframes custLeave{0%{transform:translateX(0) rotate(0);opacity:1}30%{transform:translateX(6px) rotate(3deg)}100%{transform:translateX(120px) rotate(20deg) scale(.7);opacity:0}}
+.customer-card.served-anim .cust-body{animation:custHappy .5s ease}
+@keyframes custHappy{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-8px) scale(1.15)}60%{transform:translateY(0) scale(.95)}100%{transform:translateY(0) scale(1)}}
+.customer-card.drop-hover .cust-bubble{border-color:#4caf50!important;box-shadow:0 3px 0 #4caf50,0 0 0 4px rgba(76,175,80,.4)!important;transform:scale(1.03)}
+.customer-card.drop-invalid .cust-bubble{border-color:#e74c3c!important;box-shadow:0 3px 0 #e74c3c!important}
+
 .customer-order{font-weight:800;font-size:.72rem;color:#3b2a17;display:flex;align-items:center;gap:3px;flex-wrap:wrap}
 .customer-order .dish-icon{font-size:.95rem;line-height:1}
 .customer-order .qty{background:#f0dbb8;border-radius:40px;padding:1px 5px;font-size:.6rem;font-weight:800;color:#7a4e1e}
@@ -259,15 +279,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .customer-price .tip{background:#ffd966;padding:1px 4px;border-radius:20px;font-size:.55rem;color:#5e3d1b;font-weight:800}
 .wait-timer-wrap{margin-top:3px;display:flex;align-items:center;gap:4px}
 .wait-timer-bg{flex:1;height:7px;background:#e0cfb8;border-radius:20px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.2)}
-.wait-timer-fill{height:100%;border-radius:20px;transition:width .9s linear,background-color .3s;background:#4caf50}
+.wait-timer-fill{height:100%;border-radius:20px;background:#4caf50;will-change:width}
 .wait-timer-fill.warning{background:#ff9800}
 .wait-timer-fill.danger{background:#e74c3c}
-.wait-timer-text{font-size:.62rem;font-weight:900;color:#8b6d4b;min-width:28px;text-align:right}
+.wait-timer-text{font-size:.62rem;font-weight:900;color:#8b6d4b;min-width:28px;text-align:right;font-variant-numeric:tabular-nums}
 .wait-timer-text.danger{color:#e74c3c;animation:blink .8s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.serve-btn{background:#4caf50;color:#fff;border:none;border-radius:30px;padding:3px 8px;font-weight:800;font-size:.62rem;cursor:pointer;box-shadow:0 3px 0 #2e7d32;transition:all .1s;white-space:nowrap;margin-left:2px;flex-shrink:0}
-.serve-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #2e7d32}
-.empty-orders{text-align:center;padding:14px 8px;color:#9b8a74;font-weight:600;font-size:.78rem;background:#f3e5d3;border-radius:40px;border:2px dashed #c8b094}
+.serve-btn{background:linear-gradient(180deg,#6cd46b,#4a9e3a);color:#fff;border:none;border-radius:30px;padding:4px 10px;font-weight:900;font-size:.62rem;cursor:pointer;box-shadow:0 3px 0 #2e6b1e,0 0 0 0 rgba(108,212,107,.6);transition:all .12s;white-space:nowrap;flex-shrink:0;animation:servePulse 1.2s ease-in-out infinite;align-self:center}
+@keyframes servePulse{0%,100%{box-shadow:0 3px 0 #2e6b1e,0 0 0 0 rgba(108,212,107,.55)}50%{box-shadow:0 3px 0 #2e6b1e,0 0 0 6px rgba(108,212,107,0)}}
+.serve-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #2e6b1e;animation:none}
+.empty-orders{text-align:center;padding:14px 8px;color:#ffd9a0;font-weight:600;font-size:.78rem;background:rgba(0,0,0,.18);border-radius:40px;border:2px dashed rgba(255,220,160,.3)}
 
 .daily-goal{background:linear-gradient(145deg,#fff3d6,#ffe6b3);border:2px solid #f0c274;border-radius:14px;padding:8px 10px;margin-bottom:8px;box-shadow:0 3px 0 #d9b382;display:flex;align-items:center;gap:8px}
 .daily-goal .dg-icon{font-size:1.4rem}
@@ -366,7 +387,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .open-shop-btn:disabled{opacity:.5;filter:grayscale(.6);pointer-events:none;transform:translateY(2px);box-shadow:0 2px 0 #4c8b2c}
 .quit-icon{font-size:2.4rem;margin-bottom:6px}
 
-/* 形象创建 & 衣柜 */
 .avatar-preview{font-size:4rem;margin:8px 0 12px;line-height:1;animation:bounce 2s infinite ease-in-out}
 .gender-picker{display:flex;gap:8px;margin-bottom:14px}
 .gender-btn{flex:1;border:2px solid #d9b382;background:#fffaef;border-radius:60px;padding:10px;font-weight:800;font-size:.82rem;color:#4a2e1b;cursor:pointer;transition:all .12s;box-shadow:0 3px 0 #b28b5e}
@@ -390,7 +410,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .wardrobe-item .wi-btn.owned{background:#b0d68e;color:#2a3d15;box-shadow:0 3px 0 #6c8b4c}
 .wardrobe-item .wi-btn:disabled{opacity:.5;pointer-events:none}
 .wardrobe-footer{font-weight:800;color:#4a2e1b;font-size:.78rem;margin-bottom:10px}
-/* 形象选择页面 */
 .avatar-page-box{max-width:380px;padding:18px 16px}
 .avatar-page-preview{background:linear-gradient(180deg,#fff8e8,#f3e5d3);border-radius:20px;padding:14px 0 10px;margin:10px 0;border:2px solid #e9d5bc;display:flex;flex-direction:column;align-items:center;position:relative}
 .avatar-emoji-layer{font-size:1.6rem;line-height:1;height:1.6rem;text-align:center}
@@ -421,13 +440,29 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 @keyframes exprPop{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1.3)}100%{transform:translate(-50%,-50%) scale(1)}}
 @keyframes chefCookBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
+/* 飘字系统 */
+.float-text{position:fixed;z-index:9998;pointer-events:none;font-weight:900;font-size:1rem;letter-spacing:.5px;text-shadow:0 2px 4px rgba(0,0,0,.35),0 0 8px rgba(255,255,255,.5);animation:floatUp .9s cubic-bezier(.2,.8,.3,1) forwards;will-change:transform,opacity;transform:translate(-50%,-50%)}
+.float-text.gold{color:#ffd966}
+.float-text.rep{color:#8fd46b}
+.float-text.bad{color:#e74c3c}
+.float-text.tip{color:#ffb347;font-size:.85rem}
+@keyframes floatUp{0%{transform:translate(-50%,-50%) scale(.6);opacity:0}20%{transform:translate(-50%,-90%) scale(1.15);opacity:1}60%{transform:translate(-50%,-140%) scale(1);opacity:1}100%{transform:translate(-50%,-200%) scale(.9);opacity:0}}
+
+/* 抖动 */
+@keyframes shakeX{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.shake{animation:shakeX .4s ease}
+
+/* 完成圆环 */
+@keyframes ringBurst{0%{transform:translate(-50%,-50%) scale(.2);opacity:.9}100%{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
+.ring-burst{position:fixed;z-index:9997;pointer-events:none;width:60px;height:60px;border-radius:50%;border:3px solid #ffd966;box-shadow:0 0 18px #ffb347,inset 0 0 12px #ffdb7c;animation:ringBurst .6s ease-out forwards;transform:translate(-50%,-50%)}
+
 @media (max-height:700px){
     .prep-slot{width:52px;height:52px}
     .prep-slot .slot-emoji{font-size:1.3rem}
     .splash-chef{font-size:3rem;margin:10px 0 6px}
     .splash-title{font-size:1.4rem}
     .age-rating-box{margin-top:16px}
-    .customer-list{max-height:180px}
+    .customer-list{max-height:200px}
     .mode-card .mode-emoji{width:48px;height:48px;font-size:2.2rem}
 }
 @media (max-width:360px){
@@ -444,8 +479,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 .drag-ghost.drag-serve{font-size:2.2rem}
 .prep-slot.drop-hover{border-color:#4caf50!important;box-shadow:0 0 0 3px rgba(76,175,80,0.5),0 4px 0 #8b6d4b!important;transform:scale(1.1)}
 .prep-slot.drop-invalid{border-color:#e74c3c!important;box-shadow:0 0 0 3px rgba(231,76,60,0.4),0 4px 0 #8b6d4b!important}
-.customer-card.drop-hover{border-color:#4caf50!important;box-shadow:0 0 0 3px rgba(76,175,80,0.5),0 3px 0 #4caf50!important;transform:scale(1.05)}
-.customer-card.drop-invalid{border-color:#e74c3c!important;box-shadow:0 0 0 3px rgba(231,76,60,0.3),0 3px 0 #e74c3c!important}
 .dish-chip.dragging{opacity:0.4}
 .prep-slot.dragging{opacity:0.4}
 .drag-hint{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.55rem;font-weight:800;color:#4caf50;white-space:nowrap;animation:dragHintPulse 1.5s ease-in-out infinite}
@@ -460,7 +493,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
         <div class="sub">旋转设备以获得最佳体验</div>
     </div>
 
-    <!-- 加载页 -->
     <div class="screen splash-screen" id="splashScreen">
         <div class="splash-bg-emoji e1">🍜</div>
         <div class="splash-bg-emoji e2">🍣</div>
@@ -498,12 +530,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
                 <span class="copyright-line">© 2026 稗官工作室 版权所有</span>
                 <span class="copyright-line">软著登字第 2026SR0000000 号</span>
                 <span class="copyright-line">著作权登记号：国作登字-2026-F-00000000</span>
-                <span class="version-tag">Ver 3.2.0 Build 20261202</span>
+                <span class="version-tag">Ver 4.0.0 Build 20261202</span>
             </div>
         </div>
     </div>
 
-    <!-- 模式选择页 -->
     <div class="screen mode-select-screen hidden" id="modeSelectScreen">
         <div class="mode-select-container">
             <div class="mode-header">
@@ -541,7 +572,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
         </div>
     </div>
 
-    <!-- 关卡选择页 -->
     <div class="screen level-select-screen hidden" id="levelSelectScreen">
         <div class="level-select-container">
             <div class="select-header">
@@ -580,13 +610,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
             </div>
             <div class="select-footer">
                 <div class="footer-rating">🎈 适龄提示：8+ · 健康游戏忠告：抵制不良游戏，拒绝盗版游戏</div>
-                <div class="footer-copyright">© 2026 稗官工作室 版权所有 · 软著登字第 2026SR0000000 号<br>国作登字-2026-F-00000000 · 版本 Ver 3.2.0</div>
+                <div class="footer-copyright">© 2026 稗官工作室 版权所有 · 软著登字第 2026SR0000000 号<br>国作登字-2026-F-00000000 · 版本 Ver 4.0.0</div>
                 <div class="footer-health">📖 本游戏为单机休闲游戏，不含内购</div>
             </div>
         </div>
     </div>
 
-    <!-- 游戏主页面 -->
     <div class="screen game-container hidden" id="gameContainer">
         <div class="kitchen-bg-layer">
             <div class="kitchen-bg-tile"></div>
@@ -605,12 +634,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
                 </div>
             </div>
             <div class="sub-header">
-                <div class="stats">
-                    <div class="stat"><span>💰</span> <span id="goldDisplay">0</span></div>
-                    <div class="stat"><span>⭐</span> <span id="repDisplay">0</span></div>
+                <div class="stats wood-hud">
+                    <div class="wood-stat" id="goldWoodStat"><span>💰</span><span class="num" id="goldDisplay">0</span></div>
+                    <div class="wood-stat" id="repWoodStat"><span>⭐</span><span class="num" id="repDisplay">0</span></div>
                 </div>
-                <div class="date-display" id="dateDisplay">----年--月--日</div>
-                <div class="phase-indicator"><span class="phase-icon" id="phaseIcon">🌅</span><span id="phaseText">早晨</span></div>
+                <div class="wood-stat date-wood" id="dateDisplay">----年--月--日</div>
+                <div class="wood-stat phase-wood"><span class="phase-icon" id="phaseIcon">🌅</span><span id="phaseText">早晨</span></div>
             </div>
             <div class="level-bar">
                 <div class="level-icon">🎯</div>
@@ -768,7 +797,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
         </div>
     </div>
 
-    <!-- 形象选择页面 -->
     <div class="modal-overlay avatar-overlay" id="avatarCreateModal">
         <div class="modal-box avatar-page-box">
             <div class="modal-title">👩‍🍳 形象定制</div>
@@ -796,7 +824,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
         </div>
     </div>
 
-    <!-- 衣柜 -->
     <div class="modal-overlay avatar-overlay" id="avatarWardrobeModal">
         <div class="modal-box avatar-wardrobe-box">
             <div class="modal-title">👗 厨师衣柜</div>
@@ -834,14 +861,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
 var CONFIG = {
     DAY_DURATION_MS: 3600 * 1000,
     TOTAL_LEVELS: 20,
-    SAVE_KEY: 'baiguan_kitchen_save_v6',
-    SAVE_VERSION: 6,
+    SAVE_KEY: 'baiguan_kitchen_save_v7',
+    SAVE_VERSION: 7,
     MAX_PREP_SLOTS: 5,
     SLOT_UNLOCK_REP: [0, 20, 60, 120, 200],
     SPAWN_INTERVAL_MS: 3500,
-    WAIT_TICK_MS: 1000,
-    COOK_TICK_MS: 100,
-    CUSTOMER_RENDER_MS: 4000,
+    WAIT_TICK_MS: 500,
+    COOK_TICK_MS: 50,
+    CUSTOMER_RENDER_MS: 1000,
     MAX_GOLD: 999999,
     SLOT_UNLOCK_TEXT: [0, 20, 60, 120, 200],
     FAIL_REP_THRESHOLD: 0,
@@ -921,7 +948,6 @@ var CUSTOMER_AVATARS = ['👩','👨','👧','👦','👵','👴','🧑','👩�
 
 var DEFAULT_INVENTORY = { egg:12, oil:12, veggie:8, meat:6, bread:6, rice:5, fish:4, noodle:4, cheese:4, flour:5, sugar:5, milk:4, coffee:4, fruit:3, seafood:2 };
 
-/* 形象系统数据 */
 var AVATAR_ITEMS = {
     outfit: [
         { id:'chef_default', name:'经典厨师服', emoji:'👨‍🍳', price:0, bonus:null, desc:'默认服装' },
@@ -1040,6 +1066,186 @@ function clamp(v,min,max){ return Math.max(min,Math.min(max,v)); }
 function deepCopy(o){ return JSON.parse(JSON.stringify(o)); }
 function safeDiffKey(k){ return (k && DIFFICULTY[k]) ? k : 'normal'; }
 
+/* ========== 飘字系统 ========== */
+function floatText(x, y, text, cls){
+    var el = document.createElement('div');
+    el.className = 'float-text ' + (cls || 'gold');
+    el.textContent = text;
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    document.body.appendChild(el);
+    setTimeout(function(){
+        if(el.parentNode) el.parentNode.removeChild(el);
+    }, 950);
+}
+
+function floatAtElement(el, text, cls, offsetY){
+    if(!el) return;
+    var rect = el.getBoundingClientRect();
+    var x = rect.left + rect.width/2;
+    var y = rect.top + (offsetY || 0);
+    floatText(x, y, text, cls);
+}
+
+function burstRing(x, y){
+    var el = document.createElement('div');
+    el.className = 'ring-burst';
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    document.body.appendChild(el);
+    setTimeout(function(){
+        if(el.parentNode) el.parentNode.removeChild(el);
+    }, 650);
+}
+
+function shakeEl(el){
+    if(!el) return;
+    el.classList.remove('shake');
+    void el.offsetWidth;
+    el.classList.add('shake');
+    setTimeout(function(){ el.classList.remove('shake'); }, 450);
+}
+
+/* ========== 数字滚动 ========== */
+function animateNumber(el, from, to, dur){
+    if(!el) return;
+    if(from === to){ el.textContent = to; return; }
+    var start = performance.now();
+    var d = dur || 400;
+    function step(now){
+        var t = Math.min(1, (now - start) / d);
+        var eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(from + (to - from) * eased);
+        if(t < 1) requestAnimationFrame(step);
+        else el.textContent = to;
+    }
+    requestAnimationFrame(step);
+}
+
+function pulseEl(el){
+    if(!el) return;
+    el.classList.remove('pulse');
+    void el.offsetWidth;
+    el.classList.add('pulse');
+    setTimeout(function(){ el.classList.remove('pulse'); }, 400);
+}
+
+/* ========== 主循环 ========== */
+var Loop = {
+    running: false,
+    last: 0,
+    start: function(){
+        if(this.running) return;
+        this.running = true;
+        this.last = performance.now();
+        var self = this;
+        function step(now){
+            if(!self.running) return;
+            var dt = Math.min(0.05, (now - self.last) / 1000);
+            self.last = now;
+            self.tick(dt, now);
+            requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    },
+    stop: function(){
+        this.running = false;
+    },
+    tick: function(dt, now){
+        // 灶台烹饪进度插值
+        if(state.isShopOpen){
+            for(var i=0;i<state.prepSlots.length;i++){
+                var slot = state.prepSlots[i];
+                if(slot && slot.status === 'cooking' && slot.cookStartTime){
+                    var elapsed = (now - slot.cookStartTime) / 1000;
+                    var cookTime = slot.cookDuration || 1;
+                    var progress = Math.min(100, (elapsed / cookTime) * 100);
+                    slot.progress = progress;
+                    var slotEl = document.querySelector('.prep-slot[data-slot="'+i+'"]');
+                    if(slotEl){
+                        var fill = slotEl.querySelector('.slot-progress-fill');
+                        if(fill) fill.style.width = progress + '%';
+                    }
+                    if(progress >= 100){
+                        slot.status = 'ready';
+                        slot.progress = 100;
+                        slot.cookStartTime = null;
+                        renderPrepStation();
+                        renderCustomers();
+                        updateSelectorHint();
+                        updateCookBtnState();
+                        Sound.ready();
+                        updateChefExpression('idle');
+                        if(slotEl){
+                            var r = slotEl.getBoundingClientRect();
+                            burstRing(r.left + r.width/2, r.top + r.height/2);
+                            floatAtElement(slotEl, '✓ ' + (slot.item ? slot.item.name : ''), 'rep', r.height/2);
+                        }
+                    }
+                }
+            }
+            // 顾客倒计时插值
+            var changed = false;
+            var removedIds = [];
+            var diffCfg = DIFFICULTY[safeDiffKey(state.difficulty)] || DIFFICULTY.normal;
+            for(var j=state.customers.length-1;j>=0;j--){
+                var cust = state.customers[j];
+                var elapsed2 = now - cust.spawnTime;
+                if(elapsed2 >= cust.maxWaitTime){
+                    state.customers.splice(j,1);
+                    removedIds.push(cust.id);
+                    changed = true;
+                    Sound.leave();
+                    floatText(window.innerWidth/2, window.innerHeight/2, '😤 顾客走了', 'bad');
+                    addRep(-Math.round(1 * diffCfg.repLossMul));
+                    if(state.currentLevel > 2 && state.reputation <= CONFIG.FAIL_REP_THRESHOLD && state.levelServedCount < state.levelConfig.servedNeeded){
+                        triggerFail();
+                        return;
+                    }
+                }
+            }
+            if(changed){
+                // 移除对应 DOM 元素（播放离开动画）
+                for(var r=0;r<removedIds.length;r++){
+                    var cardEl = document.querySelector('.customer-card[data-id="'+removedIds[r]+'"]');
+                    if(cardEl){
+                        cardEl.classList.add('leaving');
+                        setTimeout(function(el){ return function(){ if(el.parentNode) el.parentNode.removeChild(el); }; }(cardEl), 600);
+                    }
+                }
+                renderDishSelector();
+            }
+            // 每秒更新倒计时数字和进度条宽度
+            for(var k=0;k<state.customers.length;k++){
+                var c = state.customers[k];
+                var card = document.querySelector('.customer-card[data-id="'+c.id+'"]');
+                if(!card) continue;
+                var el2 = now - c.spawnTime;
+                var remaining = Math.max(0, c.maxWaitTime - el2);
+                var percent = (remaining / c.maxWaitTime) * 100;
+                var fillEl = card.querySelector('.wait-timer-fill');
+                var textEl = card.querySelector('.wait-timer-text');
+                if(fillEl){
+                    fillEl.style.width = percent + '%';
+                    var cn = 'wait-timer-fill';
+                    if(percent < 30) cn += ' danger';
+                    else if(percent < 60) cn += ' warning';
+                    if(fillEl.className !== cn) fillEl.className = cn;
+                }
+                if(textEl){
+                    var sec = Math.ceil(remaining/1000);
+                    var s = sec + 's';
+                    if(textEl.textContent !== s) textEl.textContent = s;
+                    var tcn = 'wait-timer-text' + (percent < 30 ? ' danger' : '');
+                    if(textEl.className !== tcn) textEl.className = tcn;
+                }
+            }
+        }
+        // 更新日期进度条
+        try { updateDateUI(); } catch(e){}
+    }
+};
+
 var Timer = {
     _map: {},
     set: function(key, fn, ms){
@@ -1060,7 +1266,6 @@ var Sound = {
     enabled: true,
     bgmPlaying: false,
     bgmTimer: null,
-    bgmGain: null,
     bgmIndex: 0,
     bgmMelody: [
         523,587,659,784, 659,587,523,0,
@@ -1343,7 +1548,6 @@ function getLevelConfig(level, difficulty){
     var multiQtyChance = Math.min(0.6, level * 0.04);
     var tipChance = Math.max(0.1, 0.3 - level * 0.01);
 
-    // 前两关仅做新手友好调整，不影响第3关及之后的原有难度曲线
     if(level === 1){
         servedNeeded = 2;
         maxCustomers = 2;
@@ -1398,11 +1602,7 @@ var state = {
     selectedItem: null,
     prepSlots: [],
     activeSlotIndex: -1,
-    cookInterval: null,
-    spawnTimer: null,
     toastTimer: null,
-    dayTimer: null,
-    waitTimer: null,
     activeTab: 'kitchen',
     todayIncome: 0,
     todayServed: 0,
@@ -1416,12 +1616,13 @@ var state = {
     guideDone: false,
     lastTickTime: Date.now(),
     playMode: null,
-    /* 形象系统 */
     avatar: { gender:'female', outfit:'chef_default', hat:'none', accessory:'none' },
     avatarUpgrades: { waitBonus:0, tipBonus:0 },
     avatarCreated: false,
     chefMood: 'idle',
-    ownedAvatarItems: { outfit:['chef_default'], hat:['none'], accessory:['none'] }
+    ownedAvatarItems: { outfit:['chef_default'], hat:['none'], accessory:['none'] },
+    _lastGoldShown: 80,
+    _lastRepShown: 0
 };
 
 function saveGame(){
@@ -1468,6 +1669,8 @@ function loadGame(){
         state.ownedAvatarItems = Object.assign({ outfit:['chef_default'], hat:['none'], accessory:['none'] }, data.ownedAvatarItems || {});
         state.gold = clamp(state.gold, 0, CONFIG.MAX_GOLD);
         state.reputation = Math.max(0, state.reputation);
+        state._lastGoldShown = state.gold;
+        state._lastRepShown = state.reputation;
         return true;
     } catch(e){
         console.error('读取失败，回退新存档', e);
@@ -1484,17 +1687,34 @@ function clearSave(){
 }
 
 function addGold(amount){
+    var from = state._lastGoldShown;
     state.gold = clamp(state.gold + amount, 0, CONFIG.MAX_GOLD);
-    updateStatsUI();
+    state._lastGoldShown = state.gold;
+    var el = $('goldDisplay');
+    if(el){
+        animateNumber(el, from, state.gold, 400);
+        pulseEl($('goldWoodStat'));
+    }
+    var invGold = $('inventoryGold');
+    if(invGold) invGold.textContent = '💰 ' + state.gold;
 }
 function addRep(amount){
+    var from = state._lastRepShown;
     state.reputation = Math.max(0, state.reputation + amount);
-    updateStatsUI();
+    state._lastRepShown = state.reputation;
+    var el = $('repDisplay');
+    if(el){
+        animateNumber(el, from, state.reputation, 400);
+        pulseEl($('repWoodStat'));
+    }
 }
 function spendGold(amount){
     if(state.gold < amount) return false;
+    var from = state._lastGoldShown;
     state.gold = clamp(state.gold - amount, 0, CONFIG.MAX_GOLD);
-    updateStatsUI();
+    state._lastGoldShown = state.gold;
+    var el = $('goldDisplay');
+    if(el) animateNumber(el, from, state.gold, 350);
     return true;
 }
 
@@ -1744,7 +1964,7 @@ function startLevel(lvl){
     updateCookBtnState();
 
     startDayClock();
-    startWaitTimer();
+    Loop.start();
     switchTab('kitchen');
 
     var tag = state.completedLevels[lvl] ? '（重玩）' : '';
@@ -1771,8 +1991,10 @@ function quitToSelect(){
 }
 
 function updateStatsUI(){
-    $('goldDisplay').textContent = state.gold;
-    $('repDisplay').textContent = state.reputation;
+    var gEl = $('goldDisplay');
+    var rEl = $('repDisplay');
+    if(gEl){ gEl.textContent = state.gold; state._lastGoldShown = state.gold; }
+    if(rEl){ rEl.textContent = state.reputation; state._lastRepShown = state.reputation; }
 }
 
 function updateLevelUI(){
@@ -1793,7 +2015,6 @@ function updateDateUI(){
 
 function startDayClock(){
     Timer.set('day', function(){
-        updateDateUI();
         var now = Date.now();
         if(Math.abs(now - state.lastTickTime) > 60000){
             showToast('⏰ 检测到系统时间变动', 2000);
@@ -1952,61 +2173,6 @@ function startSpawnTimer(){
     }, CONFIG.SPAWN_INTERVAL_MS);
 }
 
-function startWaitTimer(){
-    Timer.set('wait', function(){
-        if(!state.isShopOpen) return;
-        var now = Date.now();
-        var changed = false;
-        var diffCfg = DIFFICULTY[safeDiffKey(state.difficulty)] || DIFFICULTY.normal;
-        var repLossMul = diffCfg.repLossMul;
-        for(var i=state.customers.length-1;i>=0;i--){
-            var cust = state.customers[i];
-            var elapsed = now - cust.spawnTime;
-            if(elapsed >= cust.maxWaitTime){
-                state.customers.splice(i,1);
-                changed = true;
-                showToast('😤 顾客等太久走了...');
-                Sound.leave();
-                addRep(-Math.round(1 * repLossMul));
-                if(state.currentLevel > 2 && state.reputation <= CONFIG.FAIL_REP_THRESHOLD && state.levelServedCount < state.levelConfig.servedNeeded){
-                    triggerFail();
-                    return;
-                }
-            }
-        }
-        if(changed){
-            renderCustomers();
-            renderDishSelector();
-        }
-        else updateWaitTimers();
-    }, CONFIG.WAIT_TICK_MS);
-}
-
-function updateWaitTimers(){
-    var now = Date.now();
-    for(var i=0;i<state.customers.length;i++){
-        var cust = state.customers[i];
-        var card = document.querySelector('.customer-card[data-id="'+cust.id+'"]');
-        if(!card) continue;
-        var elapsed = now - cust.spawnTime;
-        var remaining = Math.max(0, cust.maxWaitTime - elapsed);
-        var percent = (remaining / cust.maxWaitTime) * 100;
-        var fill = card.querySelector('.wait-timer-fill');
-        var text = card.querySelector('.wait-timer-text');
-        if(fill){
-            fill.style.width = percent + '%';
-            fill.className = 'wait-timer-fill';
-            if(percent < 30) fill.className += ' danger';
-            else if(percent < 60) fill.className += ' warning';
-        }
-        if(text){
-            text.textContent = Math.ceil(remaining/1000) + 's';
-            text.className = 'wait-timer-text';
-            if(percent < 30) text.className += ' danger';
-        }
-    }
-}
-
 function triggerFail(){
     Timer.clearAll();
     state.isShopOpen = false;
@@ -2018,7 +2184,6 @@ function triggerFail(){
     addClass($('failModal'),'show');
 }
 
-/* ===== 修复：多灶台烹饪时按钮状态动态管理 ===== */
 function updateCookBtnState(){
     var btn = $('cookBtn');
     if(!btn) return;
@@ -2027,7 +2192,6 @@ function updateCookBtnState(){
         var s = state.prepSlots[i];
         if(s && s.status === 'empty'){ hasEmpty = true; break; }
     }
-    // 未开门时禁用
     if(!state.isShopOpen) hasEmpty = false;
     btn.disabled = !hasEmpty;
 }
@@ -2035,14 +2199,15 @@ function updateCookBtnState(){
 function renderPrepStation(){
     var maxSlots = getMaxSlots();
     while(state.prepSlots.length < maxSlots){
-        state.prepSlots.push({ status:'empty', item:null, type:null, progress:0, interval:null });
+        state.prepSlots.push({ status:'empty', item:null, type:null, progress:0, cookStartTime:null, cookDuration:0 });
     }
     var html = '';
     for(var i=0;i<CONFIG.MAX_PREP_SLOTS;i++){
         var unlocked = i < maxSlots;
         var slot = state.prepSlots[i] || { status:'empty', item:null, type:null, progress:0 };
         var isActive = (i === state.activeSlotIndex);
-        var cls = 'prep-slot' + (unlocked?'':' locked') + (isActive?' active':'');
+        var isCooking = slot.status === 'cooking';
+        var cls = 'prep-slot' + (unlocked?'':' locked') + (isActive?' active':'') + (isCooking?' cooking':'');
         var content = '';
         if(!unlocked){
             content = '<span class="slot-lock-icon">🔒</span><span class="slot-label">'+CONFIG.SLOT_UNLOCK_TEXT[i]+'⭐</span>';
@@ -2050,12 +2215,12 @@ function renderPrepStation(){
             content = '<span class="slot-emoji">➕</span><span class="slot-label">'+(i+1)+'号灶</span>';
         } else if(slot.status === 'cooking'){
             content = '<span class="slot-emoji">'+(slot.item?slot.item.emoji:'🍳')+'</span>'+
-                '<div class="slot-progress"><div class="slot-progress-fill" style="width:'+slot.progress+'%"></div></div>';
+                '<div class="slot-progress"><div class="slot-progress-fill" style="width:'+(slot.progress||0)+'%"></div></div>';
         } else if(slot.status === 'ready'){
             content = '<span class="slot-emoji">'+(slot.item?slot.item.emoji:'🍳')+'</span>'+
                 '<div class="slot-ready-badge">✓</div>';
         }
-        html += '<div class="'+cls+'" data-slot="'+i+'">'+content+'</div>';
+        html += '<div class="'+cls+'" data-slot="'+i+'">'+content+'<div class="slot-flame">🔥</div></div>';
     }
     var maxLabel = maxSlots < CONFIG.MAX_PREP_SLOTS ? ' （声望提升解锁更多灶台）' : '';
     html += '<div class="slot-upgrade-hint">当前 '+maxSlots+' 个灶台'+maxLabel+'</div>';
@@ -2096,26 +2261,13 @@ function renderPrepStation(){
     updateCookBtnState();
 }
 
-function handleSlotClick(idx){
-    var slot = state.prepSlots[idx];
-    if(!slot) return;
-    if(slot.status === 'ready'){
-        tryServe(slot.type, slot.item.id, idx);
-        return;
-    }
-    if(slot.status === 'cooking'){
-        showToast('⏳ 灶台 '+(idx+1)+' 正在烹饪中...');
-        return;
-    }
-    state.activeSlotIndex = idx;
-    renderPrepStation();
-    updateSelectorHint();
-    showToast('🔥 已选择 '+(idx+1)+' 号灶台，请选择菜品', 1200);
-}
-
 function startCooking(){
     if(!state.isShopOpen){ showToast('🚪 请先开门营业'); return; }
-    if(!state.selectedItem){ showToast('👆 请先选择菜品/套餐'); return; }
+    if(!state.selectedItem){
+        shakeEl($('dishScroll'));
+        showToast('👆 请先选择菜品/套餐');
+        return;
+    }
 
     var slotIdx = -1;
     if(state.activeSlotIndex >= 0 && state.activeSlotIndex < getMaxSlots()){
@@ -2127,20 +2279,24 @@ function startCooking(){
             if(state.prepSlots[i] && state.prepSlots[i].status === 'empty'){ slotIdx = i; break; }
         }
     }
-    if(slotIdx === -1){ showToast('🍳 所有灶台都在忙，等待或升级声望解锁更多灶台'); return; }
+    if(slotIdx === -1){ showToast('🍳 所有灶台都在忙'); return; }
 
     var item = state.selectedItem.data;
     var type = state.selectedItem.type;
-    if(!hasIngredients(item, type)){ showToast('📦 食材不足'); return; }
+    if(!hasIngredients(item, type)){
+        shakeEl($('dishScroll'));
+        showToast('📦 食材不足');
+        return;
+    }
 
     consumeIngredients(item, type);
 
     var cookTime;
     if(type === 'combo'){
         var sum = 0;
-        for(var i=0;i<item.items.length;i++){
+        for(var i2=0;i2<item.items.length;i2++){
             for(var j=0;j<ALL_DISHES.length;j++){
-                if(ALL_DISHES[j].id === item.items[i]){ sum += ALL_DISHES[j].cookTime; break; }
+                if(ALL_DISHES[j].id === item.items[i2]){ sum += ALL_DISHES[j].cookTime; break; }
             }
         }
         cookTime = sum / 1.5;
@@ -2148,15 +2304,15 @@ function startCooking(){
         cookTime = item.cookTime;
     }
     var speedBonus = state.upgrades.cookingSpeed * 0.05;
-    cookTime = Math.round(cookTime * (1 - speedBonus));
+    cookTime = Math.max(0.8, cookTime * (1 - speedBonus));
 
     var slot = state.prepSlots[slotIdx];
     slot.status = 'cooking';
-    slot.item = Object.assign({}, item, { cookTime: cookTime });
+    slot.item = Object.assign({}, item);
     slot.type = type;
     slot.progress = 0;
-    slot.totalSteps = Math.max(10, Math.floor(cookTime * 10));
-    slot.currentStep = 0;
+    slot.cookStartTime = performance.now();
+    slot.cookDuration = cookTime;
     state.selectedItem = null;
     state.activeSlotIndex = slotIdx;
     updateCookBtnState();
@@ -2165,30 +2321,6 @@ function startCooking(){
     updateSelectorHint();
     Sound.cook();
     updateChefExpression('cooking');
-
-    if(slot.interval) clearInterval(slot.interval);
-    slot.interval = setInterval(function(){
-        slot.currentStep++;
-        slot.progress = Math.min(100, (slot.currentStep / slot.totalSteps) * 100);
-        var slotEl = document.querySelector('.prep-slot[data-slot="'+slotIdx+'"]');
-        if(slotEl){
-            var fill = slotEl.querySelector('.slot-progress-fill');
-            if(fill) fill.style.width = slot.progress + '%';
-        }
-        if(slot.currentStep >= slot.totalSteps){
-            clearInterval(slot.interval);
-            slot.interval = null;
-            slot.status = 'ready';
-            slot.progress = 100;
-            updateCookBtnState();
-            renderPrepStation();
-            renderCustomers();
-            updateSelectorHint();
-            Sound.ready();
-            updateChefExpression('idle');
-            showToast('✅ '+item.name+' 做好了！点击灶台或顾客上菜', 1600);
-        }
-    }, CONFIG.COOK_TICK_MS);
 }
 
 function tryServe(type, id, slotIdx){
@@ -2203,15 +2335,20 @@ function tryServe(type, id, slotIdx){
     if(!slot || slot.status !== 'ready'){ showToast('🍽️ 该灶台没有做好的菜'); return; }
 
     var idx = -1;
-    for(var i=0;i<state.customers.length;i++){
-        if(state.customers[i].type === type && state.customers[i].item.id === id){ idx = i; break; }
+    for(var i2=0;i2<state.customers.length;i2++){
+        if(state.customers[i2].type === type && state.customers[i2].item.id === id){ idx = i2; break; }
     }
     if(idx === -1){ showToast('🙅 没有顾客点这个'); return; }
 
     var customer = state.customers[idx];
     var unitPrice = Math.round(customer.price / customer.qty);
-    addGold(unitPrice);
     var xp = slot.item.xp || 5;
+
+    // 计算飘字位置
+    var cardEl = document.querySelector('.customer-card[data-id="'+customer.id+'"]');
+    var rect = cardEl ? cardEl.getBoundingClientRect() : { left: window.innerWidth/2, top: window.innerHeight/2, width: 0 };
+
+    addGold(unitPrice);
     addRep(xp);
     state.todayServed++;
     state.todayIncome += unitPrice;
@@ -2219,10 +2356,22 @@ function tryServe(type, id, slotIdx){
     if(customer.type === 'combo') state.todayComboCount = (state.todayComboCount||0) + 1;
     customer.qty -= 1;
 
+    // 飘字
+    floatText(rect.left + rect.width * 0.6, rect.top + 10, '+' + unitPrice + '💰', 'gold');
+    setTimeout(function(){
+        floatText(rect.left + rect.width * 0.75, rect.top + 30, '⭐+' + xp, 'rep');
+    }, 80);
+    if(customer.tip > 0){
+        setTimeout(function(){
+            floatText(rect.left + rect.width * 0.45, rect.top + 45, '小费+' + customer.tip, 'tip');
+        }, 160);
+    }
+
     slot.status = 'empty';
     slot.item = null;
     slot.type = null;
     slot.progress = 0;
+    slot.cookStartTime = null;
 
     Sound.serve();
 
@@ -2230,14 +2379,29 @@ function tryServe(type, id, slotIdx){
         state.customers.splice(idx, 1);
         state.levelServedCount++;
         updateLevelUI();
-        showToast('😋 +'+unitPrice+' 💰  ⭐+'+xp);
         checkLevelComplete();
+        if(cardEl){
+            cardEl.classList.add('served-anim');
+            setTimeout(function(){
+                if(cardEl.parentNode) cardEl.parentNode.removeChild(cardEl);
+            }, 400);
+        }
     } else {
-        showToast('😋 上一份 +'+unitPrice+' 💰，还需 x'+customer.qty);
+        if(cardEl){
+            cardEl.classList.add('served-anim');
+            setTimeout(function(){ cardEl.classList.remove('served-anim'); }, 500);
+        }
+        var qtyEl = cardEl ? cardEl.querySelector('.qty') : null;
+        if(qtyEl) qtyEl.textContent = 'x' + customer.qty;
+        // 更新价格
+        if(cardEl){
+            var priceEl = cardEl.querySelector('.customer-price');
+            if(priceEl){
+                var newPrice = Math.round(customer.price * customer.qty / (customer.qty + 1));
+                priceEl.innerHTML = '💰 ' + newPrice + ' 金币 ' + (customer.tip > 0 ? '<span class="tip">小费 +' + customer.tip + '</span>' : '');
+            }
+        }
     }
-
-    var card = document.querySelector('.customer-card[data-id="'+customer.id+'"]');
-    if(card) addClass(card, 'served-anim');
 
     checkDailyGoal();
     renderPrepStation();
@@ -2320,8 +2484,11 @@ function renderCustomers(){
         var serveBtn = hasMatch ? '<button class="serve-btn" data-cust="'+cust.id+'">上菜</button>' : '';
 
         html += '<div class="customer-card '+matchClass+'" data-id="'+cust.id+'">'+
+            '<div class="cust-body">'+
             '<div class="customer-avatar">'+cust.avatar+'</div>'+
-            '<div class="customer-info">'+
+            '<div class="cust-shadow"></div>'+
+            '</div>'+
+            '<div class="cust-bubble">'+
             '<div class="customer-order">'+
             '<span class="dish-icon">'+cust.item.emoji+'</span>'+
             cust.item.name+
@@ -2347,14 +2514,14 @@ function renderCustomers(){
                 e.stopPropagation();
                 var custId = parseInt(btn.getAttribute('data-cust'),10);
                 var cust = null;
-                for(var i=0;i<state.customers.length;i++){
-                    if(state.customers[i].id === custId){ cust = state.customers[i]; break; }
+                for(var i2=0;i2<state.customers.length;i2++){
+                    if(state.customers[i2].id === custId){ cust = state.customers[i2]; break; }
                 }
                 if(!cust) return;
-                for(var s=0;s<getMaxSlots();s++){
-                    var slot = state.prepSlots[s];
+                for(var s2=0;s2<getMaxSlots();s2++){
+                    var slot = state.prepSlots[s2];
                     if(slot && slot.status === 'ready' && slot.type === cust.type && slot.item && slot.item.id === cust.item.id){
-                        tryServe(cust.type, cust.item.id, s);
+                        tryServe(cust.type, cust.item.id, s2);
                         return;
                     }
                 }
@@ -2380,12 +2547,12 @@ function renderDishSelector(){
     availCombos.sort(function(a,b){
         var aN = neededComboIds[a.id]?0:1, bN = neededComboIds[b.id]?0:1;
         if(aN !== bN) return aN - bN;
-        return a.cookTime - b.cookTime;
+        return 0;
     });
     availDishes.sort(function(a,b){
         var aN = neededDishIds[a.id]?0:1, bN = neededDishIds[b.id]?0:1;
         if(aN !== bN) return aN - bN;
-        return a.cookTime - b.cookTime;
+        return 0;
     });
 
     var html = '';
@@ -2464,6 +2631,7 @@ function renderDishSelector(){
 
 function updateSelectorHint(){
     var hint = $('selectorHint');
+    if(!hint) return;
     if(!state.isShopOpen){ hint.textContent = '🚪 店铺打烊中'; return; }
     if(state.selectedItem){
         var name = '';
@@ -2495,7 +2663,11 @@ function selectItem(type, id){
             return;
         }
     }
-    if(!hasIngredients(itemData, type)){ showToast('📦 食材不足，去库存补货'); return; }
+    if(!hasIngredients(itemData, type)){
+        shakeEl($('dishScroll'));
+        showToast('📦 食材不足，去库存补货');
+        return;
+    }
     state.selectedItem = { type:type, id:id, data:itemData };
     startCooking();
 }
@@ -2555,10 +2727,12 @@ function renderInventory(){
                 var qty = parseInt(btn.getAttribute('data-qty'),10);
                 if(spendGold(price)){
                     state.inventory[ingId] = (state.inventory[ingId]||0) + qty;
+                    var rect = btn.getBoundingClientRect();
+                    floatText(rect.left + rect.width/2, rect.top, '+'+qty, 'rep');
                     renderInventory();
                     renderDishSelector();
-                    showToast('✅ 补货 +'+qty);
                 } else {
+                    shakeEl(btn);
                     showToast('💰 金币不足');
                 }
             });
@@ -2608,6 +2782,7 @@ function renderUpgrades(){
                     Sound.upgrade();
                     showToast('⬆️ 升级成功！');
                 } else {
+                    shakeEl(btn);
                     showToast('💰 金币不足');
                 }
             });
@@ -2678,7 +2853,6 @@ function nextGuide(){
     }
 }
 
-/* ===== 形象创建 / 衣柜 ===== */
 var avatarPageCurrentSlot = 'outfit';
 
 function showAvatarCreate(){
@@ -2763,7 +2937,7 @@ function renderAvatarPageItems(slot){
             btn.addEventListener('click', function(){
                 var id = btn.getAttribute('data-buy');
                 var cost = parseInt(btn.getAttribute('data-cost'),10);
-                if(!spendGold(cost)){ showToast('💰 金币不足'); return; }
+                if(!spendGold(cost)){ shakeEl(btn); showToast('💰 金币不足'); return; }
                 if(!state.ownedAvatarItems[slot]) state.ownedAvatarItems[slot] = [];
                 state.ownedAvatarItems[slot].push(id);
                 state.avatar[slot] = id;
@@ -2796,7 +2970,7 @@ function renderAvatarPageItems(slot){
             btn.addEventListener('click', function(){
                 var id = btn.getAttribute('data-skill');
                 var cost = parseInt(btn.getAttribute('data-cost'),10);
-                if(!spendGold(cost)){ showToast('💰 金币不足'); return; }
+                if(!spendGold(cost)){ shakeEl(btn); showToast('💰 金币不足'); return; }
                 state.avatarUpgrades[id] = (state.avatarUpgrades[id]||0) + 1;
                 renderAvatarPageItems('skill');
                 renderAvatarPreview();
@@ -2865,7 +3039,7 @@ function renderWardrobe(slot){
             btn.addEventListener('click', function(){
                 var id = btn.getAttribute('data-buy');
                 var cost = parseInt(btn.getAttribute('data-cost'),10);
-                if(!spendGold(cost)){ showToast('💰 金币不足'); return; }
+                if(!spendGold(cost)){ shakeEl(btn); showToast('💰 金币不足'); return; }
                 if(!state.ownedAvatarItems[slot]) state.ownedAvatarItems[slot] = [];
                 state.ownedAvatarItems[slot].push(id);
                 state.avatar[slot] = id;
@@ -2898,7 +3072,7 @@ function renderWardrobe(slot){
             btn.addEventListener('click', function(){
                 var id = btn.getAttribute('data-skill');
                 var cost = parseInt(btn.getAttribute('data-cost'),10);
-                if(!spendGold(cost)){ showToast('💰 金币不足'); return; }
+                if(!spendGold(cost)){ shakeEl(btn); showToast('💰 金币不足'); return; }
                 state.avatarUpgrades[id] = (state.avatarUpgrades[id]||0) + 1;
                 renderWardrobe('skill');
                 Sound.upgrade();
@@ -2909,7 +3083,6 @@ function renderWardrobe(slot){
     }
 }
 
-/* ===== 加载与入口 ===== */
 var splashStarted = false;
 var loadingFinished = false;
 var gameDataLoaded = false;
@@ -2968,26 +3141,8 @@ function enterGame(mode){
         Sound.startBGM();
         chooseMode(mode === 'tutorial' ? 'tutorial' : 'direct');
     }catch(e){
-        console.error('进入模式选择失败，回退到关卡选择:', e);
-        try{
-            showLevelSelect();
-        }catch(e2){
-            console.error('关卡选择也失败:', e2);
-            try{
-                var app = $('app');
-                if(app){
-                    var tip = document.createElement('div');
-                    tip.style.cssText = 'position:fixed;inset:0;z-index:999999;background:#1a1208;color:#ffeaaf;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;font-size:16px;line-height:1.8;';
-                    tip.innerHTML = '<div style="font-size:2.4rem;margin-bottom:12px;">🍳</div>' +
-                        '<div style="font-weight:900;margin-bottom:8px;">游戏初始化失败</div>' +
-                        '<div style="font-size:13px;color:#c9a87c;margin-bottom:18px;">请刷新页面重试，或清除浏览器缓存后重新打开。</div>' +
-                        '<button id="__reloadBtn" style="padding:12px 28px;font-size:16px;font-weight:900;border-radius:60px;border:none;background:linear-gradient(180deg,#f7c35c,#e8a13b);color:#3d2a16;box-shadow:0 5px 0 #8b6d4b;">刷新页面</button>';
-                    app.appendChild(tip);
-                    var rb = $('__reloadBtn');
-                    if(rb) rb.onclick = function(){ location.reload(); };
-                }
-            }catch(e3){ console.error('最终兜底也失败:', e3); }
-        }
+        console.error('进入模式选择失败:', e);
+        try{ showLevelSelect(); }catch(e2){}
     }
 }
 
@@ -3060,7 +3215,6 @@ function bindEvents(){
         }catch(e){ console.error('打开形象选择失败:', e); }
     });
 
-    // 模式选择
     $('modeTutorial').addEventListener('click', function(){ chooseMode('tutorial'); });
     $('modeDirect').addEventListener('click', function(){ chooseMode('direct'); });
     $('modeAvatar').addEventListener('click', function(){
@@ -3100,6 +3254,8 @@ function bindEvents(){
         state.avatarUpgrades = { waitBonus:0, tipBonus:0 };
         state.avatarCreated = false;
         state.ownedAvatarItems = { outfit:['chef_default'], hat:['none'], accessory:['none'] };
+        state._lastGoldShown = state.gold;
+        state._lastRepShown = state.reputation;
         removeClass($('resetConfirmModal'),'show');
         renderLevelSelect();
         showToast('🗑️ 进度已重置');
@@ -3176,7 +3332,6 @@ function bindEvents(){
         showToast('🍽️ 没有做好的对应菜品');
     });
 
-    // 形象选择页面
     var genderBtns = document.querySelectorAll('.avatar-page-gender .gender-btn');
     for(var g=0;g<genderBtns.length;g++){
         (function(btn){
@@ -3211,7 +3366,6 @@ function bindEvents(){
         })(avatarPageTabs[apt]);
     }
 
-    // 衣柜
     $('wardrobeBtn').addEventListener('click', showWardrobe);
     $('wardrobeClose').addEventListener('click', function(){ removeClass($('avatarWardrobeModal'),'show'); });
     var wTabs = document.querySelectorAll('.wardrobe-tab');
@@ -3251,12 +3405,6 @@ function bindEvents(){
         if(!Drag.active) return;
         Drag.end(e.clientX, e.clientY);
     });
-
-    setInterval(function(){
-        if(state.activeTab === 'kitchen' && state.isShopOpen && !$('gameContainer').classList.contains('hidden')){
-            renderCustomers();
-        }
-    }, CONFIG.CUSTOMER_RENDER_MS);
 }
 
 function updateSoundBtn(){
