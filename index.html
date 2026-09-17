@@ -439,6 +439,17 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1a1208;font-family:
     .prep-slot .slot-emoji{font-size:1.2rem}
     .mode-card .mode-name{font-size:.9rem}
 }
+.drag-ghost{position:fixed;z-index:9999;pointer-events:none;opacity:0.85;transform:translate(-50%,-50%) scale(1.2);transition:none;font-size:2rem;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3))}
+.drag-ghost.drag-cook{font-size:2.2rem}
+.drag-ghost.drag-serve{font-size:2.2rem}
+.prep-slot.drop-hover{border-color:#4caf50!important;box-shadow:0 0 0 3px rgba(76,175,80,0.5),0 4px 0 #8b6d4b!important;transform:scale(1.1)}
+.prep-slot.drop-invalid{border-color:#e74c3c!important;box-shadow:0 0 0 3px rgba(231,76,60,0.4),0 4px 0 #8b6d4b!important}
+.customer-card.drop-hover{border-color:#4caf50!important;box-shadow:0 0 0 3px rgba(76,175,80,0.5),0 3px 0 #4caf50!important;transform:scale(1.05)}
+.customer-card.drop-invalid{border-color:#e74c3c!important;box-shadow:0 0 0 3px rgba(231,76,60,0.3),0 3px 0 #e74c3c!important}
+.dish-chip.dragging{opacity:0.4}
+.prep-slot.dragging{opacity:0.4}
+.drag-hint{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.55rem;font-weight:800;color:#4caf50;white-space:nowrap;animation:dragHintPulse 1.5s ease-in-out infinite}
+@keyframes dragHintPulse{0%,100%{opacity:0.6}50%{opacity:1}}
 </style>
 </head>
 <body>
@@ -880,12 +891,12 @@ var ALL_DISHES = [
 ];
 
 var ALL_COMBOS = [
-    { id:'combo_burger_meal', name:'汉堡套餐', emoji:'🍔🥤', level:2, price:28, xp:12, items:['burger','juice'], tag:'超值' },
-    { id:'combo_breakfast', name:'早餐组合', emoji:'🍳🥞', level:4, price:38, xp:18, items:['fried_egg','pancake'], tag:'人气' },
-    { id:'combo_sushi_set', name:'寿司拼盘', emoji:'🍣🍵', level:5, price:45, xp:22, items:['sushi','coffee'], tag:'精选' },
-    { id:'combo_steak_dinner', name:'牛排晚餐', emoji:'🥩🍷', level:6, price:68, xp:32, items:['steak','salad'], tag:'豪华' },
-    { id:'combo_pizza_party', name:'披萨派对', emoji:'🍕🧃', level:7, price:72, xp:35, items:['pizza','juice','donut'], tag:'分享' },
-    { id:'combo_seafood_feast', name:'海鲜盛宴', emoji:'🦞🍜', level:9, price:110, xp:55, items:['lobster','ramen'], tag:'顶级' }
+    { id:'combo_steak_dinner', name:'牛排晚餐', emoji:'🥩🍷', level:4, price:68, xp:32, items:['steak','salad'], tag:'豪华' },
+    { id:'combo_sushi_set', name:'寿司拼盘', emoji:'🍣🍵', level:7, price:45, xp:22, items:['sushi','coffee'], tag:'精选' },
+    { id:'combo_burger_meal', name:'汉堡套餐', emoji:'🍔🥤', level:8, price:28, xp:12, items:['burger','juice'], tag:'超值' },
+    { id:'combo_breakfast', name:'早餐组合', emoji:'🍳🥞', level:8, price:38, xp:18, items:['fried_egg','pancake'], tag:'人气' },
+    { id:'combo_pizza_party', name:'披萨派对', emoji:'🍕🧃', level:8, price:72, xp:35, items:['pizza','juice','donut'], tag:'分享' },
+    { id:'combo_seafood_feast', name:'海鲜盛宴', emoji:'🦞🍜', level:10, price:110, xp:55, items:['lobster','ramen'], tag:'顶级' }
 ];
 
 var ALL_INGREDIENTS = [
@@ -1138,6 +1149,176 @@ var Sound = {
     upgrade: function(){ var s=this; [523,659,784,1047].forEach(function(f,i){ setTimeout(function(){ s.beep(f,0.12,'sine',0.08); },i*90); }); },
     fail: function(){ var s=this; [400,300,200].forEach(function(f,i){ setTimeout(function(){ s.beep(f,0.2,'sawtooth',0.1); },i*150); }); },
     levelup: function(){ var s=this; [523,659,784,1047,1319].forEach(function(f,i){ setTimeout(function(){ s.beep(f,0.15,'sine',0.09); },i*100); }); }
+};
+
+var Drag = {
+    active: false,
+    ghost: null,
+    type: null,
+    data: null,
+    sourceEl: null,
+    startX: 0,
+    startY: 0,
+    threshold: 10,
+    moved: false,
+    currentTarget: null,
+
+    start: function(type, data, sourceEl, x, y){
+        this.active = true;
+        this.type = type;
+        this.data = data;
+        this.sourceEl = sourceEl;
+        this.startX = x;
+        this.startY = y;
+        this.moved = false;
+        this.currentTarget = null;
+        if(sourceEl) sourceEl.classList.add('dragging');
+    },
+
+    move: function(x, y){
+        if(!this.active) return;
+        var dx = x - this.startX;
+        var dy = y - this.startY;
+        if(!this.moved && Math.sqrt(dx*dx + dy*dy) < this.threshold) return;
+
+        if(!this.moved){
+            this.moved = true;
+            this._createGhost(x, y);
+        }
+        if(this.ghost){
+            this.ghost.style.left = x + 'px';
+            this.ghost.style.top = y + 'px';
+        }
+        this._updateDropTarget(x, y);
+    },
+
+    end: function(x, y){
+        if(!this.active) return;
+        var wasMoved = this.moved;
+        var target = this.currentTarget;
+        var type = this.type;
+        var data = this.data;
+        this._cleanup();
+        if(wasMoved && target){
+            if(type === 'cook'){
+                var slotIdx = parseInt(target.getAttribute('data-slot'), 10);
+                if(target.classList.contains('drop-hover')){
+                    Drag._cookOnSlot(data.type, data.id, slotIdx);
+                }
+            } else if(type === 'serve'){
+                var custId = parseInt(target.getAttribute('data-id'), 10);
+                if(target.classList.contains('drop-hover')){
+                    Drag._serveToCustomer(data.type, data.itemId, data.slotIdx, custId);
+                }
+            }
+        } else if(!wasMoved){
+            if(type === 'cook'){
+                selectItem(data.type, data.id);
+            } else if(type === 'serve'){
+                tryServe(data.type, data.itemId, data.slotIdx);
+            }
+        }
+    },
+
+    cancel: function(){
+        this._cleanup();
+    },
+
+    _createGhost: function(x, y){
+        if(this.ghost) this._removeGhost();
+        var el = document.createElement('div');
+        el.className = 'drag-ghost' + (this.type === 'cook' ? ' drag-cook' : ' drag-serve');
+        el.textContent = this.data.emoji || '🍽️';
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        document.body.appendChild(el);
+        this.ghost = el;
+    },
+
+    _removeGhost: function(){
+        if(this.ghost && this.ghost.parentNode){
+            this.ghost.parentNode.removeChild(this.ghost);
+        }
+        this.ghost = null;
+    },
+
+    _updateDropTarget: function(x, y){
+        if(this.currentTarget){
+            this.currentTarget.classList.remove('drop-hover','drop-invalid');
+            this.currentTarget = null;
+        }
+        var el = document.elementFromPoint(x, y);
+        if(!el) return;
+
+        if(this.type === 'cook'){
+            var slot = el.closest('.prep-slot');
+            if(slot){
+                var idx = parseInt(slot.getAttribute('data-slot'), 10);
+                var slotData = state.prepSlots[idx];
+                if(slotData && slotData.status === 'empty' && idx < getMaxSlots()){
+                    slot.classList.add('drop-hover');
+                    this.currentTarget = slot;
+                } else {
+                    slot.classList.add('drop-invalid');
+                    setTimeout(function(){ slot.classList.remove('drop-invalid'); }, 300);
+                }
+            }
+        } else if(this.type === 'serve'){
+            var card = el.closest('.customer-card');
+            if(card){
+                var custId = parseInt(card.getAttribute('data-id'), 10);
+                var cust = null;
+                for(var i=0;i<state.customers.length;i++){
+                    if(state.customers[i].id === custId){ cust = state.customers[i]; break; }
+                }
+                if(cust && cust.type === this.data.itemType && cust.item.id === this.data.itemId){
+                    card.classList.add('drop-hover');
+                    this.currentTarget = card;
+                } else {
+                    card.classList.add('drop-invalid');
+                    setTimeout(function(){ card.classList.remove('drop-invalid'); }, 300);
+                }
+            }
+        }
+    },
+
+    _cookOnSlot: function(type, id, slotIdx){
+        if(!state.isShopOpen){ showToast('🚪 请先开门营业'); return; }
+        var itemData = null;
+        if(type === 'dish'){
+            for(var i=0;i<ALL_DISHES.length;i++){ if(ALL_DISHES[i].id===id){ itemData=ALL_DISHES[i]; break; } }
+        } else {
+            for(var j=0;j<ALL_COMBOS.length;j++){ if(ALL_COMBOS[j].id===id){ itemData=ALL_COMBOS[j]; break; } }
+        }
+        if(!itemData) return;
+        var slot = state.prepSlots[slotIdx];
+        if(!slot || slot.status !== 'empty'){ showToast('🍳 灶台不可用'); return; }
+        if(!hasIngredients(itemData, type)){ showToast('📦 食材不足，去库存补货'); return; }
+        state.selectedItem = { type:type, id:id, data:itemData };
+        state.activeSlotIndex = slotIdx;
+        startCooking();
+    },
+
+    _serveToCustomer: function(slotType, itemId, slotIdx, custId){
+        var cust = null;
+        for(var i=0;i<state.customers.length;i++){
+            if(state.customers[i].id === custId){ cust = state.customers[i]; break; }
+        }
+        if(!cust){ showToast('🙅 顾客已离开'); return; }
+        if(cust.type !== slotType || cust.item.id !== itemId){ showToast('🙅 顾客没点这道菜'); return; }
+        tryServe(slotType, itemId, slotIdx);
+    },
+
+    _cleanup: function(){
+        this._removeGhost();
+        if(this.sourceEl) this.sourceEl.classList.remove('dragging');
+        this.active = false;
+        this.type = null;
+        this.data = null;
+        this.sourceEl = null;
+        this.moved = false;
+        this.currentTarget = null;
+    }
 };
 
 function showToast(msg, duration){
@@ -1537,7 +1718,6 @@ function startLevel(lvl){
     state.todayServed = 0;
     state.todayRep = 0;
     state.todayComboCount = 0;
-    state.inventory = deepCopy(DEFAULT_INVENTORY);
     state.lastTickTime = Date.now();
     state.dailyGoal = generateDailyGoal(lvl);
 
@@ -1884,13 +2064,32 @@ function renderPrepStation(){
     var slots = $('prepStation').querySelectorAll('.prep-slot');
     for(var j=0;j<slots.length;j++){
         (function(el){
-            el.addEventListener('click', function(){
-                var idx = parseInt(el.getAttribute('data-slot'),10);
+            var idx = parseInt(el.getAttribute('data-slot'),10);
+
+            function onSlotStart(e){
                 if(idx >= getMaxSlots()){
                     showToast('🔒 声望 '+CONFIG.SLOT_UNLOCK_TEXT[idx]+' 解锁此灶台');
                     return;
                 }
-                handleSlotClick(idx);
+                var slot = state.prepSlots[idx];
+                if(!slot) return;
+                if(slot.status === 'ready' && slot.item){
+                    var pt = e.touches ? e.touches[0] : e;
+                    Drag.start('serve', { type:slot.type, itemId:slot.item.id, itemType:slot.type, slotIdx:idx, emoji:slot.item.emoji }, el, pt.clientX, pt.clientY);
+                } else if(slot.status === 'cooking'){
+                    showToast('⏳ 灶台 '+(idx+1)+' 正在烹饪中...');
+                } else if(slot.status === 'empty'){
+                    state.activeSlotIndex = idx;
+                    renderPrepStation();
+                    updateSelectorHint();
+                    showToast('🔥 已选择 '+(idx+1)+' 号灶台，请选择菜品', 1200);
+                }
+            }
+            el.addEventListener('touchstart', function(e){
+                onSlotStart(e);
+            }, {passive:true});
+            el.addEventListener('mousedown', function(e){
+                onSlotStart(e);
             });
         })(slots[j]);
     }
@@ -2237,8 +2436,26 @@ function renderDishSelector(){
     var chips = $('dishScroll').querySelectorAll('.dish-chip');
     for(var r=0;r<chips.length;r++){
         (function(chip){
-            chip.addEventListener('click', function(){
-                selectItem(chip.getAttribute('data-type'), chip.getAttribute('data-id'));
+            var chipType = chip.getAttribute('data-type');
+            var chipId = chip.getAttribute('data-id');
+            var itemData = null;
+            if(chipType === 'dish'){
+                for(var ii=0;ii<ALL_DISHES.length;ii++){ if(ALL_DISHES[ii].id===chipId){ itemData=ALL_DISHES[ii]; break; } }
+            } else {
+                for(var jj=0;jj<ALL_COMBOS.length;jj++){ if(ALL_COMBOS[jj].id===chipId){ itemData=ALL_COMBOS[jj]; break; } }
+            }
+            var dragData = itemData ? { type:chipType, id:chipId, emoji:itemData.emoji } : null;
+
+            function onStart(e){
+                if(!dragData) return;
+                var pt = e.touches ? e.touches[0] : e;
+                Drag.start('cook', dragData, chip, pt.clientX, pt.clientY);
+            }
+            chip.addEventListener('touchstart', function(e){
+                onStart(e);
+            }, {passive:true});
+            chip.addEventListener('mousedown', function(e){
+                onStart(e);
             });
         })(chips[r]);
     }
@@ -2422,11 +2639,11 @@ function setGuideDone(){
 }
 
 var GUIDE_STEPS = [
-    { icon:'🍽️', title:'选择菜品', text:'点击下方菜品卡片后，会自动使用空闲灶台开始烹饪。有顾客下单的菜品会显示”需”角标。' },
+    { icon:'🍽️', title:'拖拽或点击菜品', text:'把菜品卡片拖到灶台上开始烹饪，也可以直接点击菜品自动选择空闲灶台。有顾客下单的菜品会显示”需”角标。' },
     { icon:'📦', title:'看懂食材数量', text:'每道菜品下方显示所需食材，格式为：食材图标 + 库存/需要。例如 🥚 12/1 表示鸡蛋库存12个、做这道菜需要1个。绿色表示库存充足，红色表示库存不足。' },
-    { icon:'🍳', title:'灶台自动开工', text:'点选菜品后，系统会优先使用你选中的空灶台，否则自动使用第一个空闲灶台。声望越高，可解锁的灶台越多，最多5个同时开工。' },
+    { icon:'🍳', title:'灶台烹饪', text:'菜品放到灶台后自动开始烹饪。声望越高，可解锁的灶台越多，最多5个同时开工。食材用完后需要在库存页面补货。' },
     { icon:'🏪', title:'开门营业', text:'点击”开始营业”才会来顾客。注意看顾客头上的倒计时，超时会流失顾客并扣声望。' },
-    { icon:'🍽️', title:'上菜收钱', text:'菜做好后，灶台会显示✓。点击灶台或顾客卡片上的”上菜”按钮即可提交。' }
+    { icon:'🍽️', title:'拖拽上菜', text:'菜做好后灶台显示✓。把做好的菜拖到对应顾客身上即可上菜收钱，也可以点击灶台或顾客卡片上的”上菜”按钮。' }
 ];
 
 function startGuide(){
@@ -3010,6 +3227,29 @@ function bindEvents(){
     });
     window.addEventListener('beforeunload', function(){
         if(!$('gameContainer').classList.contains('hidden')) saveGame();
+    });
+
+    document.addEventListener('touchmove', function(e){
+        if(!Drag.active) return;
+        var pt = e.touches[0];
+        Drag.move(pt.clientX, pt.clientY);
+        if(Drag.moved) e.preventDefault();
+    }, {passive:false});
+    document.addEventListener('touchend', function(e){
+        if(!Drag.active) return;
+        var pt = e.changedTouches[0];
+        Drag.end(pt.clientX, pt.clientY);
+    });
+    document.addEventListener('touchcancel', function(){
+        if(Drag.active) Drag.cancel();
+    });
+    document.addEventListener('mousemove', function(e){
+        if(!Drag.active) return;
+        Drag.move(e.clientX, e.clientY);
+    });
+    document.addEventListener('mouseup', function(e){
+        if(!Drag.active) return;
+        Drag.end(e.clientX, e.clientY);
     });
 
     setInterval(function(){
